@@ -4,7 +4,7 @@ The driver class for the Deadwood game
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Game{
+public class Deadwood{
 
   private int numPlayer;
   private Queue<Player> playerQueue = new LinkedList<Player>();
