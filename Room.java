@@ -1,10 +1,10 @@
 /*
 *   May 4, 2017, Sarah Gunderson, Zachary Lazar
 *   Room Class for Deadwood Assignment 2
-*   Version 1.0, Skeleton methods
+*   Version 1.1, Skeleton methods
 */
 
-public Class Room{
+public class Room{
 
   private String rName;
 

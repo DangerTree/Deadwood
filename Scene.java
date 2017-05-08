@@ -1,10 +1,10 @@
 /*
 *   May 4, 2017, Sarah Gunderson, Zachary Lazar
 *   Class to maintain Scene card objects for Deadwood
-*   Version 1.0, skeleton methods
+*   Version 1.1, skeleton methods
 */
 
-public Class Scene{
+public class Scene{
 
   private String movieName, sceneDescript, sName;
 
