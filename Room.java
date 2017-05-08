@@ -3,6 +3,8 @@
 *   Room Class for Deadwood Assignment 2
 *   Version 1.1, Skeleton methods
 */
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Room{
 
@@ -14,11 +16,30 @@ public class Room{
 
   private Room[] adjRoomList;
 
-  private Role[] rRoleList;
+  private ArrayList<Role> rRoleList = new ArrayList<Role>();
 
 
   //Room object constructor, takes name of room as parameter to make a new room
-  public Room(String rName){
+  public Room(String roomName, int shotCtr){
+    this.shotCtr = shotCtr;
+    this.rName = roomName;
+  }
+
+  // Room constructor for rooms without shotCtr (Trailer and Casting Office)
+  public Room(String roomName){
+    this.rName = roomName;
+  }
+
+  //Adds an off-card role to the rRoleList
+  public void addRole(String roleInfo){
+
+    // create new role obj
+    Scanner s = new Scanner(roleInfo).useDelimiter("_");
+    int roleRank = Integer.parseInt(s.next());
+    String roleName = s.next();
+    String roleQuote = s.next();
+    // put role in role arrayList
+    rRoleList.add(new Role(roleName, roleQuote, roleRank));
 
   }
 
