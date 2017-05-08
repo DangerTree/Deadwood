@@ -20,4 +20,8 @@ public class Role{
     //this.actor = newActor;
   }
 
+  public Player getActor (){
+    return this.actor;
+  }
+
 }
