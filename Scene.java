@@ -31,4 +31,12 @@ public class Scene{
     return true;
   }
 
+  public Role[] getSRoleList(){
+    return sRoleList;
+  }
+
+  public int getSRoleListSize(){
+    return sRoleList.length;
+  }
+
 }
