@@ -1,6 +1,3 @@
-RoomName_shotCtrNum_numOfRoles
-roleRank_roleName_roleQuote
-
 Jail_1_2
 2_Prisoner in Cell_"Zzzzz... Whiskey!"
 3_Feller in Irons_"Ah kilt the wrong man!"

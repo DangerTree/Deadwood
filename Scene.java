@@ -7,10 +7,10 @@
 public class Scene{
 
   private String movieName, sceneDescript, sName;
-
   private int budget;
-
   private Role[] sRoleList;
+  private boolean faceUp = false;
+
 
 
   //Scene object constructor, takes all attributes as parameters
@@ -37,6 +37,14 @@ public class Scene{
 
   public int getSRoleListSize(){
     return sRoleList.length;
+  }
+
+  public boolean isCardFlipped(){
+    return faceUp;
+  }
+
+  public void flipSceneCard(){
+    this.faceUp = true;
   }
 
 }
