@@ -33,13 +33,12 @@ public class Room{
 
 
   //Adds an off-card role to the rRoleList
-  public void addRole(String roleInfo){
+  public void addRole(int rank, String name, String quote){
 
     // create new role obj
-    Scanner s = new Scanner(roleInfo).useDelimiter("_");
-    int roleRank = Integer.parseInt(s.next());
-    String roleName = s.next();
-    String roleQuote = s.next();
+    int roleRank = rank;
+    String roleName = name;
+    String roleQuote = quote;
     // put role in role arrayList
     rRoleList.add(new Role(roleName, roleQuote, roleRank));
 
