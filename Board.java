@@ -36,8 +36,16 @@ public class Board{
         while (scan.hasNext() != false){
           // Create a new room object
           String roomName = scan.next();
-          int shotCtr = Integer.parseInt(scan.next());
-          int numRoles = Integer.parseInt(scan.next());
+          System.out.println(roomName);
+          //int shotCtr = scan.nextInt();
+          //int numRoles = scan.nextInt();
+          String sc = scan.next();
+          System.out.println(sc);
+          String nr = scan.next();
+          System.out.println(nr);
+          Integer shotCtr = Integer.parseInt(sc);
+          Integer numRoles = Integer.parseInt(nr);
+          System.out.println (roomName + " " + shotCtr + " " + numRoles);
           Room myRoom = new Room (roomName, shotCtr);
           // place a scene in the room
           myRoom.placeScene();
@@ -54,6 +62,10 @@ public class Board{
       }
       catch (FileNotFoundException e){
         System.out.println ("roomInfo file not found.");
+        System.exit(1);
+      }
+      catch (NumberFormatException e){
+        System.out.println ("roomInfo file formatted incorrectly.");
         System.exit(1);
       }
     }

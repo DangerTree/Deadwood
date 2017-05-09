@@ -11,6 +11,9 @@ public class Deadwood{
 
   public static void main (String args[]){
 
+    Board gameBoard = Board.getBoard(3);
+    gameBoard.setupRooms();
+
     return;
   }
 }
