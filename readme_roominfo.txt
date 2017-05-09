@@ -1,46 +1,49 @@
+RoomName_shotCtrNum_numOfRoles
+roleRank_roleName_roleQuote
+
 Jail_1_2
 2_Prisoner in Cell_"Zzzzz... Whiskey!"
 3_Feller in Irons_"Ah kilt the wrong man!"
-_
+
 General Store_2_2
 1_Man In Overalls_"Looks like a storm's comin' in."
 3_Mister Keach_"Howdy, stranger."
-_
+
 Train Station_3_4
 1_Dragged by Train_"Omgeezers!"
 1_Crusty Prospector_"Aww, peaches!"
 2_Preacher with Bag_"The Lord will provide."
 4_Cyrus the Gunfighter_"Git to fightin' or git away!"
-_
+
 Bank_1_2
 2_Suspicious Gentleman_"Can you be more specific?"
 3_Flustered Teller_"Would you like a large bill, sir?"
-_
+
 Church_2_2
 1_Dead Man_"..."
 2_Crying Woman_"Oh, the humanity!"
-_
+
 Hotel_3_4
 1_Faro Player_"Hit me!"
 1_Sleeping Drunkard_"Zzzzzz... Whiskey!"
 2_Falls from Balcony_"Arrrgghh!!"
 3_Australian Bartender_"What'll it be, mate?"
-_
+
 Main Street_3_4
 1_Railroad Worker_"I'm a steel-drivin'man!"
 2_Falls off Roof_"Aaaaiiiigggghh!"
 2_Woman in Black Dress_"Well, I'll be!"
 4_Mayor McGinty_"People of Deadwood!"
-_
+
 Saloon_2_2
 1_Reluctant Farmer_"I ain't so sure about that!"
 2_Woman in Red Dress_"Come up and see me!"
-_
+
 Ranch_2_3
 1_Shot in Leg_"Ow! Me leg!"
 2_Saucy Fred_"That's what she said!"
 3_Man Under Horse_"A little help here!"
-_
+
 Secret Hideout_3_4
 1_Clumsy Pit Fighter_"Hit me!"
 2_Thug with Knife_"Meet Suzy, my murderin' knife."
