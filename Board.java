@@ -34,15 +34,16 @@ public class Board{
 
         // goes through file descibing content of 10 acting rooms (not trailer or casting office)
         while (scan.hasNext() != false){
+        System.out.println("Start:");
           // Create a new room object
           String roomName = scan.next();
-          System.out.println(roomName);
+          //System.out.println(roomName);
           //int shotCtr = scan.nextInt();
           //int numRoles = scan.nextInt();
           String sc = scan.next();
-          System.out.println(sc);
+          //System.out.println(sc);
           String nr = scan.next();
-          System.out.println(nr);
+          //System.out.println(nr);
           Integer shotCtr = Integer.parseInt(sc);
           Integer numRoles = Integer.parseInt(nr);
           System.out.println (roomName + " " + shotCtr + " " + numRoles);
@@ -50,13 +51,23 @@ public class Board{
           // place a scene in the room
           myRoom.placeScene();
           // add the room's off-card roles to its role list
+          String rr = "";
+          int rRank = 1;
+          String RoleName = "";
+          String RoleQuote = "";
           for (int j = 0; j < numRoles; j++){
-            myRoom.addRole (scan.nextLine());
+        	rr = scan.next();
+            rRank = Integer.parseInt(rr);
+            RoleName = scan.next();
+            RoleQuote = scan.next();
+            myRoom.addRole (rRank, RoleName, RoleQuote);
           }
         // add room to list of rooms
         roomList.add(myRoom);
+        
         }
         // setup casting office and trailer
+        
         roomList.add(new Room ("Casting Office"));
         roomList.add(new Room ("Trailer"));
       }
