@@ -8,6 +8,12 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.LinkedList;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.DocumentBuilder;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Node;
+import org.w3c.dom.Element;
 
 
 public class Board{
@@ -23,15 +29,227 @@ public class Board{
       boardObj.daysLeft = dayNum;
       return boardObj;
   }
-  
+
   public static void initializeSceneDrawPile(){
+    /*
+    try {
+	    File sceneXML = new File ("scenecards.xml");
+	    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+	    DocumentBuilder db= dbFactory.newDocumentBuilder();
+	    Document doc = db.parse(sceneXML);
+	    doc.getDocumentElement().normalize();
+
+      NodeList nodeL = doc.getElementsByTagName("card");
+
+      for (int i = 0; i < nodeL.getLength; i++){
+        Node nNode =  nodeL.item(temp);
+        if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+          Scene aScene = null;
+          Element anElm = (Element) nNode;
+          aScene = new Scene (anElm.getAttribute(name), anElm.getElementsByTagName("scene"), anElm.getAttribute(number))
+        // movie name, scene des, name, budget, roleList
+
+      }
+      */
+
+
+
 	  /*
 	  File scene_file = new File ("")
-	  
+
 	  for(int i = 0; i < 40; i ++){
-		  
+
 	  }*/
   }
+
+
+  private static void makeRoomAdjList(){
+
+    // go through room list
+    for (int i = 0; i < roomList.size(); i++){
+      if roomList.get(i).getRName().equals("Trailers"){
+        for (int j = 0; j < roomList.size(); j++){
+          if roomList.get(j).getRName().equals("Main Street"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+          if roomList.get(j).getRName().equals("Saloon"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+          if roomList.get(j).getRName().equals("Hotel"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+        }
+      }
+
+      if roomList.get(i).getRName().equals("Train Station"){
+        for (int j = 0; j < roomList.size(); j++){
+          if roomList.get(j).getRName().equals("Jail"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+          if roomList.get(j).getRName().equals("General Store"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+          if roomList.get(j).getRName().equals("Casting Office"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+        }
+      }
+
+      if roomList.get(i).getRName().equals("Jail"){
+        for (int j = 0; j < roomList.size(); j++){
+          if roomList.get(j).getRName().equals("Train Station"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+          if roomList.get(j).getRName().equals("General Store"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+          if roomList.get(j).getRName().equals("Main Street"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+        }
+      }
+
+      if roomList.get(i).getRName().equals("General Store"){
+        for (int j = 0; j < roomList.size(); j++){
+          if roomList.get(j).getRName().equals("Train Station"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+          if roomList.get(j).getRName().equals("Jail"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+          if roomList.get(j).getRName().equals("Saloon"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+          if roomList.get(j).getRName().equals("Ranch"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+        }
+      }
+
+      if roomList.get(i).getRName().equals("Main Street"){
+        for (int j = 0; j < roomList.size(); j++){
+          if roomList.get(j).getRName().equals("Trailers"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+          if roomList.get(j).getRName().equals("Jail"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+          if roomList.get(j).getRName().equals("Saloon"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+        }
+      }
+
+      if roomList.get(i).getRName().equals("Saloon"){
+        for (int j = 0; j < roomList.size(); j++){
+          if roomList.get(j).getRName().equals("Trailers"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+          if roomList.get(j).getRName().equals("Main Street"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+          if roomList.get(j).getRName().equals("General Store"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+          if roomList.get(j).getRName().equals("Bank"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+        }
+      }
+
+      if roomList.get(i).getRName().equals("Casting Office"){
+        for (int j = 0; j < roomList.size(); j++){
+          if roomList.get(j).getRName().equals("Train Station"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+          if roomList.get(j).getRName().equals("Ranch"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+          if roomList.get(j).getRName().equals("Secret Hideout"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+        }
+      }
+
+      if roomList.get(i).getRName().equals("Ranch"){
+        for (int j = 0; j < roomList.size(); j++){
+          if roomList.get(j).getRName().equals("General Store"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+          if roomList.get(j).getRName().equals("Casting Office"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+          if roomList.get(j).getRName().equals("Secret Hideout"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+          if roomList.get(j).getRName().equals("Bank"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+        }
+      }
+
+      if roomList.get(i).getRName().equals("Secret Hideout"){
+        for (int j = 0; j < roomList.size(); j++){
+          if roomList.get(j).getRName().equals("Church"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+          if roomList.get(j).getRName().equals("Casting Office"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+          if roomList.get(j).getRName().equals("Ranch"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+        }
+      }
+
+      if roomList.get(i).getRName().equals("Bank"){
+        for (int j = 0; j < roomList.size(); j++){
+          if roomList.get(j).getRName().equals("Saloon"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+          if roomList.get(j).getRName().equals("Hotel"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+          if roomList.get(j).getRName().equals("Ranch"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+          if roomList.get(j).getRName().equals("Church"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+        }
+      }
+
+      if roomList.get(i).getRName().equals("Church"){
+        for (int j = 0; j < roomList.size(); j++){
+          if roomList.get(j).getRName().equals("Secret Hideout"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+          if roomList.get(j).getRName().equals("Hotel"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+          if roomList.get(j).getRName().equals("Bank"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+        }
+      }
+
+      if roomList.get(i).getRName().equals("Hotel"){
+        for (int j = 0; j < roomList.size(); j++){
+          if roomList.get(j).getRName().equals("Trailers"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+          if roomList.get(j).getRName().equals("Church"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+          if roomList.get(j).getRName().equals("Bank"){
+            roomList.get(i).addAdjRoom(roomList.get(j));
+          }
+        }
+      }
+
+    }
+  }
+
 
   /* setupRooms: initializes all rooms
   INPUT: a file describing the contents of each room (and off-card scenes)
@@ -59,33 +277,6 @@ public class Board{
           System.out.println ("role rank: " + roleLine[0] + " role name: " + roleLine[1] + " quote: " + roleLine[2]);
           myRoom.addRole (Integer.parseInt(roleLine[0]), roleLine[1], roleLine[2]);
         }
-        /*
-        System.out.println("Start:");
-        // Create a new room object
-        String roomName = scan.next();
-        String sc = scan.next();
-        String nr = scan.next();
-        Integer shotCtr = Integer.parseInt(sc);
-        Integer numRoles = Integer.parseInt(nr);
-        System.out.println (roomName + " " + shotCtr + " " + numRoles);
-        Room myRoom = new Room (roomName, shotCtr);
-        // place a scene in the room
-        myRoom.placeScene();
-        // add the room's off-card roles to its role list
-        String rr = "";
-        int rRank = 1;
-        String RoleName = "";
-        String RoleQuote = "";
-        for (int j = 0; j < numRoles; j++){
-      	  rr = scan.next();
-          rRank = Integer.parseInt(rr);
-          RoleName = scan.next();
-          RoleQuote = scan.next();
-          myRoom.addRole (rRank, RoleName, RoleQuote);
-        }
-        // add room to list of rooms
-        roomList.add(myRoom);
-        */
       }
       // setup casting office and trailer
 
@@ -100,6 +291,9 @@ public class Board{
       System.out.println ("roomInfo file formatted incorrectly.");
       System.exit(1);
     }
+
+    makeRoomAdjList();
+
   }
 
 

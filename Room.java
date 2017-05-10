@@ -11,7 +11,7 @@ public class Room{
   private String rName;
   private Scene rScene;
   private int maxShotCtr, shotCtr;
-  private Room[] adjRoomList;
+  private ArrayList<Room> adjRoomList;
   private ArrayList<Role> rRoleList = new ArrayList<Role>(); // ArrayList of off-card roles in the room
 
 
@@ -36,7 +36,11 @@ public class Room{
     rRoleList.add(new Role(name, quote, rank));
 
   }
-  
+
+  public void addAdjRoom (Room newAdjRoom){
+    this.adjRoomList.add(newAdjRoom);
+  }
+
 
 
   // Decrements number of shot counters in room after successful acting action
@@ -82,14 +86,14 @@ public class Room{
 			  rScene.getSRoleList()[i % rScene.getSRoleList().length].getActor().payActor(bonusDice[i]);
 		  }
 	  }
-	  
+
 	  for(int i = 0; i< rScene.getSRoleListSize(); i ++){ //removes on card actors from their roles
 		  if(rScene.getSRoleList()[i] != null){
 			  rScene.getSRoleList()[i].getActor().leaveRole();
 			  rScene.getSRoleList()[i] = null;
 		  }
 	  }
-	  
+
 	  for(int i  =0; i < rRoleList.size(); i++){ //awards off card actors their bonuses and removes them from their roles
 		  if(rRoleList.get(i).getActor() != null){
 			  rRoleList.get(i).getActor().awardOffCardBonus();
@@ -102,9 +106,9 @@ public class Room{
     // decrement scene num
     Board.decSceneNum();
   }
-  
+
   public void wrapScene(){
-	  
+
 	  for(int i  =0; i < rRoleList.size(); i++){ //removes off card actors from their roles
 		  if(rRoleList.get(i).getActor() != null){
 			  rRoleList.get(i).getActor().leaveRole();
@@ -116,7 +120,7 @@ public class Room{
   }
 
   //returns the list of rooms that are accessible from this room
-  public Room[] getAdjRoom(){
+  public ArrayList<Room> getAdjRoom(){
     return adjRoomList;
   }
 
