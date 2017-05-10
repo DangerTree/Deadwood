@@ -54,8 +54,8 @@ public class Room{
 
 
   //places a new scene card in the room
-  public void placeScene(){
-    //this.rScene = new Scene ();
+  public void placeScene(Scene faceDownScene){
+    this.rScene = faceDownScene;
 
   }
 

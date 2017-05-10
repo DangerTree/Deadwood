@@ -7,6 +7,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.LinkedList;
 
 
 public class Board{
@@ -14,12 +15,22 @@ public class Board{
   private static int daysLeft;
   private static int scenesLeft;
   private static ArrayList<Room> roomList = new ArrayList<Room>();
+  private static LinkedList<Scene> sceneDrawPile = new LinkedList<Scene>();
 
   private static Board boardObj = new Board();
 
   public static Board getBoard(int dayNum){
       boardObj.daysLeft = dayNum;
       return boardObj;
+  }
+  
+  public static void initializeSceneDrawPile(){
+	  /*
+	  File scene_file = new File ("")
+	  
+	  for(int i = 0; i < 40; i ++){
+		  
+	  }*/
   }
 
   /* setupRooms: initializes all rooms
@@ -40,7 +51,7 @@ public class Board{
         String[] line = scan.nextLine().split("_");
         //System.out.println ("room: " + line[0] + " shot ctrs: " + line[1]);
         Room myRoom = new Room (line[0], Integer.parseInt(line[1]));
-        myRoom.placeScene();
+        myRoom.placeScene(sceneDrawPile.remove());//we could recycle scenes in a later version
         // parse all roles in the room
         int roleNum = Integer.parseInt(line[2]);
         for (int i = 0; i < roleNum; i++){
