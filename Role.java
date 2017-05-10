@@ -24,5 +24,13 @@ public class Role{
   public Player getActor (){
     return this.actor;
   }
+  
+  public void actorLeaves(){
+	  this.actor = null;
+  }
+  
+  public int getRank(){
+	  return this.rankRequired;
+  }
 
 }

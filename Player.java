@@ -65,6 +65,18 @@ public class Player {
     // if role > myRole.get
 
   }
+  
+  public void leaveRole(){
+	  this.myRole = null;
+  }
+  
+  public void awardOffCardBonus(){
+	  this.moneyCnt += this.myRole.getRank();
+  }
+  
+  public void payActor(int pay){
+	  this.moneyCnt += pay;
+  }
 
 
 }

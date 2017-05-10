@@ -32,13 +32,11 @@ public class Room{
   public void addRole(int rank, String name, String quote){
 
     // create new role obj
-    int roleRank = rank;
-    String roleName = name;
-    String roleQuote = quote;
     // put role in role arrayList
-    rRoleList.add(new Role(roleName, roleQuote, roleRank));
+    rRoleList.add(new Role(name, quote, rank));
 
   }
+  
 
 
   // Decrements number of shot counters in room after successful acting action
@@ -46,9 +44,6 @@ public class Room{
   public int rmShotCounter(){
     this.shotCtr--;
     return this.shotCtr;
-    //if(this.shotCtr == 0){
-    //  wrapScene();
-    //}
   }
 
 
@@ -66,7 +61,7 @@ public class Room{
 
 
   // return true if there is an on-card player
-  public boolean isOncardPlayer(){
+  public boolean hasOncardPlayer(){
     // looks for on-card actors in scene
     for (int j = 0; j < this.rScene.getSRoleListSize(); j++){
       if (this.rScene.getSRoleList()[j].getActor() != null){
@@ -76,24 +71,48 @@ public class Room{
     return false;
   }
 
-  private void awardBonus (int[] bonusDice){
-    // AWARD BONUSES HERE
-    // goes through off-card roles to find actors
-    //for (int i = 0; i < rRoleList.size(); i++){
-    //}
-  }
+
 
   // Discards the current scene card and awards appropriate bonuses to players in the room
   // bonusDice will be 0 if no bonuses are to be awarded, or an array of ints if not
   public void wrapScene(int [] bonusDice){
 
-    if (bonusDice[0] != 0){
-      awardBonus(bonusDice);
-    }
-    // discard scene card (AND REMOVE PLAYERS FROM IT....)
+	  for(int i = 0; i < bonusDice.length; i++){//awards on card actors their bonuses
+		  if(rScene.getSRoleList()[i % rScene.getSRoleList().length].getActor() != null){//if there is a player in this role, award it a bonus equal to the correct assignment of bonus dice
+			  rScene.getSRoleList()[i % rScene.getSRoleList().length].getActor().payActor(bonusDice[i]);
+		  }
+	  }
+	  
+	  for(int i = 0; i< rScene.getSRoleListSize(); i ++){ //removes on card actors from their roles
+		  if(rScene.getSRoleList()[i] != null){
+			  rScene.getSRoleList()[i].getActor().leaveRole();
+			  rScene.getSRoleList()[i] = null;
+		  }
+	  }
+	  
+	  for(int i  =0; i < rRoleList.size(); i++){ //awards off card actors their bonuses and removes them from their roles
+		  if(rRoleList.get(i).getActor() != null){
+			  rRoleList.get(i).getActor().awardOffCardBonus();
+			  rRoleList.get(i).getActor().leaveRole();
+			  rRoleList.get(i).actorLeaves();
+		  }
+	  }
+    // discard scene card
     this.rScene = null;
     // decrement scene num
     Board.decSceneNum();
+  }
+  
+  public void wrapScene(){
+	  
+	  for(int i  =0; i < rRoleList.size(); i++){ //removes off card actors from their roles
+		  if(rRoleList.get(i).getActor() != null){
+			  rRoleList.get(i).getActor().leaveRole();
+			  rRoleList.get(i).actorLeaves();
+		  }
+	  }
+	  this.rScene = null; //discards scene card
+	  Board.decSceneNum(); //decrements number of scenes left on the board
   }
 
   //returns the list of rooms that are accessible from this room
