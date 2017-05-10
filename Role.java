@@ -1,5 +1,6 @@
 /*
-The roll class for Deadwood game
+*   May 4, 2017, Sarah Gunderson, Zachary Lazar
+*   Role class for Deadwood Assignment 2
 */
 
 public class Role{

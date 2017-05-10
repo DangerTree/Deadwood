@@ -1,6 +1,10 @@
 /*
-The driver class for the Deadwood game
+*   May 4, 2017, Sarah Gunderson, Zachary Lazar
+*   Deadwood class for Deadwood Assignment 2
+*
+*   Driver class for the Deadwood game
 */
+
 import java.util.LinkedList;
 import java.util.Queue;
 
