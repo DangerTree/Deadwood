@@ -67,181 +67,181 @@ public class Board{
 
     // go through room list
     for (int i = 0; i < roomList.size(); i++){
-      if roomList.get(i).getRName().equals("Trailers"){
+      if (roomList.get(i).getRName().equals("Trailers")){
         for (int j = 0; j < roomList.size(); j++){
-          if roomList.get(j).getRName().equals("Main Street"){
+          if (roomList.get(j).getRName().equals("Main Street")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
-          if roomList.get(j).getRName().equals("Saloon"){
+          if (roomList.get(j).getRName().equals("Saloon")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
-          if roomList.get(j).getRName().equals("Hotel"){
+          if (roomList.get(j).getRName().equals("Hotel")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
         }
       }
 
-      if roomList.get(i).getRName().equals("Train Station"){
+      if (roomList.get(i).getRName().equals("Train Station")){
         for (int j = 0; j < roomList.size(); j++){
-          if roomList.get(j).getRName().equals("Jail"){
+          if (roomList.get(j).getRName().equals("Jail")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
-          if roomList.get(j).getRName().equals("General Store"){
+          if (roomList.get(j).getRName().equals("General Store")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
-          if roomList.get(j).getRName().equals("Casting Office"){
+          if (roomList.get(j).getRName().equals("Casting Office")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
         }
       }
 
-      if roomList.get(i).getRName().equals("Jail"){
+      if (roomList.get(i).getRName().equals("Jail")){
         for (int j = 0; j < roomList.size(); j++){
-          if roomList.get(j).getRName().equals("Train Station"){
+          if (roomList.get(j).getRName().equals("Train Station")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
-          if roomList.get(j).getRName().equals("General Store"){
+          if (roomList.get(j).getRName().equals("General Store")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
-          if roomList.get(j).getRName().equals("Main Street"){
+          if (roomList.get(j).getRName().equals("Main Street")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
         }
       }
 
-      if roomList.get(i).getRName().equals("General Store"){
+      if (roomList.get(i).getRName().equals("General Store")){
         for (int j = 0; j < roomList.size(); j++){
-          if roomList.get(j).getRName().equals("Train Station"){
+          if (roomList.get(j).getRName().equals("Train Station")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
-          if roomList.get(j).getRName().equals("Jail"){
+          if (roomList.get(j).getRName().equals("Jail")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
-          if roomList.get(j).getRName().equals("Saloon"){
+          if (roomList.get(j).getRName().equals("Saloon")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
-          if roomList.get(j).getRName().equals("Ranch"){
+          if (roomList.get(j).getRName().equals("Ranch")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
         }
       }
 
-      if roomList.get(i).getRName().equals("Main Street"){
+      if (roomList.get(i).getRName().equals("Main Street")){
         for (int j = 0; j < roomList.size(); j++){
-          if roomList.get(j).getRName().equals("Trailers"){
+          if (roomList.get(j).getRName().equals("Trailers")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
-          if roomList.get(j).getRName().equals("Jail"){
+          if (roomList.get(j).getRName().equals("Jail")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
-          if roomList.get(j).getRName().equals("Saloon"){
+          if (roomList.get(j).getRName().equals("Saloon")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
         }
       }
 
-      if roomList.get(i).getRName().equals("Saloon"){
+      if (roomList.get(i).getRName().equals("Saloon")){
         for (int j = 0; j < roomList.size(); j++){
-          if roomList.get(j).getRName().equals("Trailers"){
+          if (roomList.get(j).getRName().equals("Trailers")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
-          if roomList.get(j).getRName().equals("Main Street"){
+          if (roomList.get(j).getRName().equals("Main Street")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
-          if roomList.get(j).getRName().equals("General Store"){
+          if (roomList.get(j).getRName().equals("General Store")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
-          if roomList.get(j).getRName().equals("Bank"){
+          if (roomList.get(j).getRName().equals("Bank")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
         }
       }
 
-      if roomList.get(i).getRName().equals("Casting Office"){
+      if (roomList.get(i).getRName().equals("Casting Office")){
         for (int j = 0; j < roomList.size(); j++){
-          if roomList.get(j).getRName().equals("Train Station"){
+          if (roomList.get(j).getRName().equals("Train Station")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
-          if roomList.get(j).getRName().equals("Ranch"){
+          if (roomList.get(j).getRName().equals("Ranch")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
-          if roomList.get(j).getRName().equals("Secret Hideout"){
+          if (roomList.get(j).getRName().equals("Secret Hideout")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
         }
       }
 
-      if roomList.get(i).getRName().equals("Ranch"){
+      if (roomList.get(i).getRName().equals("Ranch")){
         for (int j = 0; j < roomList.size(); j++){
-          if roomList.get(j).getRName().equals("General Store"){
+          if (roomList.get(j).getRName().equals("General Store")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
-          if roomList.get(j).getRName().equals("Casting Office"){
+          if (roomList.get(j).getRName().equals("Casting Office")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
-          if roomList.get(j).getRName().equals("Secret Hideout"){
+          if (roomList.get(j).getRName().equals("Secret Hideout")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
-          if roomList.get(j).getRName().equals("Bank"){
+          if (roomList.get(j).getRName().equals("Bank")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
         }
       }
 
-      if roomList.get(i).getRName().equals("Secret Hideout"){
+      if (roomList.get(i).getRName().equals("Secret Hideout")){
         for (int j = 0; j < roomList.size(); j++){
-          if roomList.get(j).getRName().equals("Church"){
+          if (roomList.get(j).getRName().equals("Church")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
-          if roomList.get(j).getRName().equals("Casting Office"){
+          if (roomList.get(j).getRName().equals("Casting Office")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
-          if roomList.get(j).getRName().equals("Ranch"){
+          if (roomList.get(j).getRName().equals("Ranch")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
         }
       }
 
-      if roomList.get(i).getRName().equals("Bank"){
+      if (roomList.get(i).getRName().equals("Bank")){
         for (int j = 0; j < roomList.size(); j++){
-          if roomList.get(j).getRName().equals("Saloon"){
+          if (roomList.get(j).getRName().equals("Saloon")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
-          if roomList.get(j).getRName().equals("Hotel"){
+          if (roomList.get(j).getRName().equals("Hotel")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
-          if roomList.get(j).getRName().equals("Ranch"){
+          if (roomList.get(j).getRName().equals("Ranch")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
-          if roomList.get(j).getRName().equals("Church"){
+          if (roomList.get(j).getRName().equals("Church")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
         }
       }
 
-      if roomList.get(i).getRName().equals("Church"){
+      if (roomList.get(i).getRName().equals("Church")){
         for (int j = 0; j < roomList.size(); j++){
-          if roomList.get(j).getRName().equals("Secret Hideout"){
+          if (roomList.get(j).getRName().equals("Secret Hideout")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
-          if roomList.get(j).getRName().equals("Hotel"){
+          if (roomList.get(j).getRName().equals("Hotel")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
-          if roomList.get(j).getRName().equals("Bank"){
+          if (roomList.get(j).getRName().equals("Bank")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
         }
       }
 
-      if roomList.get(i).getRName().equals("Hotel"){
+      if (roomList.get(i).getRName().equals("Hotel")){
         for (int j = 0; j < roomList.size(); j++){
-          if roomList.get(j).getRName().equals("Trailers"){
+          if (roomList.get(j).getRName().equals("Trailers")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
-          if roomList.get(j).getRName().equals("Church"){
+          if (roomList.get(j).getRName().equals("Church")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
-          if roomList.get(j).getRName().equals("Bank"){
+          if (roomList.get(j).getRName().equals("Bank")){
             roomList.get(i).addAdjRoom(roomList.get(j));
           }
         }
@@ -306,7 +306,7 @@ public class Board{
       String rName = roomList.get(i).getRName();
       if (! rName.equals("Casting Office") && ! rName.equals("Trailers")){
         roomList.get(i).resetShotCounter();
-        roomList.get(i).placeScene();
+        roomList.get(i).placeScene(sceneDrawPile.remove());
       }
     }
   }
