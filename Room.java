@@ -1,22 +1,18 @@
 /*
 *   May 4, 2017, Sarah Gunderson, Zachary Lazar
-*   Room Class for Deadwood Assignment 2
-*   Version 1.1, Skeleton methods
+*   Room class for Deadwood Assignment 2
 */
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Room{
 
   private String rName;
-
   private Scene rScene;
-
   private int maxShotCtr, shotCtr;
-
   private Room[] adjRoomList;
-
-  private ArrayList<Role> rRoleList = new ArrayList<Role>();
+  private ArrayList<Role> rRoleList = new ArrayList<Role>(); // ArrayList of off-card roles in the room
 
 
   //Room object constructor, takes name of room as parameter to make a new room
@@ -32,7 +28,7 @@ public class Room{
   }
 
 
-  //Adds an off-card role to the rRoleList
+  // Adds an off-card role to the rRoleList
   public void addRole(int rank, String name, String quote){
 
     // create new role obj
@@ -45,8 +41,8 @@ public class Room{
   }
 
 
-  //decrements number of shot counters in room after successful acting action
-  // returns number of shots left
+  // Decrements number of shot counters in room after successful acting action
+  // Returns number of shots left
   public int rmShotCounter(){
     this.shotCtr--;
     return this.shotCtr;
@@ -56,7 +52,7 @@ public class Room{
   }
 
 
-  //resets the number of shot counters after a new scene is placed(called from placeScene())
+  // Resets the number of shot counters after a new scene is placed(called from placeScene())
   public void resetShotCounter(){
     this.shotCtr = this.maxShotCtr;
   }
@@ -87,7 +83,7 @@ public class Room{
     //}
   }
 
-  //discards the current scene card and awards appropriate bonuses to players in the room
+  // Discards the current scene card and awards appropriate bonuses to players in the room
   // bonusDice will be 0 if no bonuses are to be awarded, or an array of ints if not
   public void wrapScene(int [] bonusDice){
 

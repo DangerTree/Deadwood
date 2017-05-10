@@ -1,6 +1,8 @@
 /*
-The gameboard class for Deadwood game
+*   May 4, 2017, Sarah Gunderson, Zachary Lazar
+*   Gameboard class for Deadwood Assignment 2
 */
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
@@ -22,7 +24,8 @@ public class Board{
 
   /* setupRooms: initializes all rooms
   INPUT: a file describing the contents of each room (and off-card scenes)
-  POST-CONDITION: 10 rooms w/scenes and 2 rooms w/o scenes are created and added to roomList
+  POST-CONDITION: 10 rooms w/scenes and off-card roles and 2 rooms w/o scenes...
+    ...(trailer and casting office) are created and added to roomList
   */
   public void setupRooms(){
 
@@ -76,7 +79,7 @@ public class Board{
       // setup casting office and trailer
 
       roomList.add(new Room ("Casting Office"));
-      roomList.add(new Room ("Trailer"));
+      roomList.add(new Room ("Trailers"));
     }
     catch (FileNotFoundException e){
       System.out.println ("roomInfo file not found.");
@@ -89,28 +92,32 @@ public class Board{
   }
 
 
-  // moves players to Trailers, deals new scene cards to rooms, and replaces shot ctrs
-  // NOTE: discard last scene card?
+  /* endDay:
+  POST-CONDITION: Players are in Trailers, all Rooms have new Scenes and full shot ctrs
+  NOTE: discard last scene card?
+  */
   public void endDay(){
-    // replace shot counters and deal new scene cards to rooms
-    for (int i = 0; i < roomList.size()-2; i++){
-      roomList.get(i).resetShotCounter();
-      roomList.get(i).placeScene();
+    for (int i = 0; i < roomList.size(); i++){
+      String rName = roomList.get(i).getRName();
+      if (! rName.equals("Casting Office") && ! rName.equals("Trailers")){
+        roomList.get(i).resetShotCounter();
+        roomList.get(i).placeScene();
+      }
     }
   }
 
 
-  // getDaysLeft: returns the number of days left in the game
+  // getDaysLeft: Returns the number of days left in the game
   public static int getDaysLeft(){
     return daysLeft;
   }
 
-  // getScenesLeft: returns the number of scenes left on the board
+  // getScenesLeft: Returns the number of scenes left on the board
   public static int getScenesLeft(){
     return scenesLeft;
   }
 
-  // decSceneNum: decrements scenesLeft (the number of scenes on board) by one
+  // decSceneNum: Recrements scenesLeft (the number of scenes on board) by one
   public static void decSceneNum(){
     scenesLeft--;
   }

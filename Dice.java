@@ -1,6 +1,8 @@
 /*
-A simple dice class for the Deadwood game
+*   May 4, 2017, Sarah Gunderson, Zachary Lazar
+*   Dice class for Deadwood Assignment 2
 */
+
 import java.util.Random;
 
 public class Dice{

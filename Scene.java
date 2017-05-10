@@ -1,7 +1,6 @@
 /*
 *   May 4, 2017, Sarah Gunderson, Zachary Lazar
-*   Class to maintain Scene card objects for Deadwood
-*   Version 1.1, skeleton methods
+*   Scene class for Deadwood Assignment 2
 */
 
 public class Scene{
