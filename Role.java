@@ -32,5 +32,6 @@ public class Role{
   public int getRank(){
 	  return this.rankRequired;
   }
+  
 
 }
