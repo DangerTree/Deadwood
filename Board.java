@@ -20,6 +20,7 @@ public class Board{
   private static int scenesLeft;
   private static HashMap <String, Room> roomHashMap= new HashMap <String, Room>();
   private static LinkedList<Scene> sceneDrawPile = new LinkedList<Scene>();
+  private static int[][] upgradeReqs = {{4,5}, {10,10}, {18,15}, {28,20}, {40, 25}};
 
   private static Board boardObj = new Board();
 
@@ -60,7 +61,7 @@ public class Board{
 
 				  sRoleList[i] = newRole;
 			  }
-        
+
 			  //make scene
 			  myScene = new Scene(line[0], line[3], Integer.parseInt(line[2]), Integer.parseInt(line[1]), sRoleList);
 			  //add scene to sceneDrawPile
@@ -346,6 +347,16 @@ public class Board{
 
     makeRoomAdjList();
 
+  }
+
+
+  public static int getUpgradeReqs (String type, int level){
+    if (type.equals("cr")){
+      return upgradeReqs[level-1][1];
+    }
+    else {
+      return upgradeReqs[level-1][0];
+    }
   }
 
 

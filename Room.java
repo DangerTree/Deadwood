@@ -120,13 +120,24 @@ public class Room{
   }
 
   //returns the list of rooms that are accessible from this room
-  public ArrayList<Room> getAdjRoom(){
+  /*public ArrayList<Room> getAdjRoom(){
     return adjRoomList;
+  }*/
+  public Room getAdjRoom (String rName){
+    for (int k = 0; k < adjRoomList.size(); k++){
+      if (adjRoomList.get(k).getRName().equals(rName)){
+        return adjRoomList.get(k);
+      }
+    }
+    return null;
   }
+
 
   //returns the room's name
   public String getRName(){
     return rName;
   }
+
+
 
 }
