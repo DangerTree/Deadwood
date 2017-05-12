@@ -11,15 +11,16 @@ public class Player {
 
   private Scene myScene;
 
-  private int rank, moneyCnt, creditCnt, practiceCnt;
+  private int rank, moneyCnt, creditCnt, practiceCnt, playerID;
 
 
   // Player object constructor, takes the starting rank as a parameter
-  public Player(int rank, int credits, Room trailer){
+  public Player(int rank, int credits, Room trailer, int id){
     this.rank = rank;
     this.creditCnt = credits;
     this.moneyCnt = 0;
     this.practiceCnt = 0;
+    this.playerID = id;
     this.myRoom = trailer;
   }
 

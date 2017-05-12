@@ -11,10 +11,12 @@ import java.util.InputMismatchException;
 
 public class Deadwood{
 
-  private static int numPlayer;
+  //private static int numPlayer;
   private static Queue<Player> playerQueue = new LinkedList<Player>();
 
   public static void main (String args[]){
+
+    int numPlayer = 1;
 
     // check if correct number of arguments
     if (args.length != 1){
@@ -36,6 +38,8 @@ public class Deadwood{
     // ask user how many players there are
     System.out.println("Welcome to Deadwood, the cheapass game of acting badly!");
 
+    Board gameB = initGameboard(numPlayer);
+    /*
     Board gameBoard = null;
     if (numPlayer == 2 || numPlayer == 3){
       gameBoard = Board.getBoard(3);
@@ -44,6 +48,9 @@ public class Deadwood{
       gameBoard = Board.getBoard(4);
     }
 
+    gameBoard.setupRooms();
+
+    // Create player obects
     int startingCred = 0;
     int startingRank = 1;
     if (numPlayer == 5){
@@ -56,18 +63,53 @@ public class Deadwood{
       startingRank = 2;
     }
 
-
     // make numPlayer player objects, and add them to Queue
     for (int i = 0; i < numPlayer; i ++){
-      playerQueue.add(new Player(startingRank, startingCred, gameBoard.getTrailer()));
+      playerQueue.add(new Player(startingRank, startingCred, gameBoard.getTrailer(), i));
     }
+    */
 
-    // determine randomly who will go first
-
-
-    gameBoard.setupRooms();
-
+    initGameplay();
 
     return;
   }
+
+  private static Board initGameboard (int numPlayer){
+
+    Board gameBoard = null;
+    if (numPlayer == 2 || numPlayer == 3){
+      gameBoard = Board.getBoard(3);
+    }
+    else{
+      gameBoard = Board.getBoard(4);
+    }
+
+    gameBoard.setupRooms();
+
+    // Create player obects
+    int startingCred = 0;
+    int startingRank = 1;
+    if (numPlayer == 5){
+      startingCred = 2;
+    }
+    else if (numPlayer == 6){
+      startingCred = 4;
+    }
+    else if (numPlayer == 7 || numPlayer == 8){
+      startingRank = 2;
+    }
+
+    // make numPlayer player objects, and add them to Queue
+    for (int i = 0; i < numPlayer; i ++){
+      playerQueue.add(new Player(startingRank, startingCred, gameBoard.getTrailer(), i));
+    }
+    return gameBoard;
+  }
+
+
+  private static void initGameplay (){
+    System.out.println ("Run test");
+  }
+
+
 }
