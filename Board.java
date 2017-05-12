@@ -23,6 +23,7 @@ public class Board{
   private static int daysLeft;
   private static int scenesLeft;
   private static ArrayList<Room> roomList = new ArrayList<Room>();
+  //private static HashMap <String, Room> roomHashMap= new HashMap <String, Room>();
   private static LinkedList<Scene> sceneDrawPile = new LinkedList<Scene>();
 
   private static Board boardObj = new Board();
@@ -32,46 +33,47 @@ public class Board{
       makeScenes();
       return boardObj;
   }
-  
+
+
   //method to make scene cards to populate the sceneDrawPile LinkedList
   public static void makeScenes(){
-	  
+
 	  File scene_file = new File ("sceneInfo.txt");
 	  Scanner scan = null;
 	  try{
 		  scan = new Scanner(scene_file);
-		  
+
 		  Scene myScene = null;
-		  
+
 		  int sNumber = 0;
 		  int budget = 0;
 		  int numRoles = 0;
-		  
+
 		  while(scan.hasNextLine()){
-			  
+
 			  //read from sceneInfo.txt
 			  String[] line = scan.nextLine().split("_");
 			  //make array of roles to go on scene
 			  numRoles = Integer.parseInt(line[4]);
 			  Role[] sRoleList = new Role[numRoles];
-			  
+
 			  for(int i = 0; i < numRoles; i++){
 				  String[] roleLine = scan.nextLine().split("_");
-				  
+
 				  Role newRole = new Role ( roleLine[1], roleLine[2], Integer.parseInt(roleLine[0]));
-				  
+
 				  sRoleList[i] = newRole;
-				  
+
 			  }
 			  //make scene
 			  myScene = new Scene(line[0], line[3], Integer.parseInt(line[2]), Integer.parseInt(line[1]), sRoleList);
 			  //add scene to sceneDrawPile
 			  sceneDrawPile.add(myScene);
 			  System.out.println(myScene.getMovieName());
-			  
+
 		  }
-	  
-	  
+
+
 	  }
 	  catch (FileNotFoundException e){
 	      System.out.println ("sceneInfo file not found.");
@@ -81,8 +83,9 @@ public class Board{
 	      System.out.println ("roomInfo file formatted incorrectly.");
 	      System.exit(1);
 	    }
-	  
+
   }
+
 
   public static void initializeSceneDrawPile(){
     /*
@@ -105,9 +108,6 @@ public class Board{
 
       }
       */
-
-
-
 	  /*
 	  File scene_file = new File ("")
 
@@ -331,6 +331,7 @@ public class Board{
           System.out.println ("role rank: " + roleLine[0] + " role name: " + roleLine[1] + " quote: " + roleLine[2]);
           myRoom.addRole (Integer.parseInt(roleLine[0]), roleLine[1], roleLine[2]);
         }
+
       }
       // setup casting office and trailer
 
