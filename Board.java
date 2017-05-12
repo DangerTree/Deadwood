@@ -10,20 +10,14 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.LinkedList;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.DocumentBuilder;
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Node;
-import org.w3c.dom.Element;
+import java.util.HashMap;
 
 
 public class Board{
 
   private static int daysLeft;
   private static int scenesLeft;
-  private static ArrayList<Room> roomList = new ArrayList<Room>();
-  //private static HashMap <String, Room> roomHashMap= new HashMap <String, Room>();
+  private static HashMap <String, Room> roomHashMap= new HashMap <String, Room>();
   private static LinkedList<Scene> sceneDrawPile = new LinkedList<Scene>();
 
   private static Board boardObj = new Board();
@@ -38,9 +32,10 @@ public class Board{
   //method to make scene cards to populate the sceneDrawPile LinkedList
   public static void makeScenes(){
 
-	  File scene_file = new File ("sceneInfo.txt");
+	  File scene_file = null;
 	  Scanner scan = null;
 	  try{
+      scene_file = new File ("sceneInfo.txt");
 		  scan = new Scanner(scene_file);
 
 		  Scene myScene = null;
@@ -118,6 +113,39 @@ public class Board{
 
 
   private static void makeRoomAdjList(){
+
+    File roomAdjFile = null;
+    Scanner scan = null;
+
+    try {
+      roomAdjFile = new File ("adjRoomList.txt");
+      scan = new Scanner (roomAdjFile);
+      while (scan.hasNextLine() != false){
+        String roomName = scan.next();
+
+        if (scan.hasNextLine()){
+          String[] adjRoomList = scan.nextLine().split("_");
+          for (int j = 0; j < adjRoomList.length; j++){
+            roomHashMap.get(roomName).addAdjRoom(roomHashMap.get(adjRoomList[j])); // add all adjacent rooms to this room's adjacency list
+          }
+        }
+        else {
+          System.err.println ("Improperly formatted Room Adjacently List file.");
+          System.exit(1);
+        }
+      }
+    }
+    catch (FileNotFoundException e){
+      System.out.println ("adjRoomList.txt file not found.");
+      System.exit(1);
+    }
+    catch (NumberFormatException e){
+      System.out.println ("adjRoomList.txt file formatted incorrectly.");
+      System.exit(1);
+    }
+  }
+
+  /*private static void makeRoomAdjList(){
 
     // go through room list
     for (int i = 0; i < roomList.size(); i++){
@@ -303,6 +331,7 @@ public class Board{
 
     }
   }
+  */
 
 
   /* setupRooms: initializes all rooms
@@ -312,9 +341,10 @@ public class Board{
   */
   public void setupRooms(){
 
-    File room_file = new File ("roomInfo2.txt");
+    File room_file = null;
     Scanner scan = null;
     try {
+      room_file = new File ("roomInfo2.txt");
       scan = new Scanner (room_file);//.useDelimiter("_");
 
       // goes through file descibing content of 10 acting rooms (not trailer or casting office)
@@ -331,12 +361,11 @@ public class Board{
           System.out.println ("role rank: " + roleLine[0] + " role name: " + roleLine[1] + " quote: " + roleLine[2]);
           myRoom.addRole (Integer.parseInt(roleLine[0]), roleLine[1], roleLine[2]);
         }
-
+        roomHashMap.put(myRoom.getRName(), myRoom);
       }
       // setup casting office and trailer
-
-      roomList.add(new Room ("Casting Office"));
-      roomList.add(new Room ("Trailers"));
+      roomHashMap.put("Casting Office", new Room("Casting Office"));
+      roomHashMap.put("Trailers", new Room("Trailers"));
     }
     catch (FileNotFoundException e){
       System.out.println ("roomInfo file not found.");
@@ -357,13 +386,17 @@ public class Board{
   NOTE: discard last scene card?
   */
   public void endDay(){
-    for (int i = 0; i < roomList.size(); i++){
-      String rName = roomList.get(i).getRName();
-      if (! rName.equals("Casting Office") && ! rName.equals("Trailers")){
-        roomList.get(i).resetShotCounter();
-        roomList.get(i).placeScene(sceneDrawPile.remove());
+    for (Room room : roomHashMap.values()){
+      if (! room.getRName().equals("Casting Office") && ! room.getRName().equals("Trailers")){
+        room.resetShotCounter();
+        room.placeScene(sceneDrawPile.remove());
       }
     }
+  }
+
+
+  public Room getTrailer(){
+    return roomHashMap.get("Trailers");
   }
 
 
