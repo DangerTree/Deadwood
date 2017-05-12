@@ -15,8 +15,12 @@ public class Player {
 
 
   // Player object constructor, takes the starting rank as a parameter
-  public Player(int rank){
-
+  public Player(int rank, int credits, Room trailer){
+    this.rank = rank;
+    this.creditCnt = credits;
+    this.moneyCnt = 0;
+    this.practiceCnt = 0;
+    this.myRoom = trailer;
   }
 
   // Handles the turn for the player
@@ -65,15 +69,15 @@ public class Player {
     // if role > myRole.get
 
   }
-  
+
   public void leaveRole(){
 	  this.myRole = null;
   }
-  
+
   public void awardOffCardBonus(){
 	  this.moneyCnt += this.myRole.getRank();
   }
-  
+
   public void payActor(int pay){
 	  this.moneyCnt += pay;
   }
