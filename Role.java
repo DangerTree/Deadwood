@@ -11,27 +11,26 @@ public class Role{
   private String rQuote;
 
   public Role (String roleName, String roleQuote, int rank){
-    /*this.rankRequired = rank;
+    this.rankRequired = rank;
     this.rName = roleName;
     this.rQuote = roleQuote;
-    */
   }
 
   public void addActor (Player newActor){
-    //this.actor = newActor;
+    this.actor = newActor;
   }
 
   public Player getActor (){
     return this.actor;
   }
-  
+
   public void actorLeaves(){
 	  this.actor = null;
   }
-  
+
   public int getRank(){
 	  return this.rankRequired;
   }
-  
+
 
 }

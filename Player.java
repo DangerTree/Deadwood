@@ -45,19 +45,53 @@ public class Player {
   }
 
   // Attempts to upgrade the player's rank, returns false if unable to do so
-  private boolean upgrade(){
-    return true;
+  private boolean upgrade(String type, int level){
+    // check if in Casting office
+    if (this.myRoom.getRName().equals("Casting Office")){
+      if (this.rank >= level){
+        System.out.println ("Are you sure? Desired upgrade rank is lower than your current rank.");
+        return false;
+      }
+      int req = Board.getUpgradeReqs(type, level);
+      if (type.equals("$")){
+        if (this.moneyCnt >= req){
+          this.rank = level;
+          this.moneyCnt -= req;
+          return true;
+        }
+      }
+      else if (type.equals("cr")){
+        if (this.creditCnt >= req){
+          this.rank = level;
+          this.creditCnt -= req;
+          return true;
+        }
+      }
+    }
+    return false;
   }
+
 
   // Rehearses for the player's current role, returns false if unable to do so
   private boolean rehearse(){
-    return true;
+    if (this.myRole != null){
+      this.practiceCnt ++;
+      return true;
+    }
+    return false;
   }
 
   // Moves the player to a new room
-  private void move(String rName){
-
+  private boolean move(String rName){
+    Room temp = myRoom.getAdjRoom(rName);
+    if (temp == null){
+      System.out.println("Indicated room is not adjacent.");
+      return false;
+    }
+    this.myRoom = temp;
+    return true;
   }
+  
 
   // Works an off card role
   private void act_OffCard(){

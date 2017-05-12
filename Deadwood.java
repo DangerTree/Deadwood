@@ -109,6 +109,11 @@ public class Deadwood{
 
   private static void initGameplay (){
     System.out.println ("Run test");
+
+    Dice aD = new Dice();
+    for (int j = 0; j < 30; j++){
+      System.out.println (aD.rollOneD());
+    }
   }
 
 
