@@ -11,7 +11,7 @@ public class Room{
   private String rName;
   private Scene rScene;
   private int maxShotCtr, shotCtr;
-  private ArrayList<Room> adjRoomList;
+  private ArrayList<Room> adjRoomList = new ArrayList<Room>();
   private ArrayList<Role> rRoleList = new ArrayList<Role>(); // ArrayList of off-card roles in the room
 
 

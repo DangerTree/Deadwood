@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.LinkedList;
 import java.util.HashMap;
+import java.util.Arrays;
 
 
 public class Board{
@@ -58,14 +59,12 @@ public class Board{
 				  Role newRole = new Role ( roleLine[1], roleLine[2], Integer.parseInt(roleLine[0]));
 
 				  sRoleList[i] = newRole;
-
 			  }
+        
 			  //make scene
 			  myScene = new Scene(line[0], line[3], Integer.parseInt(line[2]), Integer.parseInt(line[1]), sRoleList);
 			  //add scene to sceneDrawPile
 			  sceneDrawPile.add(myScene);
-			  System.out.println(myScene.getMovieName());
-
 		  }
 
 
@@ -82,36 +81,6 @@ public class Board{
   }
 
 
-  public static void initializeSceneDrawPile(){
-    /*
-    try {
-	    File sceneXML = new File ("scenecards.xml");
-	    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-	    DocumentBuilder db= dbFactory.newDocumentBuilder();
-	    Document doc = db.parse(sceneXML);
-	    doc.getDocumentElement().normalize();
-
-      NodeList nodeL = doc.getElementsByTagName("card");
-
-      for (int i = 0; i < nodeL.getLength; i++){
-        Node nNode =  nodeL.item(temp);
-        if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-          Scene aScene = null;
-          Element anElm = (Element) nNode;
-          aScene = new Scene (anElm.getAttribute(name), anElm.getElementsByTagName("scene"), anElm.getAttribute(number))
-        // movie name, scene des, name, budget, roleList
-
-      }
-      */
-	  /*
-	  File scene_file = new File ("")
-
-	  for(int i = 0; i < 40; i ++){
-
-	  }*/
-  }
-
-
   private static void makeRoomAdjList(){
 
     File roomAdjFile = null;
@@ -121,7 +90,7 @@ public class Board{
       roomAdjFile = new File ("adjRoomList.txt");
       scan = new Scanner (roomAdjFile);
       while (scan.hasNextLine() != false){
-        String roomName = scan.next();
+        String roomName = scan.nextLine();
 
         if (scan.hasNextLine()){
           String[] adjRoomList = scan.nextLine().split("_");
@@ -358,7 +327,6 @@ public class Board{
         int roleNum = Integer.parseInt(line[2]);
         for (int i = 0; i < roleNum; i++){
           String[] roleLine = scan.nextLine().split("_");
-          System.out.println ("role rank: " + roleLine[0] + " role name: " + roleLine[1] + " quote: " + roleLine[2]);
           myRoom.addRole (Integer.parseInt(roleLine[0]), roleLine[1], roleLine[2]);
         }
         roomHashMap.put(myRoom.getRName(), myRoom);
