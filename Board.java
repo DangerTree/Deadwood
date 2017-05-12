@@ -1,6 +1,8 @@
 /*
 *   May 4, 2017, Sarah Gunderson, Zachary Lazar
 *   Gameboard class for Deadwood Assignment 2
+
+SHOULD SCENE CARDS SHUFFLE?????
 */
 
 import java.util.Scanner;
