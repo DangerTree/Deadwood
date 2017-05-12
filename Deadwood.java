@@ -38,10 +38,10 @@ public class Deadwood{
 
     Board gameBoard = null;
     if (numPlayer == 2 || numPlayer == 3){
-      Board gameBoard = Board.getBoard(3);
+      gameBoard = Board.getBoard(3);
     }
     else{
-      Board gameBoard = Board.getBoard(4);
+      gameBoard = Board.getBoard(4);
     }
 
     int startingCred = 0;
