@@ -29,7 +29,59 @@ public class Board{
 
   public static Board getBoard(int dayNum){
       boardObj.daysLeft = dayNum;
+      makeScenes();
       return boardObj;
+  }
+  
+  //method to make scene cards to populate the sceneDrawPile LinkedList
+  public static void makeScenes(){
+	  
+	  File scene_file = new File ("sceneInfo.txt");
+	  Scanner scan = null;
+	  try{
+		  scan = new Scanner(scene_file);
+		  
+		  Scene myScene = null;
+		  
+		  int sNumber = 0;
+		  int budget = 0;
+		  int numRoles = 0;
+		  
+		  while(scan.hasNextLine()){
+			  
+			  //read from sceneInfo.txt
+			  String[] line = scan.nextLine().split("_");
+			  //make array of roles to go on scene
+			  numRoles = Integer.parseInt(line[4]);
+			  Role[] sRoleList = new Role[numRoles];
+			  
+			  for(int i = 0; i < numRoles; i++){
+				  String[] roleLine = scan.nextLine().split("_");
+				  
+				  Role newRole = new Role ( roleLine[1], roleLine[2], Integer.parseInt(roleLine[0]));
+				  
+				  sRoleList[i] = newRole;
+				  
+			  }
+			  //make scene
+			  myScene = new Scene(line[0], line[3], Integer.parseInt(line[2]), Integer.parseInt(line[1]), sRoleList);
+			  //add scene to sceneDrawPile
+			  sceneDrawPile.add(myScene);
+			  System.out.println(myScene.getMovieName());
+			  
+		  }
+	  
+	  
+	  }
+	  catch (FileNotFoundException e){
+	      System.out.println ("sceneInfo file not found.");
+	      System.exit(1);
+	    }
+	  catch (NumberFormatException e){
+	      System.out.println ("roomInfo file formatted incorrectly.");
+	      System.exit(1);
+	    }
+	  
   }
 
   public static void initializeSceneDrawPile(){
