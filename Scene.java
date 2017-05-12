@@ -5,16 +5,23 @@
 
 public class Scene{
 
-  private String movieName, sceneDescript, sName;
-  private int budget;
+  private String movieName, sceneDescript;
+  private int budget, sNumber;
   private Role[] sRoleList;
-  private boolean faceUp = false;
+  private boolean faceUp;
 
 
 
   //Scene object constructor, takes all attributes as parameters
-  public Scene(String movieName, String sceneDescript, String sName, int budget, Role[] sRoleList){
+  public Scene(String movieName, String sceneDescript, int sNumber, int budget, Role[] sRoleList){
 
+	  this.movieName = movieName;
+	  this.sceneDescript = sceneDescript;
+	  this.sNumber = sNumber;
+	  this.budget = budget;
+	  this.sRoleList = sRoleList;
+	  this.faceUp = false;
+	  
   }
 
   //takes a roll from a player and checks it against the movie's budget to determine a success or failure to act for the scene
@@ -28,6 +35,10 @@ public class Scene{
     return success;
     */
     return true;
+  }
+  
+  public String getMovieName(){
+	  return this.movieName;
   }
 
   public Role[] getSRoleList(){
@@ -45,5 +56,6 @@ public class Scene{
   public void flipSceneCard(){
     this.faceUp = true;
   }
+  
 
 }
