@@ -39,35 +39,6 @@ public class Deadwood{
     System.out.println("Welcome to Deadwood, the cheapass game of acting badly!");
 
     Board gameB = initGameboard(numPlayer);
-    /*
-    Board gameBoard = null;
-    if (numPlayer == 2 || numPlayer == 3){
-      gameBoard = Board.getBoard(3);
-    }
-    else{
-      gameBoard = Board.getBoard(4);
-    }
-
-    gameBoard.setupRooms();
-
-    // Create player obects
-    int startingCred = 0;
-    int startingRank = 1;
-    if (numPlayer == 5){
-      startingCred = 2;
-    }
-    else if (numPlayer == 6){
-      startingCred = 4;
-    }
-    else if (numPlayer == 7 || numPlayer == 8){
-      startingRank = 2;
-    }
-
-    // make numPlayer player objects, and add them to Queue
-    for (int i = 0; i < numPlayer; i ++){
-      playerQueue.add(new Player(startingRank, startingCred, gameBoard.getTrailer(), i));
-    }
-    */
 
     initGameplay();
 
