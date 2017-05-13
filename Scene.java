@@ -48,5 +48,13 @@ public class Scene{
     this.faceUp = true;
   }
 
+  public int getSNumber(){
+    return this.sNumber;
+  }
+
+  public String getSName(){
+    return this.movieName;
+  }
+
 
 }

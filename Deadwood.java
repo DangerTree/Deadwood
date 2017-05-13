@@ -40,6 +40,7 @@ public class Deadwood{
 
     Board gameB = initGameboard(numPlayer);
 
+
     initGameplay();
 
     return;
@@ -79,12 +80,17 @@ public class Deadwood{
 
 
   private static void initGameplay (){
-    System.out.println ("Run test");
 
-    Dice aD = new Dice();
-    for (int j = 0; j < 30; j++){
-      System.out.println (aD.rollOneD());
+    while(Board.getDaysLeft() != 0){
+      while(Board.getScenesLeft() > 1){
+        System.out.println("It is player " + playerQueue.peek().getPlayerID() +"'s turn.");
+        Player activePlayer = playerQueue.remove();
+        activePlayer.takeTurn();
+        playerQueue.add(activePlayer);
+      }
+      Board.endDay();
     }
+    Board.endGame();
   }
 
 
