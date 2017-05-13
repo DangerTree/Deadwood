@@ -32,5 +32,9 @@ public class Role{
 	  return this.rankRequired;
   }
 
+  public String getRoleWho(){
+    String toRet = this.rName + ", " + this.rQuote;
+    return toRet;
+  }
 
 }

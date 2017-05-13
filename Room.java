@@ -138,6 +138,20 @@ public class Room{
     return rName;
   }
 
+  public boolean hasScene(){
+    if (this.rScene == null){
+      return false;
+    }
+    return true;
+  }
+
+  public String getSName(){
+    return this.rScene.getSName();
+  }
+
+  public int getSNumber(){
+    return this.rScene.getSNumber();
+  }
 
 
 }
