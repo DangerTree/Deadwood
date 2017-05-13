@@ -16,6 +16,8 @@ public class Player {
 
   private Scene myScene;
 
+  private boolean roleOnCard = false;
+
   private int rank, moneyCnt, creditCnt, practiceCnt, playerID;
 
 
@@ -94,23 +96,34 @@ public class Player {
         }
         else {System.out.println();}
       }
-      else if (cmd0.equals("where")){
+
+      else if (cmd0.equals("where")){ // prints player, player's current room, scene name and number if on a role. if not, lists open roles
         System.out.print ("in " + this.myRoom.getRName());
         if (this.myRoom.hasScene()){
           System.out.println (" shooting " + this.myRoom.getSName() + " scene " + this.myRoom.getSNumber()); // "shooting [scene name] scene [scene #]"
+          if (this.myRole == null){
+            this.myRoom.displayAllRoles(); // lists available acting roles off and on card
+          }
         }
         else {
           System.out.println(" wrapped.");
         }
       }
-      /*else if (cmd0.equals ("rehearse")){
-        if (this.practiceCnt >= this.my)
+
+      else if (cmd0.equals("rehearse")){
+        // add snarky comment about not needing to rehearse w/ so many practiceCnt s later
         this.practiceCnt++;
-      }*/
+      }
+      else if (cmd0.equals("work")){
+
+      }
 
 
     }
   }
+
+
+
 
   // rank getter
   public int getRank(){

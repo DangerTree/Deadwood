@@ -153,5 +153,31 @@ public class Room{
     return this.rScene.getSNumber();
   }
 
+  // print all oncard and off card roles
+  // returns false if the room has no scene; true if otherwise
+  public boolean displayAllRoles(){
+
+    // print on card roles
+    if (this.rScene != null){
+      System.out.println("\nAvailable on-card roles:");
+      for (int i = 0; i < rScene.getSRoleListSize(); i++){
+        if (this.rScene.getSRoleList()[i].getActor() != null){ // if the role is available
+          System.out.println("Rank " + this.rScene.getSRoleList()[i].getRank() + " " + this.rScene.getSRoleList()[i].getRoleWho());
+        }
+      }
+    }
+    else {
+      return false;
+    }
+    // print off-card roles
+    System.out.println("\nAvailable off-card roles:");
+    for (int i = 0; i < rRoleList.size(); i++){
+      if (rRoleList.get(i).getActor() != null){
+        System.out.println("Rank " + rRoleList.get(i).getRank() + " " + rRoleList.get(i).getRoleWho());
+      }
+    }
+    return true;
+  }
+
 
 }
