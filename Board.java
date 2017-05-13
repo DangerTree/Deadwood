@@ -75,7 +75,7 @@ public class Board{
     File room_file = null;
     Scanner scan = null;
     try {
-      room_file = new File ("roomInfo2.txt");
+      room_file = new File ("roomInfo.txt");
       scan = new Scanner (room_file);//.useDelimiter("_");
 
       // goes through file descibing content of 10 acting rooms (not trailer or casting office)

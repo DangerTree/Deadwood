@@ -1,1 +1,39 @@
-Jail_1_2_2_Prisoner in Cell_"Zzzzz... Whiskey!"_3_Feller in Irons_"Ah kilt the wrong man!"_General Store_2_2_1_Man In Overalls_"Looks like a storm's comin' in."_3_Mister Keach_"Howdy, stranger."_Train Station_3_4_1_Dragged by Train_"Omgeezers!"_1_Crusty Prospector_"Aww, peaches!"_2_Preacher with Bag_"The Lord will provide."_4_Cyrus the Gunfighter_"Git to fightin' or git away!"_Bank_1_2_2_Suspicious Gentleman_"Can you be more specific?"_3_Flustered Teller_"Would you like a large bill, sir?"_Church_2_2_1_Dead Man_"..."_2_Crying Woman_"Oh, the humanity!"_Hotel_3_4_1_Faro Player_"Hit me!"_1_Sleeping Drunkard_"Zzzzzz... Whiskey!"_2_Falls from Balcony_"Arrrgghh!!"_3_Australian Bartender_"What'll it be, mate?"_Main Street_3_4_1_Railroad Worker_"I'm a steel-drivin'man!"_2_Falls off Roof_"Aaaaiiiigggghh!"_2_Woman in Black Dress_"Well, I'll be!"_4_Mayor McGinty_"People of Deadwood!"_Saloon_2_2_1_Reluctant Farmer_"I ain't so sure about that!"_2_Woman in Red Dress_"Come up and see me!"_Ranch_2_3_1_Shot in Leg_"Ow! Me leg!"_2_Saucy Fred_"That's what she said!"_3_Man Under Horse_"A little help here!"_Secret Hideout_3_4_1_Clumsy Pit Fighter_"Hit me!"_2_Thug with Knife_"Meet Suzy, my murderin' knife."_3_Dangerous Tom_"There's two ways we can do this...."_4_Penny, who is Lost_"Oh, woe! For I am lost!"
+Jail_1_2
+2_Prisoner in Cell_"Zzzzz... Whiskey!"
+3_Feller in Irons_"Ah kilt the wrong man!"
+General Store_2_2
+1_Man In Overalls_"Looks like a storm's comin' in."
+3_Mister Keach_"Howdy, stranger."
+Train Station_3_4_
+1_Dragged by Train_"Omgeezers!"_
+1_Crusty Prospector_"Aww, peaches!"_
+2_Preacher with Bag_"The Lord will provide."_
+4_Cyrus the Gunfighter_"Git to fightin' or git away!"_
+Bank_1_2_
+2_Suspicious Gentleman_"Can you be more specific?"_
+3_Flustered Teller_"Would you like a large bill, sir?"_
+Church_2_2_
+1_Dead Man_"..."_
+2_Crying Woman_"Oh, the humanity!"_
+Hotel_3_4_
+1_Faro Player_"Hit me!"_
+1_Sleeping Drunkard_"Zzzzzz... Whiskey!"_
+2_Falls from Balcony_"Arrrgghh!!"_
+3_Australian Bartender_"What'll it be, mate?"_
+Main Street_3_4_
+1_Railroad Worker_"I'm a steel-drivin'man!"_
+2_Falls off Roof_"Aaaaiiiigggghh!"_
+2_Woman in Black Dress_"Well, I'll be!"_
+4_Mayor McGinty_"People of Deadwood!"_
+Saloon_2_2_
+1_Reluctant Farmer_"I ain't so sure about that!"_
+2_Woman in Red Dress_"Come up and see me!"_
+Ranch_2_3_
+1_Shot in Leg_"Ow! Me leg!"_
+2_Saucy Fred_"That's what she said!"_
+3_Man Under Horse_"A little help here!"_
+Secret Hideout_3_4_
+1_Clumsy Pit Fighter_"Hit me!"_
+2_Thug with Knife_"Meet Suzy, my murderin' knife."_
+3_Dangerous Tom_"There's two ways we can do this...."_
+4_Penny, who is Lost_"Oh, woe! For I am lost!"_
