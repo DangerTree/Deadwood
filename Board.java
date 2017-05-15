@@ -12,6 +12,8 @@ import java.io.FileNotFoundException;
 import java.util.LinkedList;
 import java.util.HashMap;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
 
 
 public class Board{
@@ -85,10 +87,12 @@ public class Board{
         //System.out.println ("room: " + line[0] + " shot ctrs: " + line[1]);
         Room myRoom = new Room (line[0], Integer.parseInt(line[1]));
         myRoom.placeScene(sceneDrawPile.remove());//we could recycle scenes in a later version
+        scenesLeft++;
         // parse all roles in the room
         int roleNum = Integer.parseInt(line[2]);
         for (int i = 0; i < roleNum; i++){
           String[] roleLine = scan.nextLine().split("_");
+          //System.out.println (roleLine[0] + " " +roleLine[1] + " " + roleLine[2]);
           myRoom.addRole (Integer.parseInt(roleLine[0]), roleLine[1], roleLine[2]);
         }
         roomHashMap.put(myRoom.getRName(), myRoom);
@@ -107,7 +111,6 @@ public class Board{
     }
 
     makeRoomAdjList();
-
   }
 
 
@@ -189,6 +192,7 @@ public class Board{
         room.placeScene(sceneDrawPile.remove());
       }
     }
+    daysLeft--;
   }
 
 
@@ -208,7 +212,7 @@ public class Board{
   }
 
   public static void endGame(){
-
+    return;
   }
 
 }

@@ -25,9 +25,9 @@ Main Street_3_4_
 2_Falls off Roof_"Aaaaiiiigggghh!"_
 2_Woman in Black Dress_"Well, I'll be!"_
 4_Mayor McGinty_"People of Deadwood!"_
-Saloon_2_2_
-1_Reluctant Farmer_"I ain't so sure about that!"_
-2_Woman in Red Dress_"Come up and see me!"_
+Saloon_2_2
+1_Reluctant Farmer_"I ain't so sure about that!"
+2_Woman in Red Dress_"Come up and see me!"
 Ranch_2_3_
 1_Shot in Leg_"Ow! Me leg!"_
 2_Saucy Fred_"That's what she said!"_

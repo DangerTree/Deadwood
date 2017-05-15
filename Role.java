@@ -37,5 +37,9 @@ public class Role{
     return toRet;
   }
 
+  public String getRoleName(){
+    return this.rName;
+  }
+
 
 }

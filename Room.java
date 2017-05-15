@@ -134,6 +134,48 @@ public class Room{
   }
 
 
+  // displayAdjRooms prints out a list of adjacent rooms
+  public void displayAdjRooms(){
+    for (int k = 0; k < adjRoomList.size()-1; k++){
+      System.out.print (adjRoomList.get(k).getRName() + ", ");
+    }
+    System.out.println (adjRoomList.get(adjRoomList.size()-1).getRName());
+  }
+
+
+  // findRole: returns the Role object with the same indicated roleName, or null otherwise
+  public Role findRole (String roleName){
+    // find off-card roles
+    for (int k = 0; k < rRoleList.size(); k++){
+      if (rRoleList.get(k).getRoleName().equals(rName)){
+        if (rRoleList.get(k).getActor() != null){
+          System.out.print ("Sorry, this role is already taken.");
+          return null;
+        }
+        else{
+          return rRoleList.get(k);
+        }
+      }
+    }
+    // Look for on-card roles
+    if (this.rScene != null){
+      for (int i = 0; i < rScene.getSRoleListSize(); i++){
+        if (this.rScene.getSRoleList()[i].getRoleName().equals(rName)){
+          if (this.rScene.getSRoleList()[i].getActor() != null){ // if the role is available
+            System.out.print ("Sorry, this role is already taken.");
+            return null;
+          }
+          else {
+            return this.rScene.getSRoleList()[i];
+          }
+        }
+      }
+    }
+    System.out.print ("No role found with that name.");
+    return null;
+  }
+
+
   // getRName returns the room's name
   public String getRName(){
     return rName;
@@ -168,7 +210,7 @@ public class Room{
     if (this.rScene != null){
       System.out.println("\nAvailable on-card roles:");
       for (int i = 0; i < rScene.getSRoleListSize(); i++){
-        if (this.rScene.getSRoleList()[i].getActor() != null){ // if the role is available
+        if (this.rScene.getSRoleList()[i].getActor() == null){ // if the role is available
           System.out.println("Rank " + this.rScene.getSRoleList()[i].getRank() + " " + this.rScene.getSRoleList()[i].getRoleWho());
         }
       }
@@ -179,8 +221,8 @@ public class Room{
     // print off-card roles
     System.out.println("\nAvailable off-card roles:");
     for (int i = 0; i < rRoleList.size(); i++){
-      if (rRoleList.get(i).getActor() != null){
-        System.out.println("Rank " + rRoleList.get(i).getRank() + " " + rRoleList.get(i).getRoleWho());
+      if (rRoleList.get(i).getActor() == null){
+        System.out.println("Rank " + rRoleList.get(i).getRank() + ": " + rRoleList.get(i).getRoleWho());
       }
     }
     return true;
