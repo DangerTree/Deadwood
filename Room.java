@@ -60,7 +60,6 @@ public class Room{
   //places a new scene card in the room
   public void placeScene(Scene faceDownScene){
     this.rScene = faceDownScene;
-
   }
 
 
@@ -80,14 +79,20 @@ public class Room{
   // bonusDice will be 0 if no bonuses are to be awarded, or an array of ints if not
   public void wrapScene(int [] bonusDice){
 
-	  for(int i = 0; i < bonusDice.length; i++){//awards on card actors their bonuses
-		  if(rScene.getSRoleList()[i % rScene.getSRoleList().length].getActor() != null){//if there is a player in this role, award it a bonus equal to the correct assignment of bonus dice
+	  for (int i = 0; i < bonusDice.length; i++){ //awards on card actors their bonuses
+		  if (rScene.getSRoleList()[i % rScene.getSRoleList().length].getActor() != null){ //if there is a player in this role, award it a bonus equal to the correct assignment of bonus dice
 			  rScene.getSRoleList()[i % rScene.getSRoleList().length].getActor().payActor(bonusDice[i]);
 		  }
 	  }
+    /*
+    for (int i = bonusDice.length - 1; i >= 0; i++){ //awards on card actors their bonuses
+      if (rScene.getSRoleList()[i % rScene.getSRoleList().length].getActor() != null){ //if there is a player in this role, award it a bonus equal to the correct assignment of bonus dice
+        rScene.getSRoleList()[i % rScene.getSRoleList().length].getActor().payActor(bonusDice[i]);
+      }
+    }*/
 
-	  for(int i = 0; i< rScene.getSRoleListSize(); i ++){ //removes on card actors from their roles
-		  if(rScene.getSRoleList()[i] != null){
+	  for (int i = 0; i< rScene.getSRoleListSize(); i ++){ //removes on card actors from their roles
+		  if (rScene.getSRoleList()[i] != null){
 			  rScene.getSRoleList()[i].getActor().leaveRole();
 			  rScene.getSRoleList()[i] = null;
 		  }
@@ -143,8 +148,45 @@ public class Room{
   }
 
 
+public Role findOnCardRole (String roleName){
+  // Look for on-card roles
+  if (this.rScene != null){
+    for (int i = 0; i < rScene.getSRoleListSize(); i++){
+      if (this.rScene.getSRoleList()[i].getRoleName().equals(rName)){
+        if (this.rScene.getSRoleList()[i].getActor() != null){ // if the role is available
+          System.out.print ("Sorry, this role is already taken.");
+          return null;
+        }
+        else {
+          return this.rScene.getSRoleList()[i];
+        }
+      }
+    }
+  }
+  System.out.print ("No role found with that name.");
+  return null;
+}
+
+
+public Role findOffCardRole (String roleName){
+  // find off-card roles
+  for (int k = 0; k < rRoleList.size(); k++){
+    if (rRoleList.get(k).getRoleName().equals(rName)){
+      if (rRoleList.get(k).getActor() != null){
+        System.out.print ("Sorry, this role is already taken.");
+        return null;
+      }
+      else{
+        return rRoleList.get(k);
+      }
+    }
+  }
+  System.out.print ("No role found with that name.");
+  return null;
+}
+
   // findRole: returns the Role object with the same indicated roleName, or null otherwise
-  public Role findRole (String roleName){
+  /*public Role findRole (String roleName){
     // find off-card roles
     for (int k = 0; k < rRoleList.size(); k++){
       if (rRoleList.get(k).getRoleName().equals(rName)){
@@ -173,7 +215,7 @@ public class Room{
     }
     System.out.print ("No role found with that name.");
     return null;
-  }
+  }*/
 
 
   // getRName returns the room's name
@@ -181,6 +223,10 @@ public class Room{
     return rName;
   }
 
+
+  public Scene getScene(){
+    return this.rScene;
+  }
 
   // hasScene returns true it this room has an affiliated scene, or false otherwise
   public boolean hasScene(){
