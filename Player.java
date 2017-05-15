@@ -71,7 +71,7 @@ public class Player {
         this.practiceCnt++;
       }
       else if (cmd0.equals("work")){
-        
+
       }
       else if (cmd0.equals("move")){
 
