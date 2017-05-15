@@ -59,9 +59,23 @@ public class Player {
         whereAmI();
       }
 
+      else if (cmd0.equals("upgrade")){ // already checked in validateUserCommand that the user is in the casting office
+        if (command.size() == 2){
+          String paymentType = command.remove(0);
+          int level = Integer.parseInt(command.remove(0));
+          int reqCurrency = Board.getUpgradeReqs (paymentType, level);
+          doUpgrade (paymentType, level, reqCurrency);
+        }
+        else{
+          System.out.println ("Wrong number of arguments for 'upgrade'.");
+        }
+      }
+
       else if (cmd0.equals("end")){
         turnDone = true;
       }
+
+
 
       else {
 
@@ -101,7 +115,7 @@ public class Player {
               System.out.println ("Room is not adjacent or does not exist. Please try again.");
             }
           }
-
+          /*
           else if (cmd0.equals("upgrade")){ // already checked in validateUserCommand that the user is in the casting office
             if (command.size() == 2){
               String paymentType = command.remove(0);
@@ -113,7 +127,7 @@ public class Player {
               System.out.println ("Wrong number of arguments for 'upgrade'.");
             }
           }
-
+          */
           else if (cmd0.equals("act")){ // already checked in validateUserCommand that the user has a role
             act();
             noActionsTaken = false;
@@ -216,33 +230,6 @@ public class Player {
     return creditCnt;
   }
 
-  // Attempts to upgrade the player's rank, returns false if unable to do so
-  private boolean upgrade(String type, int level){
-    // check if in Casting office
-    if (this.myRoom.getRName().equals("Casting Office")){
-      if (this.rank >= level){
-        System.out.println ("Are you sure? Desired upgrade rank is lower than your current rank.");
-        return false;
-      }
-      int req = Board.getUpgradeReqs(type, level);
-      if (type.equals("$")){
-        if (this.moneyCnt >= req){
-          this.rank = level;
-          this.moneyCnt -= req;
-          return true;
-        }
-      }
-      else if (type.equals("cr")){
-        if (this.creditCnt >= req){
-          this.rank = level;
-          this.creditCnt -= req;
-          return true;
-        }
-      }
-    }
-    return false;
-  }
-
 
   // Moves the player to a new room
   private boolean move(String rName){
@@ -314,13 +301,12 @@ public class Player {
   }
 
 
-  private boolean doUpgrade (String paymentType, int level, int reqCurrency){
+  private void doUpgrade (String paymentType, int level, int reqCurrency){
 
     if (paymentType.equals("$")){
       if (this.moneyCnt >= reqCurrency){
         this.moneyCnt -= reqCurrency;
         this.rank = level;
-        return false;
       }
       else{
         System.out.println ("You're too poor!!! " + paymentType + reqCurrency + " required for upgrade.");
@@ -330,13 +316,11 @@ public class Player {
       if (this.creditCnt >= reqCurrency){
         this.creditCnt -= reqCurrency;
         this.rank = level;
-        return false;
       }
       else{
         System.out.println ("You're not popular enough!!! " + paymentType + reqCurrency + " required for upgrade.");
       }
     }
-    return true;
   }
 
 
