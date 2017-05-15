@@ -92,8 +92,20 @@ public class Deadwood{
       }
       Board.endDay();
     }
-    Board.endGame();
+    endGame();//Board.endGame();
   }
 
+  private static void endGame (){
+    int [] scores = new int [playerQueue.size()];
+    int max = 0;
+    int playerNum = playerQueue.size();
+    for (int i = 0; i < playerNum; i++){
+      scores[i] = playerQueue.poll().calculateScore();
+      if (scores[i] > max){
+        max = i;
+      }
+    }
+    System.out.println ("Player " + max + " won!");
+  }
 
 }

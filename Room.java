@@ -79,9 +79,13 @@ public class Room{
   // bonusDice will be 0 if no bonuses are to be awarded, or an array of ints if not
   public void wrapScene(int [] bonusDice){
 
+
 	  for (int i = 0; i < bonusDice.length; i++){ //awards on card actors their bonuses
 		  if (rScene.getSRoleList()[i % rScene.getSRoleList().length].getActor() != null){ //if there is a player in this role, award it a bonus equal to the correct assignment of bonus dice
-			  rScene.getSRoleList()[i % rScene.getSRoleList().length].getActor().payActor(bonusDice[i]);
+			  //rScene.getSRoleList()[i % rScene.getSRoleList().length].getActor().payActor(bonusDice[i]);
+        Player temp = rScene.getSRoleList()[i % rScene.getSRoleList().length].getActor();
+        temp.payActor(bonusDice[i]);
+        System.out.println ("Awarding player " + temp.getPlayerID() + " a $" + bonusDice[i] + " bonus.");
 		  }
 	  }
     /*
@@ -92,8 +96,9 @@ public class Room{
     }*/
 
 	  for (int i = 0; i< rScene.getSRoleListSize(); i ++){ //removes on card actors from their roles
-		  if (rScene.getSRoleList()[i] != null){
+		  if (rScene.getSRoleList()[i].getActor() != null){
 			  rScene.getSRoleList()[i].getActor().leaveRole();
+        rScene.getSRoleList()[i].actorLeaves();
 			  rScene.getSRoleList()[i] = null;
 		  }
 	  }
@@ -152,7 +157,7 @@ public Role findOnCardRole (String roleName){
   // Look for on-card roles
   if (this.rScene != null){
     for (int i = 0; i < rScene.getSRoleListSize(); i++){
-      if (this.rScene.getSRoleList()[i].getRoleName().equals(rName)){
+      if (this.rScene.getSRoleList()[i].getRoleName().equals(roleName)){
         if (this.rScene.getSRoleList()[i].getActor() != null){ // if the role is available
           System.out.print ("Sorry, this role is already taken.");
           return null;
@@ -163,7 +168,6 @@ public Role findOnCardRole (String roleName){
       }
     }
   }
-  System.out.print ("No role found with that name.");
   return null;
 }
 
@@ -171,7 +175,7 @@ public Role findOnCardRole (String roleName){
 public Role findOffCardRole (String roleName){
   // find off-card roles
   for (int k = 0; k < rRoleList.size(); k++){
-    if (rRoleList.get(k).getRoleName().equals(rName)){
+    if (rRoleList.get(k).getRoleName().equals(roleName)){
       if (rRoleList.get(k).getActor() != null){
         System.out.print ("Sorry, this role is already taken.");
         return null;
@@ -181,7 +185,7 @@ public Role findOffCardRole (String roleName){
       }
     }
   }
-  System.out.print ("No role found with that name.");
+  //System.out.print ("No role found with that name.");
   return null;
 }
 

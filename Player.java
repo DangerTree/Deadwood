@@ -48,7 +48,7 @@ public class Player {
       String cmd0 = command.remove(0);
 
       if (cmd0.equals("who")){
-        System.out.print ("Player " + this.playerID + " ($" + this.moneyCnt + ", " + this.creditCnt + "cr) ");
+        System.out.print ("Player " + this.playerID + " ($" + this.moneyCnt + ", " + this.creditCnt + "cr), Rank: " + this.rank);
         if (this.myRole != null){
           System.out.println("working " + this.myRole.getRoleWho());
         }
@@ -74,6 +74,7 @@ public class Player {
           if (cmd0.equals("rehearse")){
             // add snarky comment about not needing to rehearse w/ so many practiceCnt s later
             this.practiceCnt++;
+            System.out.println ("Total practice chips increased to " + this.practiceCnt);
             noActionsTaken = false;
           }
 
@@ -89,6 +90,11 @@ public class Player {
             System.out.println ("Room to move to: " + newRoom);
             if (this.myRoom.getAdjRoom(newRoom) != null){
               this.myRoom = this.myRoom.getAdjRoom(newRoom);
+              if (this.myRoom.getScene() != null){
+                if (this.myRoom.getScene().isCardFlipped() == false){
+                  this.myRoom.getScene().flipSceneCard();
+                }
+              }
               noActionsTaken = false;
             }
             else {
@@ -109,38 +115,8 @@ public class Player {
           }
 
           else if (cmd0.equals("act")){ // already checked in validateUserCommand that the user has a role
-
-            // role dice
-            int theRoll = Dice.rollOneD();
-            // compare dice roll to movie budget
-            if (this.myScene.checkBudget (theRoll)){
-              int shotsLeft = this.myRoom.rmShotCounter();
-              if (shotsLeft == 0){
-                if (this.myRoom.hasOncardPlayer()){
-                  // wrap scene w/ bonus roll, dice # = to budget
-                  int[] bRoll = Dice.bonusRoll (this.myScene.getBudget());
-                  this.myRoom.wrapScene(bRoll);
-                }
-                else{
-                  this.myRoom.wrapScene();
-                }
-                // remove player from role, remove role from player
-                this.myRole.actorLeaves();
-                this.roleOnCard = false;
-                this.practiceCnt = 0;
-                this.myRole = null;
-              }
-            }
-            // if successful, pay actor and remove shot counter
-
-            // otherwise, print sadness
-
-            if (roleOnCard){
-              act_OnCard();
-            }
-            else {
-              act_OffCard();
-            }
+            act();
+            noActionsTaken = false;
           }
         }
       }
@@ -153,6 +129,11 @@ public class Player {
   private int promptUser(){
     int mode = 0;
     //System.out.println ("MADE IT TO promptUser");
+
+    /* if the player has already taken an action on their move, they can only enter who where or end
+    if (noActionsTaken == false){
+      System.out.println("Player " + this.playerID + ", what would you like to do?\n\tOPTIONS: who, where, or end.");
+    }*/
 
     if(this.myRole != null){
       mode = 1;
@@ -182,6 +163,7 @@ public class Player {
   */
   private ArrayList<String> validateUserCommand(int mode, ArrayList<String> command){
     // Take command from user
+    System.out.print("> ");
     Scanner scan = new Scanner (System.in);
     command = new ArrayList <String> (Arrays.asList(scan.nextLine().split(" ")));
 
@@ -190,24 +172,28 @@ public class Player {
       case 1: // if player has a role already
         while(!command.get(0).equals("who") && !command.get(0).equals("where") && !command.get(0).equals("act") && !command.get(0).equals("rehearse") && !command.get(0).equals("end")){
           System.out.println("You can not do that while you are working a role. Please enter a command from the list above.");
+          System.out.print("> ");
           command = new ArrayList <String> (Arrays.asList(scan.nextLine().split(" ")));
         }
         break;
       case 2: // if player is in casting office
         while(!command.get(0).equals("who") && !command.get(0).equals("where") && !command.get(0).equals("upgrade") && !command.get(0).equals("move") && !command.get(0).equals("end")){
           System.out.println("You can not do that while you are in the Casting Office. Please enter a command from the list above.");
+          System.out.print("> ");
           command = new ArrayList <String> (Arrays.asList(scan.nextLine().split(" ")));
         }
         break;
       case 3: // if player is in Trailers
         while(!command.get(0).equals("who") && !command.get(0).equals("where") && !command.get(0).equals("move") && !command.get(0).equals("end")){
           System.out.println("You can not do that while you are in the Trailers. Please enter a command from the list above.");
+          System.out.print("> ");
           command = new ArrayList <String> (Arrays.asList(scan.nextLine().split(" ")));
         }
         break;
       default: // player is not in Trailers or Casting Office, nor working a role (e.g. is in a room's whitespace w/o part)
         while(!command.get(0).equals("who") && !command.get(0).equals("where") && !command.get(0).equals("move") && !command.get(0).equals("end") && !command.get(0).equals("work")){
-          System.out.println("You can not do that while you are in the Trailers. Please enter a command from the list above.");
+          System.out.println("You can not do that while you are in a room without an active scene. Please enter a command from the list above.");
+          System.out.print("> ");
           command = new ArrayList <String> (Arrays.asList(scan.nextLine().split(" ")));
         }
     }
@@ -258,15 +244,6 @@ public class Player {
   }
 
 
-  // Rehearses for the player's current role, returns false if unable to do so
-  private boolean rehearse(){
-    if (this.myRole != null){
-      this.practiceCnt ++;
-      return true;
-    }
-    return false;
-  }
-
   // Moves the player to a new room
   private boolean move(String rName){
     Room temp = myRoom.getAdjRoom(rName);
@@ -280,17 +257,49 @@ public class Player {
 
 
   // Works an off card role
-  private void act_OffCard(){
-    //int attempt = Dice.rollOneD();
+  private void act(){
+    int theRoll = Dice.rollOneD();
+    System.out.println ("You rolled a " + theRoll + " and you have " + this.practiceCnt + " practice chips.");
+    System.out.println ("Total: " + (theRoll + this.practiceCnt));
+    // compare dice roll to movie budget
+    if (this.myScene.checkBudget (theRoll + this.practiceCnt)){
+      // pay regular salary
+      if (roleOnCard){
+        System.out.println ("You succeeded! Take two credits.");
+        this.creditCnt += 2;
+      }
+      else {
+        System.out.println ("You succeeded! Take 1 dollar and 1 credit.");
+        this.moneyCnt ++;
+        this.creditCnt ++;
+      }
 
+      int shotsLeft = this.myRoom.rmShotCounter();
+      if (shotsLeft == 0){
+        if (this.myRoom.hasOncardPlayer()){
+          // wrap scene w/ bonus roll, dice # = to budget
+          int[] bRoll = Dice.bonusRoll (this.myScene.getBudget());
+          this.myRoom.wrapScene(bRoll);
+        }
+        else{
+          this.myRoom.wrapScene();
+        }
+        // remove player from role, remove role from player
+        this.roleOnCard = false;
+        this.practiceCnt = 0;
+        this.myRole = null;
+        this.myScene = null;
+      }
+    }
+    else if (roleOnCard == false){ // if acting failed and player was off-card
+      this.moneyCnt ++;
+      System.out.println ("You failed. But still got $1!");
+    }
+    else {
+      System.out.println("You failed, better luck next time.");
+    }
   }
 
-  // Works an on card role
-  private void act_OnCard(){
-    // role dice
-    // if role > myRole.get
-
-  }
 
   public void leaveRole(){
 	  this.myRole = null;
@@ -314,7 +323,7 @@ public class Player {
         return false;
       }
       else{
-        System.out.println ("You're too poor!!!" + paymentType + reqCurrency + " required for upgrade.");
+        System.out.println ("You're too poor!!! " + paymentType + reqCurrency + " required for upgrade.");
       }
     }
     if (paymentType.equals("cr")){
@@ -324,7 +333,7 @@ public class Player {
         return false;
       }
       else{
-        System.out.println ("You're not popular enough!!!" + paymentType + reqCurrency + " required for upgrade.");
+        System.out.println ("You're not popular enough!!! " + paymentType + reqCurrency + " required for upgrade.");
       }
     }
     return true;
@@ -364,7 +373,7 @@ public class Player {
 
     System.out.print ("in " + this.myRoom.getRName());
     if (this.myRoom.hasScene()){
-      System.out.println (" shooting " + this.myRoom.getSName() + " scene #" + this.myRoom.getSNumber()); // "shooting [scene name] scene [scene #]"
+      System.out.println (" shooting " + this.myRoom.getSName() + " scene #" + this.myRoom.getSNumber() + ", Budget: $" + this.myRoom.getScene().getBudget()); // "shooting [scene name] scene [scene #]"
       this.myRoom.displayAllRoles(); // lists available acting roles off and on card
     }
     else {
@@ -382,6 +391,14 @@ public class Player {
 
   public int getPlayerID(){
     return this.playerID;
+  }
+
+
+  public int calculateScore (){
+    int score = this.moneyCnt + this.creditCnt;
+    score += this.rank * 5;
+    System.out.println ("Player " + this.playerID + " received a score of " + score + ".");
+    return score;
   }
 
 
