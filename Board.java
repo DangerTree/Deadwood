@@ -167,10 +167,10 @@ public class Board{
 
   public static int getUpgradeReqs (String type, int level){
     if (type.equals("cr")){
-      return upgradeReqs[level-1][1];
+      return upgradeReqs[level-2][1];
     }
     else {
-      return upgradeReqs[level-1][0];
+      return upgradeReqs[level-2][0];
     }
   }
 
@@ -210,9 +210,4 @@ public class Board{
   public static void decSceneNum(){
     scenesLeft--;
   }
-
-  public static void endGame(){
-    return;
-  }
-
 }
