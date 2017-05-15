@@ -183,7 +183,6 @@ public class Board{
 
   /* endDay:
   POST-CONDITION: Players are in Trailers, all Rooms have new Scenes and full shot ctrs
-  NOTE: discard last scene card?
   */
   public static void endDay(){
     for (Room room : roomHashMap.values()){
