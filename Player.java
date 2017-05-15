@@ -41,7 +41,7 @@ public class Player {
     while (turnDone != true){
       // Print out correct prompt and assign mode
       System.out.println("\n");
-      int mode = promptUser();
+      int mode = promptUser(noActionsTaken);
 
       command = validateUserCommand(mode, command);
       // try to process command, checking if input arg option # and types are valid
@@ -94,8 +94,10 @@ public class Player {
 
           else if (cmd0.equals("work")){
             String usrPart = String.join(" ", command.toArray(new CharSequence[command.size()]));
-            System.out.println (usrPart);
             boolean result = takeRole (usrPart);
+            if(result){
+              System.out.println ("You took the role: " + usrPart);
+            }
             noActionsTaken = !result;
           }
 
@@ -115,19 +117,6 @@ public class Player {
               System.out.println ("Room is not adjacent or does not exist. Please try again.");
             }
           }
-          /*
-          else if (cmd0.equals("upgrade")){ // already checked in validateUserCommand that the user is in the casting office
-            if (command.size() == 2){
-              String paymentType = command.remove(0);
-              int level = Integer.parseInt(command.remove(0));
-              int reqCurrency = Board.getUpgradeReqs (paymentType, level);
-              noActionsTaken = doUpgrade (paymentType, level, reqCurrency);
-            }
-            else{
-              System.out.println ("Wrong number of arguments for 'upgrade'.");
-            }
-          }
-          */
           else if (cmd0.equals("act")){ // already checked in validateUserCommand that the user has a role
             act();
             noActionsTaken = false;
@@ -140,32 +129,33 @@ public class Player {
 
   // promptUser asks the user what actions they would like to take, given their location and status
   // RETURNS: an int indicating their status/location
-  private int promptUser(){
+  private int promptUser(boolean noActionsTaken){
     int mode = 0;
     //System.out.println ("MADE IT TO promptUser");
 
-    /* if the player has already taken an action on their move, they can only enter who where or end
-    if (noActionsTaken == false){
-      System.out.println("Player " + this.playerID + ", what would you like to do?\n\tOPTIONS: who, where, or end.");
-    }*/
-
-    if(this.myRole != null){
+    // if the player has already taken an action on their move, they can only enter who where or end (but not if they are in the casting office)
+    if (noActionsTaken == false && !this.myRoom.getRName().equals("Casting Office")){
       mode = 1;
+      System.out.println("Player " + this.playerID + ", what would you like to do?\n\tOPTIONS: who, where, or end.");
+    }
+
+    else if(this.myRole != null){
+      mode = 2;
       System.out.println("Player " + this.playerID + ", what would you like to do?\n\tOPTIONS: who, where, act, rehearse, or end.");
     }
 
     else if(this.myRoom.getRName().equals("Casting Office")){
-      mode = 2;
+      mode = 3;
       System.out.println("Player " + this.playerID + ", what would you like to do?\n\tOPTIONS: who, where, move, upgrade, or end.");
     }
 
     else if(this.myRoom.getRName().equals("Trailers")){
-      mode = 3;
+      mode = 4;
       System.out.println("Player " + this.playerID + ", what would you like to do?\n\tOPTIONS: who, where, move, or end.");
     }
 
     else if(this.myRole == null){ // player in room, but without role
-      mode = 4;
+      mode = 5;
       System.out.println("Player " + this.playerID + ", what would you like to do?\n\tOPTIONS: who, where, work, or end.");
     }
     return mode;
@@ -183,21 +173,28 @@ public class Player {
 
     // check if valid command, given player's position / status
     switch (mode){
-      case 1: // if player has a role already
+      case 1: // if player has already done an action this turn (and is not in the casting office)
+        while(!command.get(0).equals("who") && !command.get(0).equals("where") && !command.get(0).equals("end")){
+          System.out.println("You can not do that while you are working a role. Please enter a command from the list above.");
+          System.out.print("> ");
+          command = new ArrayList <String> (Arrays.asList(scan.nextLine().split(" ")));
+        }
+      break;
+      case 2: // if player has a role already
         while(!command.get(0).equals("who") && !command.get(0).equals("where") && !command.get(0).equals("act") && !command.get(0).equals("rehearse") && !command.get(0).equals("end")){
           System.out.println("You can not do that while you are working a role. Please enter a command from the list above.");
           System.out.print("> ");
           command = new ArrayList <String> (Arrays.asList(scan.nextLine().split(" ")));
         }
         break;
-      case 2: // if player is in casting office
+      case 3: // if player is in casting office
         while(!command.get(0).equals("who") && !command.get(0).equals("where") && !command.get(0).equals("upgrade") && !command.get(0).equals("move") && !command.get(0).equals("end")){
           System.out.println("You can not do that while you are in the Casting Office. Please enter a command from the list above.");
           System.out.print("> ");
           command = new ArrayList <String> (Arrays.asList(scan.nextLine().split(" ")));
         }
         break;
-      case 3: // if player is in Trailers
+      case 4: // if player is in Trailers
         while(!command.get(0).equals("who") && !command.get(0).equals("where") && !command.get(0).equals("move") && !command.get(0).equals("end")){
           System.out.println("You can not do that while you are in the Trailers. Please enter a command from the list above.");
           System.out.print("> ");
@@ -206,7 +203,7 @@ public class Player {
         break;
       default: // player is not in Trailers or Casting Office, nor working a role (e.g. is in a room's whitespace w/o part)
         while(!command.get(0).equals("who") && !command.get(0).equals("where") && !command.get(0).equals("move") && !command.get(0).equals("end") && !command.get(0).equals("work")){
-          System.out.println("You can not do that while you are in a room without an active scene. Please enter a command from the list above.");
+          System.out.println("You can not do that while you do not have a role. Please enter a command from the list above.");
           System.out.print("> ");
           command = new ArrayList <String> (Arrays.asList(scan.nextLine().split(" ")));
         }
