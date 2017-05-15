@@ -82,7 +82,12 @@ public class Deadwood{
 
   private static void initGameplay (){
 
+
+
+
     while(Board.getDaysLeft() != 0){
+      System.out.println ("Days left: " + Board.getDaysLeft());
+      System.out.println ("Scenes left: " + Board.getScenesLeft());
       while(Board.getScenesLeft() > 1){
         System.out.println("It is player " + playerQueue.peek().getPlayerID() +"'s turn.");
         Player activePlayer = playerQueue.remove();
