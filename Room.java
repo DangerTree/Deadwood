@@ -76,7 +76,6 @@ public class Room{
   }
 
 
-
   // Discards the current scene card and awards appropriate bonuses to players in the room
   // bonusDice will be 0 if no bonuses are to be awarded, or an array of ints if not
   public void wrapScene(int [] bonusDice){
@@ -107,6 +106,7 @@ public class Room{
     Board.decSceneNum();
   }
 
+
   public void wrapScene(){
 
 	  for(int i  =0; i < rRoleList.size(); i++){ //removes off card actors from their roles
@@ -119,10 +119,11 @@ public class Room{
 	  Board.decSceneNum(); //decrements number of scenes left on the board
   }
 
-  //returns the list of rooms that are accessible from this room
-  /*public ArrayList<Room> getAdjRoom(){
-    return adjRoomList;
-  }*/
+
+  /* getAdjRoom
+  * Parameter: String rName, the name of a room
+  * Returns: the Room object with name rName, if that Room is adjacent, or null if not
+  */
   public Room getAdjRoom (String rName){
     for (int k = 0; k < adjRoomList.size(); k++){
       if (adjRoomList.get(k).getRName().equals(rName)){
@@ -133,11 +134,13 @@ public class Room{
   }
 
 
-  //returns the room's name
+  // getRName returns the room's name
   public String getRName(){
     return rName;
   }
 
+
+  // hasScene returns true it this room has an affiliated scene, or false otherwise
   public boolean hasScene(){
     if (this.rScene == null){
       return false;
@@ -145,10 +148,14 @@ public class Room{
     return true;
   }
 
+
+  // getSName returns the name of the Room's scene
   public String getSName(){
     return this.rScene.getSName();
   }
 
+
+  // getSNumber returns the # of the Room's scene
   public int getSNumber(){
     return this.rScene.getSNumber();
   }
