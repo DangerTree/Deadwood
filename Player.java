@@ -44,7 +44,6 @@ public class Player {
       int mode = promptUser();
 
       command = validateUserCommand(mode, command);
-      System.out.println ("1size of ArrayList command: " + command.size());
       // try to process command, checking if input arg option # and types are valid
       String cmd0 = command.remove(0);
 
@@ -60,57 +59,50 @@ public class Player {
         whereAmI();
       }
 
-      //(noActionsTaken == false){}
-
-      else if (cmd0.equals("rehearse")){
-        // add snarky comment about not needing to rehearse w/ so many practiceCnt s later
-        this.practiceCnt++;
-        noActionsTaken = false;
-      }
-
-      else if (cmd0.equals("work")){
-        if (noActionsTaken){
-          String usrPart = String.join(" ", command.toArray(new CharSequence[command.size()]));
-          System.out.println (usrPart);
-          takeRole (usrPart);
-          noActionsTaken = false;
-        }
-        else {
-          System.out.println ("You can only move once per turn.");
-        }
-      }
-
-      else if (cmd0.equals("move")){
-        if (noActionsTaken){
-          String newRoom = String.join(" ", command.toArray(new CharSequence[command.size()]));
-          //CharSequence[] cs = command.toArray(new CharSequence[command.size()]);
-          //String newRoom = Arrays.toString(command.toArray(new CharSequence[command.size()]));
-          System.out.println ("Room to move to: " + newRoom);
-          if (this.myRoom.getAdjRoom(newRoom) != null){
-            this.myRoom = this.myRoom.getAdjRoom(newRoom);
-          }
-          else {
-            System.out.println ("Room is not adjacent or does not exist. Please try again.");
-          }
-          noActionsTaken = false;
-        }
-        else {
-          System.out.println ("You can only move once per turn.");
-        }
-      }
-
-      else if (cmd0.equals("upgrade")){
-
-      }
-
-      else if (cmd0.equals("act")){
-
-      }
-
       else if (cmd0.equals("end")){
         turnDone = true;
       }
 
+      else {
+
+        if (noActionsTaken == false){
+          System.out.println ("You have already used your action for the turn; you may ask 'where', 'who', or 'end' to end your turn.");
+        }
+
+        else { // if the player does have an action to take
+
+          if (cmd0.equals("rehearse")){
+            // add snarky comment about not needing to rehearse w/ so many practiceCnt s later
+            this.practiceCnt++;
+          }
+
+          else if (cmd0.equals("work")){
+            String usrPart = String.join(" ", command.toArray(new CharSequence[command.size()]));
+            System.out.println (usrPart);
+            takeRole (usrPart);
+          }
+
+          else if (cmd0.equals("move")){
+            String newRoom = String.join(" ", command.toArray(new CharSequence[command.size()]));
+            System.out.println ("Room to move to: " + newRoom);
+            if (this.myRoom.getAdjRoom(newRoom) != null){
+              this.myRoom = this.myRoom.getAdjRoom(newRoom);
+            }
+            else {
+              System.out.println ("Room is not adjacent or does not exist. Please try again.");
+            }
+          }
+
+          else if (cmd0.equals("upgrade")){
+
+          }
+
+          else if (cmd0.equals("act")){
+
+          }
+          noActionsTaken = false;
+        }
+      }
     }
   }
 
