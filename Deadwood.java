@@ -6,6 +6,7 @@
 */
 
 import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.Queue;
 import java.util.InputMismatchException;
 
@@ -96,16 +97,34 @@ public class Deadwood{
   }
 
   private static void endGame (){
-    int [] scores = new int [playerQueue.size()];
-    int max = 0;
     int playerNum = playerQueue.size();
+    int [] scores = new int [playerNum];
+    int highestScorerID = 0;
+    ArrayList <Integer> winners = new ArrayList <Integer> (playerNum);
+
     for (int i = 0; i < playerNum; i++){
       scores[i] = playerQueue.poll().calculateScore();
-      if (scores[i] > max){
-        max = i;
+      if (scores[i] > scores[highestScorerID]){
+        highestScorerID = i;
       }
     }
-    System.out.println ("Player " + max + " won!");
+    // Fill winners ArrayList with the playerID of the winners
+    for (int j = 0; j < playerNum; j++){
+      if (scores[j] == highestScorerID){
+        winners.add(j);
+      }
+    }
+    // Print our winners
+    if (winners.size() > 1){
+      System.out.print ("There is a tie! Players ");
+      for (int k = 0; k < winners.size() -1 ; k++){
+        System.out.print (winners.get(k) + ", ");
+      }
+      System.out.print ("and " + winners.get(winners.size()-1) + " won!");
+    }
+    else {
+      System.out.println ("Player " + highestScorerID + " won!");
+    }
   }
 
 }
