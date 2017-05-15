@@ -22,7 +22,7 @@ public class Dice{
     for (int i = 0; i < budget; i++){
       rolls[i]= randy.nextInt(6)+1;
     }
-    Arrays.sort(rolls, Collections.reverseOrder());
+    Arrays.sort(rolls);
     return rolls;
   }
 

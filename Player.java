@@ -124,6 +124,11 @@ public class Player {
                 else{
                   this.myRoom.wrapScene();
                 }
+                // remove player from role, remove role from player
+                this.myRole.actorLeaves();
+                this.roleOnCard = false;
+                this.practiceCnt = 0;
+                this.myRole = null;
               }
             }
             // if successful, pay actor and remove shot counter
