@@ -50,7 +50,7 @@ public class Player {
       if (cmd0.equals("who")){
         System.out.print ("Player " + this.playerID + " ($" + this.moneyCnt + ", " + this.creditCnt + "cr), Rank: " + this.rank);
         if (this.myRole != null){
-          System.out.println("working " + this.myRole.getRoleWho());
+          System.out.println(" working " + this.myRole.getRoleWho()); //Zak added a space before "working"
         }
         else {System.out.println();}
       }
