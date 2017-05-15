@@ -192,6 +192,7 @@ public class Board{
         room.placeScene(sceneDrawPile.remove());
       }
     }
+    scenesLeft = 10; //Zak added this line, should fix game ending too early glitch
     daysLeft--;
   }
 
