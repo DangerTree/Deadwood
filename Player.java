@@ -74,12 +74,14 @@ public class Player {
           if (cmd0.equals("rehearse")){
             // add snarky comment about not needing to rehearse w/ so many practiceCnt s later
             this.practiceCnt++;
+            noActionsTaken = false;
           }
 
           else if (cmd0.equals("work")){
             String usrPart = String.join(" ", command.toArray(new CharSequence[command.size()]));
             System.out.println (usrPart);
-            takeRole (usrPart);
+            boolean result = takeRole (usrPart);
+            noActionsTaken = !result;
           }
 
           else if (cmd0.equals("move")){
@@ -87,20 +89,54 @@ public class Player {
             System.out.println ("Room to move to: " + newRoom);
             if (this.myRoom.getAdjRoom(newRoom) != null){
               this.myRoom = this.myRoom.getAdjRoom(newRoom);
+              noActionsTaken = false;
             }
             else {
               System.out.println ("Room is not adjacent or does not exist. Please try again.");
             }
           }
 
-          else if (cmd0.equals("upgrade")){
-
+          else if (cmd0.equals("upgrade")){ // already checked in validateUserCommand that the user is in the casting office
+            if (command.size() == 2){
+              String paymentType = command.remove(0);
+              int level = Integer.parseInt(command.remove(0));
+              int reqCurrency = Board.getUpgradeReqs (paymentType, level);
+              noActionsTaken = doUpgrade (paymentType, level, reqCurrency);
+            }
+            else{
+              System.out.println ("Wrong number of arguments for 'upgrade'.");
+            }
           }
 
-          else if (cmd0.equals("act")){
+          else if (cmd0.equals("act")){ // already checked in validateUserCommand that the user has a role
 
+            // role dice
+            int theRoll = Dice.rollOneD();
+            // compare dice roll to movie budget
+            if (this.myScene.checkBudget (theRoll)){
+              int shotsLeft = this.myRoom.rmShotCounter();
+              if (shotsLeft == 0){
+                if (this.myRoom.hasOncardPlayer()){
+                  // wrap scene w/ bonus roll, dice # = to budget
+                  int[] bRoll = Dice.bonusRoll (this.myScene.getBudget());
+                  this.myRoom.wrapScene(bRoll);
+                }
+                else{
+                  this.myRoom.wrapScene();
+                }
+              }
+            }
+            // if successful, pay actor and remove shot counter
+
+            // otherwise, print sadness
+
+            if (roleOnCard){
+              act_OnCard();
+            }
+            else {
+              act_OffCard();
+            }
           }
-          noActionsTaken = false;
         }
       }
     }
@@ -264,17 +300,56 @@ public class Player {
   }
 
 
-  private void takeRole(String usrPart){
-    if (this.myScene == null){
+  private boolean doUpgrade (String paymentType, int level, int reqCurrency){
+
+    if (paymentType.equals("$")){
+      if (this.moneyCnt >= reqCurrency){
+        this.moneyCnt -= reqCurrency;
+        this.rank = level;
+        return false;
+      }
+      else{
+        System.out.println ("You're too poor!!!" + paymentType + reqCurrency + " required for upgrade.");
+      }
+    }
+    if (paymentType.equals("cr")){
+      if (this.creditCnt >= reqCurrency){
+        this.creditCnt -= reqCurrency;
+        this.rank = level;
+        return false;
+      }
+      else{
+        System.out.println ("You're not popular enough!!!" + paymentType + reqCurrency + " required for upgrade.");
+      }
+    }
+    return true;
+  }
+
+
+  // takeRole sets the player's role to usrPart if possible and updates roleOnCard if neccessary. returns false otherwise
+  private boolean takeRole(String usrPart){
+    if (this.myRoom.hasScene() == false){
       System.out.println ("There is no active scene in this room.");
+      return false;
     }
     else {
-      Role tempRole = this.myRoom.findRole(usrPart);
+      //Role tempRole = this.myRoom.findRole(usrPart);
+      Role tempRole = this.myRoom.findOnCardRole(usrPart);
+      if (tempRole == null){
+        tempRole = this.myRoom.findOffCardRole(usrPart);
+      }
+      else { // if players new role does exist on the scene card
+        roleOnCard = true;
+      }
       if (tempRole == null){
         System.out.println ("Please try again.");
+        return false;
       }
       else {
         this.myRole = tempRole;
+        this.myRole.addActor(this);
+        this.myScene = myRoom.getScene();
+        return true;
       }
     }
   }

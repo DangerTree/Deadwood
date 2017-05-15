@@ -25,7 +25,11 @@ public class Scene{
 
   //takes a roll from a player and checks it against the movie's budget to determine a success or failure to act for the scene
   public boolean checkBudget(int playerRoll){
-    return (playerRoll < budget) ? false : true;
+    return (playerRoll < this.budget) ? false : true;
+  }
+
+  public int getBudget(){
+    return this.budget;
   }
 
   public String getMovieName(){
@@ -33,7 +37,7 @@ public class Scene{
   }
 
   public Role[] getSRoleList(){
-    return sRoleList;
+    return this.sRoleList;
   }
 
   public int getSRoleListSize(){
@@ -41,7 +45,7 @@ public class Scene{
   }
 
   public boolean isCardFlipped(){
-    return faceUp;
+    return this.faceUp;
   }
 
   public void flipSceneCard(){
