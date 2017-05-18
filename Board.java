@@ -39,7 +39,7 @@ public class Board{
     Scanner scan = null;
 
     try {
-      roomAdjFile = new File ("adjRoomList.txt");
+      roomAdjFile = new File ("adjRoomsInfo.txt");
       scan = new Scanner (roomAdjFile);
       while (scan.hasNextLine() != false){
         String roomName = scan.nextLine();
@@ -51,17 +51,17 @@ public class Board{
           }
         }
         else {
-          System.err.println ("Improperly formatted Room Adjacently List file.");
+          System.err.println ("Improperly formatted Room Adjacently List file (adjRoomsInfo.txt).");
           System.exit(1);
         }
       }
     }
     catch (FileNotFoundException e){
-      System.out.println ("adjRoomList.txt file not found.");
+      System.out.println ("adjRoomsInfo.txt file not found.");
       System.exit(1);
     }
     catch (NumberFormatException e){
-      System.out.println ("adjRoomList.txt file formatted incorrectly.");
+      System.out.println ("adjRoomsInfo.txt file formatted incorrectly.");
       System.exit(1);
     }
   }
