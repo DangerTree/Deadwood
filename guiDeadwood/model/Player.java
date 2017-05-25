@@ -33,7 +33,7 @@ public class Player {
 
   // Handles the turn for the player
   public void takeTurn(){
-    boolean noActionsTaken = true;
+    boolean actionTaken = false;
     //ArrayList <String> command = new ArrayList <String> ();
     ArrayList <String> command = null;
     boolean turnDone = false;
@@ -41,7 +41,7 @@ public class Player {
     while (turnDone != true){
       // Print out correct prompt and assign mode
       System.out.println("\n");
-      int mode = promptUser(noActionsTaken);
+      int mode = promptUser(actionTaken);
 
       command = validateUserCommand(mode, command);
       // try to process command, checking if input arg option # and types are valid
@@ -75,11 +75,9 @@ public class Player {
         turnDone = true;
       }
 
+      else { // for commands which count as "one action per turn":
 
-
-      else {
-
-        if (noActionsTaken == false){
+        if (actionTaken == true){
           System.out.println ("You have already used your action for the turn; you may ask 'where', 'who', or 'end' to end your turn.");
         }
 
@@ -89,7 +87,7 @@ public class Player {
             // add snarky comment about not needing to rehearse w/ so many practiceCnt s later
             this.practiceCnt++;
             System.out.println ("Total practice chips increased to " + this.practiceCnt);
-            noActionsTaken = false;
+            actionTaken = true;
           }
 
           else if (cmd0.equals("work")){
@@ -98,7 +96,7 @@ public class Player {
             if(result){
               System.out.println ("You took the role: " + usrPart);
             }
-            noActionsTaken = !result;
+            actionTaken = result;
           }
 
           else if (cmd0.equals("move")){
@@ -111,15 +109,16 @@ public class Player {
                   this.myRoom.getScene().flipSceneCard();
                 }
               }
-              noActionsTaken = false;
+              actionTaken = true;
             }
             else {
               System.out.println ("Room is not adjacent or does not exist. Please try again.");
             }
           }
+
           else if (cmd0.equals("act")){ // already checked in validateUserCommand that the user has a role
             act();
-            noActionsTaken = false;
+            actionTaken = true;
           }
         }
       }
@@ -129,12 +128,12 @@ public class Player {
 
   // promptUser asks the user what actions they would like to take, given their location and status
   // RETURNS: an int indicating their status/location
-  private int promptUser(boolean noActionsTaken){
+  private int promptUser(boolean actionTaken){
     int mode = 0;
     //System.out.println ("MADE IT TO promptUser");
 
     // if the player has already taken an action on their move, they can only enter who where or end (but not if they are in the casting office)
-    if (noActionsTaken == false && !this.myRoom.getRName().equals("Casting Office")){
+    if (actionTaken == true && !this.myRoom.getRName().equals("Casting Office")){
       mode = 1;
       System.out.println("Player " + this.playerID + ", what would you like to do?\n\tOPTIONS: who, where, or end.");
     }
