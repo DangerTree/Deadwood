@@ -2,7 +2,6 @@ Room Name
 location of top left pixel (x, y), dimension of room(horizontal, vertical)
 
 
-
 Train Station
 0, 0, 230, 450
 

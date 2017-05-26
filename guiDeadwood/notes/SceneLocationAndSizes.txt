@@ -1,4 +1,6 @@
-Scene Card locations
+Room Name
+Location of top left pixel(x, y), dimension of scene card (horizontal, vertical)
+
 
 Train Station
 15, 65, 215, 125
