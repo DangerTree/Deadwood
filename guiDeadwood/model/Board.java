@@ -4,6 +4,7 @@
 
 SHOULD SCENE CARDS SHUFFLE?????
 */
+package model;
 
 import java.util.Scanner;
 import java.util.ArrayList;
