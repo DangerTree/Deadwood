@@ -1,0 +1,40 @@
+Room Name
+location of top left pixel (x, y), dimension of room(horizontal, vertical)
+
+
+
+Train Station
+0, 0, 230, 450
+
+Jail
+250, 0, 350, 250
+
+Main Street
+600, 0, 600, 200
+
+General Store
+230, 250, 370, 200
+
+Saloon
+600, 200, 380, 250
+
+Trailers
+980, 250, 220, 200
+
+Casting Office
+0, 450, 225, 230
+
+Ranch
+225, 450, 375, 250
+
+Secret Hideout
+0, 700, 600, 200
+
+Bank
+600, 450, 370, 200
+
+Church
+600, 650, 340, 250
+
+Hotel
+970, 450, 230, 450

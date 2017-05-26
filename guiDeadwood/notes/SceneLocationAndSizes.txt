@@ -1,0 +1,31 @@
+Scene Card locations
+
+Train Station
+15, 65, 215, 125
+
+Jail
+275, 25, 215, 125
+
+General Store
+365, 280, 215, 125
+
+Main Street
+965, 25, 215, 125
+
+Saloon
+625, 275, 215, 125
+
+Ranch
+245, 470, 215, 125
+
+Secret Hideout
+20, 725, 215, 125
+
+Bank
+618, 470, 215, 125
+
+Church
+618, 730, 215, 125
+
+Hotel
+965, 735, 215, 125
