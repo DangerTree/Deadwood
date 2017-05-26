@@ -33,6 +33,10 @@ public class Board{
       return boardObj;
   }
 
+  public static Room getRoom(String rName){
+    return this.HashMap.get(rName);
+  }
+
 
   private static void makeRoomAdjList(){
 
