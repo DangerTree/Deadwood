@@ -18,8 +18,8 @@ public class SceneView
     sceneLabel.setVisible(true);
     add (sceneLabel, new Integer (0)); // THIS IS PROBABLY THE WRONG LAYER
     sceneLabel.setBounds(0, 0, h, w);
-    ResourcesDW r = new ResourcesDW.getInstance();
-    s.setIcon (r.getBackOfCard()); // face down card
+    ResourcesDW r = ResourcesDW.getInstance();
+    sceneLabel.setIcon (r.getBackOfCard()); // face down card
 
     s.subscribe(this);
   }
@@ -30,7 +30,7 @@ public class SceneView
   }
 
   public void flipSceneCard (model.Scene s){
-    ResourcesDW r = new ResourcesDW.getInstance();
+    ResourcesDW r = ResourcesDW.getInstance();
     sceneLabel.setIcon(r.getSceneIcon(s.getMovieName(), s.getSNumber()));
   }
 

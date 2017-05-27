@@ -15,7 +15,7 @@ public class Scene{
 
   public interface Listener {
     public void signalWrapping();
-    public void flipSceneCard();
+    public void flipSceneCard(Scene s);
   }
 
   private Collection<Listener> listeners;
@@ -67,7 +67,7 @@ public class Scene{
   public void flipSceneCard(){
     this.faceUp = true;
     for(Listener l: listeners)
-      l.flipSceneCard();
+      l.flipSceneCard(this);
   }
 
   public int getSNumber(){

@@ -34,7 +34,7 @@ public class Board{
   }
 
   public static Room getRoom(String rName){
-    return this.HashMap.get(rName);
+    return roomHashMap.get(rName);
   }
 
 
