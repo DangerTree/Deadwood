@@ -4,48 +4,61 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import java.util.HashMap;
 
 // This singleton class loads the 7-segment images once and keeps track of them
 // throughout the program's execution.
-public class Resources {
+public class ResourcesDW {
   // This array actually holds the images, which are indexed by the displayed
-  // number.  That is, big[1] is the 7-segment number 1.
-  private ImageIcon[] big;
+  // number.  That is, sceneIcons[1] is the 7-segment number 1.
+  private HashMap<String, ImageIcon> sceneIcons;
   private ImageIcon background;
-  static Resources instance;
+  static ResourcesDW instance;
 
   // This constructor creates the only instance of the class and reads in the
   // images from the files.  This is hard coded to look for the resources in a
   // specific directory.  This could be improved in two ways.  the path could be
   // more flexible and the images could be loaded on demand.
-  private Resources() {
-    big = new ImageIcon[40];
+  private ResourcesDW() {
+    HashMap <String, ImageIcon> sceneIcons = new HashMap <String, ImageIcon>();
 
-    try {
-      for (int i = 0; i < 40; i++)
-        big[i] = new ImageIcon (
-          ImageIO.read(
-            new File(String.format("../resources/%d.png", i))));
+    File imgFolder = new File ("../resources/scenes");
+    File[] listOfImages = imgFolder.listFiles();
 
-      background = new ImageIcon (
-          ImageIO.read(new File("../resources/bg.jpeg")));
-    }catch (IOException e) {
+    // for every file in the imgFile folder, load it into the HashMap
+    try{
+      for (int i = 0; i < listOfImages.length; i++){
+        if (listOfImages[i].isFile() && listOfImages[i].getName().endsWith(".png")){
+          String key = listOfImages[i].getName().substring(0, listOfImages[i].getName().length()-4);
+          ImageIcon img = new ImageIcon (ImageIO.read(listOfImages[i]));
+          sceneIcons.put (key, img);
+        }
+      }
+      background = new ImageIcon (ImageIO.read(new File("../resources/fullBoard.jpg")));
+    } catch (IOException e) {
+      System.out.println("Image resource not found. Exiting program.");
       e.printStackTrace();
       System.exit(1);
     }
   }
 
-  public ImageIcon getIcon(int i) {
-    return big[i];
+  public ImageIcon getSceneIcon(String sceneName, int sceneNum) {
+    String assembledKey = sceneName + " " + sceneNum;
+    ImageIcon toRet = sceneIcons.get(assembledKey);
+    if (toRet == null){
+      System.out.println ("Image for scene: " + assembledKey + " not found. Exiting game.");
+      System.exit(1);
+    }
+    return toRet;
   }
 
   public ImageIcon getBG(){
     return background;
   }
 
-  public static Resources getInstance() {
+  public static ResourcesDW getInstance() {
     if (instance == null)
-      instance = new Resources();
+      instance = new ResourcesDW();
     return instance;
   }
 
