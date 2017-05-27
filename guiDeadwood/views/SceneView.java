@@ -1,6 +1,8 @@
+package views;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
-import javax.swing.ImageIO;
+import javax.imageio.ImageIO;
 
 public class SceneView
   extends javax.swing.JLayeredPane
@@ -16,9 +18,10 @@ public class SceneView
     sceneLabel.setVisible(true);
     add (sceneLabel, new Integer (0)); // THIS IS PROBABLY THE WRONG LAYER
     sceneLabel.setBounds(0, 0, h, w);
+    ResourcesDW r = new ResourcesDW.getInstance();
+    s.setIcon (r.getBackOfCard()); // face down card
 
     s.subscribe(this);
-    s.setIcon () // face down card
   }
 
   // IF THE SCENE IS WRAPPING, MAKE THE SCENE VIEW INVISIBLE
@@ -26,8 +29,9 @@ public class SceneView
     sceneLabel.setVisible(false);
   }
 
-  public void flipSceneCard (){
-    sceneLabel.setIcon(getIcon);
+  public void flipSceneCard (model.Scene s){
+    ResourcesDW r = new ResourcesDW.getInstance();
+    sceneLabel.setIcon(r.getSceneIcon(s.getMovieName(), s.getSNumber()));
   }
 
 

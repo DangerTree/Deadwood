@@ -4,6 +4,7 @@
 *
 *   Driver class for the Deadwood game
 */
+package model;
 
 import java.util.LinkedList;
 import java.util.ArrayList;
