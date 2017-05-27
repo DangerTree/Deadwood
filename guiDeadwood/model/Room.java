@@ -111,6 +111,7 @@ public class Room{
 		  }
 	  }
     // discard scene card
+    //this.rScene.signalWrapping();
     this.rScene = null;
     // decrement scene num
     Board.decSceneNum();
