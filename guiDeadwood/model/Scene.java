@@ -3,12 +3,27 @@
 *   Scene class for Deadwood Assignment 2
 */
 
+import java.util.Collection;
+
 public class Scene{
 
   private String movieName, sceneDescript;
   private int budget, sNumber;
   private Role[] sRoleList;
   private boolean faceUp;
+
+  public interface Listener {
+    public void signalWrapping();
+    public void flipSceneCard();
+  }
+
+  private Collection<Listener> listeners;
+
+  public void subscribe(Listener l){
+    listeners.add(l);
+  }
+
+
 
 
   //Scene object constructor, takes all attributes as parameters
@@ -50,6 +65,8 @@ public class Scene{
 
   public void flipSceneCard(){
     this.faceUp = true;
+    for(Listener l: listeners)
+      l.flipSceneCard();
   }
 
   public int getSNumber(){
@@ -58,6 +75,11 @@ public class Scene{
 
   public String getSName(){
     return this.movieName;
+  }
+
+  public void signalWrapping(){
+    for(Listener l: listeners)
+      l.signalWrapping();
   }
 
 
