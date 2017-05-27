@@ -2,6 +2,8 @@
 *   May 4, 2017, Sarah Gunderson, Zachary Lazar
 *   Player class for Deadwood Assignment 2
 */
+package model;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.lang.System.*;

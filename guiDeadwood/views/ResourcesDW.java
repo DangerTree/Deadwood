@@ -1,4 +1,4 @@
-package view;
+package views;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +12,7 @@ public class ResourcesDW {
   // This array actually holds the images, which are indexed by the displayed
   // number.  That is, sceneIcons[1] is the 7-segment number 1.
   private HashMap<String, ImageIcon> sceneIcons;
-  private ImageIcon background;
+  private ImageIcon background, backOfCard;
   static ResourcesDW instance;
 
   // This constructor creates the only instance of the class and reads in the
@@ -35,6 +35,7 @@ public class ResourcesDW {
         }
       }
       background = new ImageIcon (ImageIO.read(new File("../resources/fullBoard.jpg")));
+      backOfCard = new ImageIcon (ImageIO.read(new File("../resources/cardBack.jpg")));
     } catch (IOException e) {
       System.out.println("Image resource not found. Exiting program.");
       e.printStackTrace();
@@ -54,6 +55,10 @@ public class ResourcesDW {
 
   public ImageIcon getBG(){
     return background;
+  }
+
+  public ImageIcon getBackOfCard(){
+    return backOfCard;
   }
 
   public static ResourcesDW getInstance() {

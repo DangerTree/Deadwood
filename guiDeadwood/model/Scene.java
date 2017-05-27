@@ -2,6 +2,7 @@
 *   May 4, 2017, Sarah Gunderson, Zachary Lazar
 *   Scene class for Deadwood Assignment 2
 */
+package model;
 
 import java.util.Collection;
 
