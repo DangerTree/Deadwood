@@ -66,7 +66,7 @@ public class Scene{
   public void flipSceneCard(){
     this.faceUp = true;
     for(Listener l: listeners)
-      l.flipSceneCard();
+      l.flipSceneCard(this);
   }
 
   public int getSNumber(){
