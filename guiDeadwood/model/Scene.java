@@ -2,6 +2,7 @@
 *   May 4, 2017, Sarah Gunderson, Zachary Lazar
 *   Scene class for Deadwood Assignment 2
 */
+package model;
 
 import java.util.Collection;
 
@@ -14,7 +15,7 @@ public class Scene{
 
   public interface Listener {
     public void signalWrapping();
-    public void flipSceneCard();
+    public void flipSceneCard(Scene s);
   }
 
   private Collection<Listener> listeners;
