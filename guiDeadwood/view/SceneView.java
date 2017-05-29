@@ -13,11 +13,11 @@ public class SceneView
 
   public SceneView (int x, int y, int h, int w, model.Scene s){
 
-    setBounds (x, y, h, w);
+    setBounds (x, y, w, h);
     sceneLabel = new JLabel();
     sceneLabel.setVisible(true);
-    add (sceneLabel, new Integer (3)); // THIS IS PROBABLY THE WRONG LAYER
-    sceneLabel.setBounds(0, 0, h, w);
+    add (sceneLabel, new Integer (0)); // THIS IS PROBABLY THE WRONG LAYER
+    sceneLabel.setBounds(0, 0, w, h);
     ResourcesDW r = ResourcesDW.getInstance();
     sceneLabel.setIcon (r.getBackOfCard()); // face down card
 

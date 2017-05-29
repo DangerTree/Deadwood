@@ -1,3 +1,14 @@
+################## May 29th, 2017: #################
+
+### 12:45pm
+    read image locations from outside file (not hard coding them)
+    resize face-down scene cards to fit the bounds of the JLabel (?)
+    create board and scene controllers
+
+
+####################################################
+
+
 to compile, navigate to guiDeadwood and:
     ./run.sh
 

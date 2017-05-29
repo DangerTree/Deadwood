@@ -16,62 +16,98 @@ public class BoardView extends JLayeredPane{
 
     boardLabel = new JLabel (backgroundImg);
     boardLabel.setBounds (0, 0, backgroundImg.getIconWidth(), backgroundImg.getIconHeight());
-    add(boardLabel, new Integer (0)); // add the board image as the first layer
+    add(boardLabel, new Integer (1)); // add the board image as the first layer
     setBounds (boardLabel.getBounds());
 
+
     // create room view objects
-    makeRoomViews(bModel);
+    makeSceneViews(bModel);
   }
 
-  private void makeRoomViews(model.Board bModel) throws Exception{
+  private void makeSceneViews(model.Board bModel) throws Exception{
 
+    SceneView sv;
+
+    sv = new SceneView (15, 65, 125, 215, bModel.getRoom ("Train Station").getScene());
+    this.add(sv, new Integer (2));
+
+    sv = new SceneView (275, 25, 125, 215, bModel.getRoom ("Jail").getScene());
+    this.add(sv, new Integer (2));
+
+    sv = new SceneView (965, 25, 125, 215, bModel.getRoom ("Main Street").getScene());
+    this.add(sv, new Integer (2));
+
+    sv = new SceneView (365, 280, 125, 215, bModel.getRoom ("General Store").getScene());
+    this.add(sv, new Integer (2));
+
+    sv = new SceneView (625, 275, 125, 215, bModel.getRoom ("Saloon").getScene());
+    this.add(sv, new Integer (2));
+
+    sv = new SceneView (245, 470, 125, 215, bModel.getRoom ("Ranch").getScene());
+    this.add(sv, new Integer (2));
+
+    sv = new SceneView (20, 725, 125, 215, bModel.getRoom ("Secret Hideout").getScene());
+    this.add(sv, new Integer (2));
+
+    sv = new SceneView (618, 470, 125, 215, bModel.getRoom ("Bank").getScene());
+    this.add(sv, new Integer (2));
+
+    sv = new SceneView (618, 730, 125, 215, bModel.getRoom ("Church").getScene());
+    this.add(sv, new Integer (2));
+
+    sv = new SceneView (965, 735, 125, 215, bModel.getRoom ("Hotel").getScene());
+    this.add(sv, new Integer (2));
+
+
+    /*
     RoomView rv;
 
     rv = new RoomView (0, 0, 450, 230, bModel.getRoom ("Train Station"));
     rv.addSceneView (15, 65, 125, 215, bModel.getRoom ("Train Station").getScene());
-    add(rv, new Integer (1));
+    this.add(rv, new Integer (2));
 
     rv = new RoomView (250, 0, 250, 350, bModel.getRoom ("Jail"));
     rv.addSceneView (275, 25, 125, 215, bModel.getRoom ("Jail").getScene());
-    add(rv, new Integer (1));
+    this.add(rv, new Integer (2));
 
     rv = new RoomView (600, 0, 200, 600, bModel.getRoom ("Main Street"));
     rv.addSceneView (965, 25, 125, 215, bModel.getRoom ("Main Street").getScene());
-    add(rv, new Integer (1));
+    this.add(rv, new Integer (2));
 
     rv = new RoomView (230, 250, 200, 370, bModel.getRoom ("General Store"));
     rv.addSceneView (365, 280, 125, 215, bModel.getRoom ("General Store").getScene());
-    add(rv, new Integer (1));
+    this.add(rv, new Integer (2));
 
     rv = new RoomView (600, 200, 250, 380, bModel.getRoom ("Saloon"));
     rv.addSceneView (625, 275, 125, 215, bModel.getRoom ("Saloon").getScene());
-    add(rv, new Integer (1));
+    this.add(rv, new Integer (2));
 
     rv = new RoomView (225, 450, 250, 375, bModel.getRoom ("Ranch"));
     rv.addSceneView (245, 470, 125, 215, bModel.getRoom ("Ranch").getScene());
-    add(rv, new Integer (1));
+    this.add(rv, new Integer (2));
 
     rv = new RoomView (0, 700, 200, 600, bModel.getRoom ("Secret Hideout"));
     rv.addSceneView (20, 725, 125, 215, bModel.getRoom ("Secret Hideout").getScene());
-    add(rv, new Integer (1));
+    this.add(rv, new Integer (2));
 
     rv = new RoomView (600, 450, 200, 370, bModel.getRoom ("Bank"));
     rv.addSceneView (618, 470, 125, 215, bModel.getRoom ("Bank").getScene());
-    add(rv, new Integer (1));
+    this.add(rv, new Integer (2));
 
     rv = new RoomView (600, 650, 250, 340, bModel.getRoom ("Church"));
     rv.addSceneView (618, 730, 125, 215, bModel.getRoom ("Church").getScene());
-    add(rv, new Integer (1));
+    this.add(rv, new Integer (2));
 
     rv = new RoomView (970, 450, 450, 230, bModel.getRoom ("Hotel"));
     rv.addSceneView (965, 735, 125, 215, bModel.getRoom ("Hotel").getScene());
-    add(rv, new Integer (1));
+    this.add(rv, new Integer (2));
 
     rv = new RoomView (980, 250, 200, 220, bModel.getRoom ("Trailers"));
-    add(rv, new Integer (1));
+    this.add(rv, new Integer (2));
 
     rv = new RoomView (0, 450, 230, 225, bModel.getRoom ("Casting Office"));
-    add(rv, new Integer (1));
+    this.add(rv, new Integer (2));
+    */
   }
 
 }

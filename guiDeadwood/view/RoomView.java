@@ -13,11 +13,13 @@ public class RoomView extends JLayeredPane{
   // rx, ry, rh, rw are the room placement and height/width params
   public RoomView (int rx, int ry, int rh, int rw, model.Room rModel) throws Exception {
 
-    roomRectangle = new JLabel ();
-    roomRectangle.setBounds (rx, ry, rh, rw);
-    roomRectangle.setVisible(true);
-    add(roomRectangle, new Integer (1)); // add the board image as the first layer
-    setBounds (roomRectangle.getBounds());
+    setBounds (rx, ry, rh, rw); // set bounds of JLayeredPane
+
+    //roomRectangle = new JLabel ();
+    //roomRectangle.setVisible(false);
+    //add(roomRectangle, new Integer (3));
+    //roomRectangle.setBounds (0, 0, rh, rw);
+
     this.rmModel = rModel;
 
     // add this RoomView as a listener of a Room obj in the model
@@ -35,7 +37,7 @@ public class RoomView extends JLayeredPane{
   public void addSceneView (int sx, int sy, int sh, int sw, model.Scene sModel){
     // makes a new scene view
     SceneView sv = new SceneView (sx, sy, sh, sw, sModel);
-    add(sv, new Integer (3));
+    add(sv, new Integer (4));
   }
 
 
