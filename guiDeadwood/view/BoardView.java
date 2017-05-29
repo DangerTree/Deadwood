@@ -34,6 +34,33 @@ public class BoardView extends JLayeredPane{
 
   private void initPlayerRoomLoc(){
 
+    File PlayerLocationsFile = null;
+    Scanner scan = null;
+
+    try{
+      PlayerLocationsFile = new File ("resources/PlayerLocations.txt");
+      scan = new Scanner (PlayerLocationsFile);
+      while(scan.hasNextLine() != false){
+        String roomName = scan.nextLine();
+
+        int [][] newLocations = new int[8][2];
+        for(int i = 0; i < 8; i++){
+          String x = scan.Next();
+          String y = scan.Next();
+          newLocations[i][0] = Integer.parseInt(x);
+          newLocations[i][1] = Integer.parseInt(y);
+        }
+        playerRoomLoc.put(roomName, newLocations);
+      }
+    }
+    catch(FileNotFoundException e){
+      System.out.println("PlayerLocations.txt file not found.");
+      System.exit(1);
+    }
+    catch(NumberFormatException e){
+      System.out.println("PlayerLocations.txt file formattted incorrectly.");
+      System.exit(1);
+    }
 
   }
 
