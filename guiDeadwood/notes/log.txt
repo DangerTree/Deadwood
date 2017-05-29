@@ -2,3 +2,9 @@ to compile, navigate to guiDeadwood and:
     ./run.sh
 
 (MUST BE RUN FROM guiDeadwood directory)
+
+################## Would like to do: #################
+
+### 5/28/17
+
+read in scene and room location from a file, instead of hard coding it.

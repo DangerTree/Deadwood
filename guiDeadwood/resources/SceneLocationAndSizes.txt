@@ -8,11 +8,11 @@ Train Station
 Jail
 275, 25, 125, 215
 
-General Store
-365, 280, 125, 215
-
 Main Street
 965, 25, 125, 215
+
+General Store
+365, 280, 125, 215
 
 Saloon
 625, 275, 125, 215
