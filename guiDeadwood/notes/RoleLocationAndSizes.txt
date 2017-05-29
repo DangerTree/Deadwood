@@ -1,0 +1,86 @@
+Dragged by Train
+51, 270, 46, 46
+
+Crusty Prospector
+115, 229, 46, 46
+
+Cyrus the Gunfighter
+50, 357, 46, 46
+
+Preacher with Bag
+115, 320, 46, 46
+
+Prisoner in Cell
+520, 25, 46, 46
+
+Feller in Irons
+520, 106, 46, 46
+
+Railroad Worker
+638, 23, 46, 46
+
+Falls off Roof
+721, 23, 46, 46
+
+Woman in Black Dress
+638, 105, 46, 46
+
+Mayor McGinty
+721, 106, 46, 46
+
+Woman in Red Dress
+879, 277, 46, 46
+
+Reluctant Farmer
+879, 353, 46, 46
+
+Man in Overalls
+237, 277, 46, 46
+
+Mister Keach
+237, 360, 46, 46
+
+Man Under Horse
+489, 526, 46, 46
+
+Shot in Leg
+413, 609, 46, 46
+
+Saucy Fred
+489, 610, 46, 46
+
+Clumsy Pit Fighter
+436, 721, 46, 46
+
+Thug with Knife
+523, 721, 46, 46
+
+Dangerous Tom
+436, 809, 46, 46
+
+Penny, who is Lost
+523, 809, 46, 46
+
+Flustered Teller
+912, 470, 46, 46
+
+Suspicious Gentleman
+912, 555, 46, 46
+
+Dead Man
+858, 731, 46, 46
+
+Crying Woman
+859, 811, 46, 46
+
+Sleeping Drunkard
+1112, 470, 46, 46
+
+Faro Player
+1045, 510, 46, 46
+
+Falls from Balcony
+1112, 558, 46, 46
+
+Australian Bartender
+1047, 597, 46, 46
