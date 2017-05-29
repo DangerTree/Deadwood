@@ -33,12 +33,18 @@ public class ResourcesDW {
       for (int i = 0; i < listOfImages.length; i++){
         if (listOfImages[i].isFile() && listOfImages[i].getName().endsWith(".png")){
           String key = listOfImages[i].getName().substring(0, listOfImages[i].getName().length()-4);
-          ImageIcon img = new ImageIcon (ImageIO.read(listOfImages[i]));
+          ImageIcon unscaledImg = new ImageIcon (ImageIO.read(listOfImages[i]));
+          ImageIcon img = new ImageIcon(unscaledImg.getImage().getScaledInstance(215, 125, 1));
           sceneIcons.put (key, img);
         }
       }
+
+
       background = new ImageIcon (ImageIO.read(new File("./resources/fullBoard.jpg")));
-      backOfCard = new ImageIcon (ImageIO.read(new File("./resources/cardBack.png")));
+
+      ImageIcon cardBack = new ImageIcon (ImageIO.read(new File("./resources/cardBack.png")));
+      backOfCard = new ImageIcon(cardBack.getImage().getScaledInstance(215, 125, 1));
+
     } catch (IOException e) {
       System.out.println("Image resource not found. Exiting program.");
       e.printStackTrace();
