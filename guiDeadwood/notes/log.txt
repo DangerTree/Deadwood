@@ -1,2 +1,4 @@
 to compile, navigate to guiDeadwood and:
-    javac -sourcepath . *.java
+    ./run.sh
+
+(MUST BE RUN FROM guiDeadwood directory)
