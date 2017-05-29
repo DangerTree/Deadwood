@@ -26,21 +26,40 @@ public class ResourcesDW {
   private ResourcesDW() {
     HashMap <String, ImageIcon> sceneIcons = new HashMap <String, ImageIcon>();
 
-    File imgFolder = new File ("./resources/scenes");
-    File[] listOfImages = imgFolder.listFiles();
-
     // for every file in the imgFile folder, load it into the HashMap
     try{
-      for (int i = 0; i < listOfImages.length; i++){
-        if (listOfImages[i].isFile() && listOfImages[i].getName().endsWith(".png")){
-          String key = listOfImages[i].getName().substring(0, listOfImages[i].getName().length()-4);
-          ImageIcon img = new ImageIcon (ImageIO.read(listOfImages[i]));
+      /************ LOAD SCENE CARD IMAGES *****************************/
+      File sceneImgFolder = new File ("./resources/scenes");
+      File[] listOfSImages = sceneImgFolder.listFiles();
+
+      for (int i = 0; i < listOfSImages.length; i++){
+        if (listOfSImages[i].isFile() && listOfSImages[i].getName().endsWith(".png")){
+          String key = listOfSImages[i].getName().substring(0, listOfSImages[i].getName().length()-4);
+          ImageIcon unscaledImg = new ImageIcon (ImageIO.read(listOfSImages[i]));
+          ImageIcon img = new ImageIcon(unscaledImg.getImage().getScaledInstance(215, 125, 1));
           sceneIcons.put (key, img);
         }
       }
+      /************ LOAD PLAYER MOVER DIE IMAGES ************************/
+      /*File diceImgFolder = new File ("./resources/dice");
+      File[] listOfDImages = diceImgFolder.listFiles();
+      //[player id, rank]
+      for (int i = 0; i < listOfDImages.length; i++){
+        if (listOfDImages[i].isFile() && listOfDImages[i].getName().endsWith(".png")){
+
+          String key = listOfDImages[i].getName().substring(0, listOfDImages[i].getName().length()-4);
+          ImageIcon unscaledImg = new ImageIcon (ImageIO.read(listOfDImages[i]));
+          ImageIcon img = new ImageIcon(unscaledImg.getImage().getScaledInstance(215, 125, 1));
+          sceneIcons.put (key, img);
+        }
+      }*/
+      /************ LOAD BACKGROUND AND BACK OR SCENE CARD IMGS **********/
 
       background = new ImageIcon (ImageIO.read(new File("./resources/fullBoard.jpg")));
-      backOfCard = new ImageIcon (ImageIO.read(new File("./resources/cardBack.png")));
+
+      ImageIcon cardBack = new ImageIcon (ImageIO.read(new File("./resources/cardBack.png")));
+      backOfCard = new ImageIcon(cardBack.getImage().getScaledInstance(215, 125, 1));
+
     } catch (IOException e) {
       System.out.println("Image resource not found. Exiting program.");
       e.printStackTrace();
