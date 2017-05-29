@@ -17,39 +17,15 @@ public class Deadwood{
   private static Queue<Player> playerQueue = new LinkedList<Player>();
 
 
-  public static void main (String args[]){
+  /*public static void run (int numOfPlayers){
 
-    int numPlayer = 1;
-
-    // check if correct number of arguments
-    if (args.length != 1){
-      System.out.println ("Wrong number of arguments. Please only input number of players.");
-      throw new InputMismatchException();
-    }
-    try {
-      numPlayer = Integer.parseInt(args[0]);
-      if (numPlayer < 2 || numPlayer > 8){
-        System.out.println ("Invalid number of players. Must be between 2 and 8 players, inclusive.");
-        System.exit(1);
-      }
-    }
-    catch (NumberFormatException e){
-      System.out.println ("Wrong format for argument 0 [number of players]. Please input an integer.");
-      System.exit(1);
-    }
-
-    // ask user how many players there are
-    System.out.println("Welcome to Deadwood, the cheapass game of acting badly!");
-
-    Board gameB = initGameboard(numPlayer);
-
-
+    Board gameB = initGameboard(numOfPlayers);
     initGameplay();
-
     return;
-  }
+  }*/
 
-  private static Board initGameboard (int numPlayer){
+
+  public static Board initGameboard (int numPlayer){
 
     Board gameBoard = null;
     if (numPlayer == 2 || numPlayer == 3){
@@ -82,7 +58,7 @@ public class Deadwood{
   }
 
 
-  private static void initGameplay (){
+  public static void initGameplay (){
 
     while(Board.getDaysLeft() != 0){
       System.out.println ("Days left: " + Board.getDaysLeft() + "\tScenes left: " + Board.getScenesLeft());
