@@ -1,5 +1,5 @@
 // boardView organizes roompanels?
-package views;
+package view;
 
 import javax.swing.JLayeredPane;
 import javax.swing.JLabel;
@@ -10,12 +10,18 @@ public class BoardView extends JLayeredPane{
   private JLabel boardLabel;
 
   public BoardView (model.Board bModel) throws Exception {
-    Class cls = getClass();
-    ImageIcon icon = new ImageIcon (ImageIO.read(cls.getResourceAsStream("../resources/fullBoard.jpg"))); // board image
-    boardLabel.setIcon (icon);
+    System.out.println ("in BoardView.java");
+
+
+    //boardLabel = new JLabel ();
+    //Class cls = getClass();
+    ResourcesDW r = ResourcesDW.getInstance();
+    ImageIcon backgroundImg = r.getBG();
+    boardLabel = new JLabel (backgroundImg);
+    //boardLabel.setIcon(backgroundImg);
+    boardLabel.setBounds (0, 0, backgroundImg.getIconWidth(), backgroundImg.getIconHeight());
     add(boardLabel, new Integer (0)); // add the board image as the first layer
-    //boardLabel.setBounds (0, 0, screenSize.width, screenSize.height);
-    //setBounds (boardLabel.getBounds());
+    setBounds (boardLabel.getBounds());
 
 
 
