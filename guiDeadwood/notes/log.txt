@@ -1,0 +1,2 @@
+to compile, navigate to guiDeadwood and:
+    javac -sourcepath . *.java
