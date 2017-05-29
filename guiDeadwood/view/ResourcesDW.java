@@ -44,9 +44,12 @@ public class ResourcesDW {
       /*File diceImgFolder = new File ("./resources/dice");
       File[] listOfDImages = diceImgFolder.listFiles();
       //[player id, rank]
+      // if the first char is o, playerID = 0,
       for (int i = 0; i < listOfDImages.length; i++){
-        if (listOfDImages[i].isFile() && listOfDImages[i].getName().endsWith(".png")){
-
+        String fileName = listOfDImages[i].getName();
+        if (listOfDImages[i].isFile() && fileName.endsWith(".png")){
+          char char1;
+          if ()
           String key = listOfDImages[i].getName().substring(0, listOfDImages[i].getName().length()-4);
           ImageIcon unscaledImg = new ImageIcon (ImageIO.read(listOfDImages[i]));
           ImageIcon img = new ImageIcon(unscaledImg.getImage().getScaledInstance(215, 125, 1));
