@@ -5,11 +5,17 @@ import javax.swing.JLayeredPane;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.imageio.ImageIO;
+import java.util.HashMap;
+
 
 public class BoardView extends JLayeredPane{
   private JLabel boardLabel;
+  private JLabel[] playerLabels;
+  private HashMap <String, int[][]> playerRoomLoc; // holds String "Room Name", [[player1 x_loc, player1 y_loc], [player1 x_loc, player1 y_loc]...]
 
-  public BoardView (model.Board bModel) throws Exception {
+  public BoardView (model.Board bModel, int numPlayers) throws Exception {
+
+    initPlayerLabels(numPlayers);
 
     ResourcesDW r = ResourcesDW.getInstance();
     ImageIcon backgroundImg = r.getBG();
@@ -23,6 +29,45 @@ public class BoardView extends JLayeredPane{
     // create room view objects
     makeSceneViews(bModel);
   }
+
+  private void initPlayerLabels (int numPlayers){
+
+    ResourcesDW r = ResourcesDW.getInstance();
+
+    playerLabels = new JLabel[numPlayers];
+    for (int i = 0; i < numPlayers; i++){
+      playerLabels [i] = new JLabel();
+      playerLabels[i].setIcon (r.getPlayerIcon(i, 1)); // rank 1; color determined by ID
+      int[] pLoc = playerRoomLoc.get("Trailers")[i];
+      playerLabels[i].setBounds(pLoc[0], pLoc[1], 30, 30); // establish bounds of scene card
+      playerLabels[i].setVisible(true);
+      add (playerLabels[i], new Integer (4)); // add sceneLabel to JLayeredPane
+
+
+    }
+  }
+
+
+  // if the player is in whitespace, update it's postion, visually
+  public void changed (model.Player p){
+    // depict where player is at
+    if (p.getRole() == null){
+      int pID = p.getPlayerID();
+      // MOVE THE PLAYER ICON
+      ResourcesDW r = ResourcesDW.getInstance();
+      // update the player's mover dice icon
+      playerLabels[pID].setIcon (r.getPlayerIcon (pID, p.getRank()));
+      // update its location
+      int[] newLoc = playerRoomLoc.get(p.getRoom().getRName())[pID];
+      playerLabels[pID].setLocation(newLoc[0], newLoc[1]);
+      playerLabels[p.getPlayerID()].setVisible(true); // make the jLabel visible
+    }
+    else { // if the player is not in the whitespace of a room
+      playerLabels[p.getPlayerID()].setVisible(false);
+    }
+  }
+
+
 
   private void makeSceneViews(model.Board bModel) throws Exception{
 

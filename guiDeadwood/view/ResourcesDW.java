@@ -15,6 +15,7 @@ public class ResourcesDW {
   // This array actually holds the images, which are indexed by the displayed
   // number.  That is, sceneIcons[1] is the 7-segment number 1.
   private HashMap<String, ImageIcon> sceneIcons;
+  private HashMap<int[], ImageIcon> playerIcons; // where int[] = [player id, rank], and ImageIcon is the coorresponding mover die
   private ImageIcon background, backOfCard;
   static ResourcesDW instance;
 
@@ -37,6 +38,7 @@ public class ResourcesDW {
           sceneIcons.put (key, img);
         }
       }
+
       background = new ImageIcon (ImageIO.read(new File("./resources/fullBoard.jpg")));
       backOfCard = new ImageIcon (ImageIO.read(new File("./resources/cardBack.png")));
     } catch (IOException e) {
@@ -50,6 +52,18 @@ public class ResourcesDW {
       System.exit(1);
     }
   }
+
+
+  public ImageIcon getPlayerIcon (int playerID, int rank){
+    int[] key = {playerID, rank};
+    ImageIcon toRet = playerIcons.get(key);
+    if (toRet == null){
+      System.out.println ("Player mover die icon for [playerID, rank] = " + key + " not found. Exiting game.");
+      System.exit(1);
+    }
+    return toRet;
+  }
+
 
   public ImageIcon getSceneIcon(String sceneName, int sceneNum) {
     String assembledKey = sceneName + " " + sceneNum;

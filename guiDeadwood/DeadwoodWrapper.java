@@ -14,20 +14,20 @@ public class DeadwoodWrapper{
   }
 
   public static void main(String[] args) throws Exception{
-    startModel();
+    int numPlayers = startModel();
 
     JFrame frame = new JFrame();
     JLayeredPane pane = new JLayeredPane();
 
     model.Board bModel = model.Board.getBoard();
-    view.BoardView bView = new view.BoardView (bModel); // connect board view to the model
+    view.BoardView bView = new view.BoardView (bModel, numPlayers); // connect board view to the model
     controller.BoardController bContr = new controller.BoardController (bModel); // connect board controller to model
 
 
 
 
     pane.add (bView, new Integer (0));
-    //pane.add (bContr, new Integer (1));
+    pane.add (bContr, new Integer (1));
     pane.setVisible (true);
 
     frame.setTitle ("Deadwood");
@@ -43,7 +43,7 @@ public class DeadwoodWrapper{
   }
 
 
-  private static void startModel (){
+  private static int startModel (){
     Object[] playerNumOptions = {"2", "3", "4", "5", "6", "7", "8"};
     int np = 0;
     String numOfPlayers = (String)JOptionPane.showInputDialog(null,
@@ -66,6 +66,7 @@ public class DeadwoodWrapper{
     }
 
     model.Deadwood.initGameboard(np); // setup the model
+    return np;
   }
 
 
