@@ -35,7 +35,6 @@ public class DeadwoodWrapper{
     frame.add (pane);
     frame.pack();
     frame.setVisible(true);
-    System.out.println ("end of DeadwoodWrapper");
 
     model.Deadwood.initGameplay();
   }
