@@ -23,11 +23,12 @@ class RoomController extends JPanel{
 
   private void clicked (){
     // tryToMove
-    model.Deadwood.validateUserCommand ("move");
-    ArrayList <String> command = new ArrayList <String>();
-    command.add("move");
-    command.add(rmModel.getRName());
-    model.Deadwood.takeAction (command);
+    if (model.Deadwood.validateUserCommand ("move")){
+      ArrayList <String> command = new ArrayList <String>();
+      command.add("move");
+      command.add(rmModel.getRName());
+      model.Deadwood.takeAction (command);
+    }
   }
 
 }

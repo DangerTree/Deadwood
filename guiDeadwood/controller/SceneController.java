@@ -16,18 +16,22 @@ class SceneController extends JPanel{
   }
 
 
+  public void signalWrapping (){
+  }
+
+
   // if scene is flipped, make role controllers
-  public void flipSceneCard (model.Scene s){
+  /*public void flipSceneCard (model.Scene s){
 
     RoleController rlc;
-    //switch (scene.getSRoleListSize()){
-      // if there is one role, position it accordingly
-    //  case 1:
+    switch (scene.getSRoleListSize()){
+      if there is one role, position it accordingly
+      case 1:
 
-    //}
+    }
 
 
-  }
+  }*/
 
 
 

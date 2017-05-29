@@ -13,18 +13,49 @@ public class SceneView
 
   public SceneView (int x, int y, int h, int w, model.Scene s){
 
-    setBounds (x, y, w, h);
-    sceneLabel = new JLabel();
+    setBounds (x, y, w, h); // create bounds of JLayeredPane
+    sceneLabel = new JLabel(); // create new JLabel (will hold scene card image) in JLayeredPane
+    sceneLabel.setBounds(0, 0, w, h); // establish bounds of scene card
     sceneLabel.setVisible(true);
-    add (sceneLabel, new Integer (0)); // THIS IS PROBABLY THE WRONG LAYER
-    sceneLabel.setBounds(0, 0, w, h);
+    add (sceneLabel, new Integer (0)); // add sceneLabel to JLayeredPane
+
     ResourcesDW r = ResourcesDW.getInstance();
     sceneLabel.setIcon (r.getBackOfCard()); // face down card
 
-    System.out.println ("s: " + s);
-    System.out.println ("this: " + this);
-    s.subscribe(this);
+    //System.out.println ("s: " + s);
+    //System.out.println ("this: " + this);
+    s.subscribe(this); // tell the scene model that it is listening to it
+
+    makeRoleViews(s);
   }
+
+
+  private void makeRoleViews(model.Scene s){
+    RoleView rl_v;
+    model.Role[] roleList = s.getSRoleList();
+    switch (s.getSRoleListSize()){
+      case 1: // make a role view positioned on the card for only 1 role
+        rl_v = new RoleView (87, 51, 47, 47, roleList[0]);
+        this.add (rl_v, new Integer (1));
+        break;
+      case 2:
+        rl_v = new RoleView (122, 51, 47, 47, roleList[0]);
+        this.add (rl_v, new Integer (1));
+        rl_v = new RoleView (56, 51, 47, 47, roleList[1]);
+        this.add (rl_v, new Integer (1));
+        break;
+      case 3:
+        rl_v = new RoleView (152, 51, 47, 47, roleList[0]);
+        this.add (rl_v, new Integer (1));
+        rl_v = new RoleView (86, 51, 47, 47, roleList[1]);
+        this.add (rl_v, new Integer (1));
+        rl_v = new RoleView (21, 51, 47, 47, roleList[2]);
+        this.add (rl_v, new Integer (1));
+        break;
+    }
+
+  }
+
 
   // IF THE SCENE IS WRAPPING, MAKE THE SCENE VIEW INVISIBLE
   public void signalWrapping (){

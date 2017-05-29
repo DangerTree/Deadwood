@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.lang.System.*;
 import java.util.Scanner;
 import java.util.Collection;
+import java.util.LinkedList;
 
 
 public class Player {
@@ -43,12 +44,14 @@ public class Player {
 
   // Player object constructor, takes the starting rank as a parameter
   public Player(int rank, int credits, Room trailer, int id){
+    listeners = new LinkedList<Listener>();
     this.rank = rank;
     this.creditCnt = credits;
     this.moneyCnt = 0;
     this.practiceCnt = 0;
     this.playerID = id;
     this.myRoom = trailer;
+    changed();
   }
 
   public boolean hasTakenAction(){

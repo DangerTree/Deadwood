@@ -14,6 +14,8 @@ public class Scene{
   private Role[] sRoleList;
   private boolean faceUp;
 
+  /**************************************************************/
+
   public interface Listener {
     public void signalWrapping();
     public void flipSceneCard(Scene s);
@@ -25,7 +27,7 @@ public class Scene{
     listeners.add(l);
   }
 
-
+  /**************************************************************/
 
   //Scene object constructor, takes all attributes as parameters
   public Scene(String movieName, String sceneDescript, int sNumber, int budget, Role[] sRoleList){
