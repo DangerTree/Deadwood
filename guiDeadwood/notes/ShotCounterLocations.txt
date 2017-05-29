@@ -2,39 +2,30 @@ Train Station
 35 12
 88 12
 142 12
-
 Jail
 443 158
-
 General Store
 313 278
 313 330
-
 Main Street
 802 23
 858 23
 922 23
-
 Saloon
 624 216
 678 216
-
 Ranch
 472 472
 524 472
-
 Bank
 840 548
-
 Secret Hideout
 245 764
 300 764
 354 764
-
 Church
 622 675
 682 675
-
 Hotel
 1005 683
 1058 683
