@@ -1,7 +1,8 @@
-package views;
+package view;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.NullPointerException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import java.util.HashMap;
@@ -22,7 +23,7 @@ public class ResourcesDW {
   private ResourcesDW() {
     HashMap <String, ImageIcon> sceneIcons = new HashMap <String, ImageIcon>();
 
-    File imgFolder = new File ("../resources/scenes");
+    File imgFolder = new File ("resources/scenes");
     File[] listOfImages = imgFolder.listFiles();
 
     // for every file in the imgFile folder, load it into the HashMap
@@ -34,10 +35,15 @@ public class ResourcesDW {
           sceneIcons.put (key, img);
         }
       }
-      background = new ImageIcon (ImageIO.read(new File("../resources/fullBoard.jpg")));
-      backOfCard = new ImageIcon (ImageIO.read(new File("../resources/cardBack.jpg")));
+      background = new ImageIcon (ImageIO.read(new File("resources/fullBoard.jpg")));
+      backOfCard = new ImageIcon (ImageIO.read(new File("resources/cardBack.jpg")));
     } catch (IOException e) {
       System.out.println("Image resource not found. Exiting program.");
+      e.printStackTrace();
+      System.exit(1);
+    }
+    catch (NullPointerException e){
+      System.out.println ("Null resource file.");
       e.printStackTrace();
       System.exit(1);
     }
@@ -54,6 +60,7 @@ public class ResourcesDW {
   }
 
   public ImageIcon getBG(){
+    System.out.println (background);
     return background;
   }
 
