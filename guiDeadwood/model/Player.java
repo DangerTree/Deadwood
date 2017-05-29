@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.lang.System.*;
 import java.util.Scanner;
+import java.util.Collection;
 
 
 public class Player {
@@ -18,11 +19,26 @@ public class Player {
 
   private Scene myScene;
 
-  private boolean roleOnCard = false;
-
   private int rank, moneyCnt, creditCnt, practiceCnt, playerID;
-
+  private int mode = 0;
   private boolean actionTaken = false;
+  private boolean roleOnCard = false;
+  private boolean turnDone = false;
+
+  public interface Listener {
+    void changed(Player r);
+  }
+
+  private Collection<Listener> listeners;
+
+  public void subscribe (Listener l){
+    listeners.add(l);
+  }
+
+  protected void changed(){
+    for (Listener l : listeners)
+      l.changed(this);
+  }
 
 
   // Player object constructor, takes the starting rank as a parameter
@@ -35,98 +51,118 @@ public class Player {
     this.myRoom = trailer;
   }
 
+  public boolean hasTakenAction(){
+    return this.actionTaken;
+  }
+
+  public boolean isTurnDone(){
+    return this.turnDone;
+  }
+
+  public void endTurn(){
+    this.turnDone = false;
+  }
+
+  public int getMode(){
+    return this.mode;
+  }
+
+  public void setMode(int newMode){
+    this.mode = newMode;
+  }
+
+  public Role getRole (){
+    return myRole;
+  }
+
+  public Room getRoom (){
+    return myRoom;
+  }
+
+
   // Handles the turn for the player
-  public void takeTurn(){
-    //ArrayList <String> command = new ArrayList <String> ();
-    ArrayList <String> command = null;
-    boolean turnDone = false;
+  public void takeTurn(ArrayList <String> command){
 
-    while (turnDone != true){
-      // Print out correct prompt and assign mode
-      System.out.println("\n");
-      int mode = promptUser(actionTaken);
+    // try to process command, checking if input arg option # and types are valid
+    String cmd0 = command.remove(0);
 
-      command = validateUserCommand(mode, command);
-      // try to process command, checking if input arg option # and types are valid
-      String cmd0 = command.remove(0);
-
-      if (cmd0.equals("who")){
-        System.out.print ("Player " + this.playerID + " ($" + this.moneyCnt + ", " + this.creditCnt + "cr), Rank: " + this.rank);
-        if (this.myRole != null){
-          System.out.println(" working " + this.myRole.getRoleWho()); //Zak added a space before "working"
-        }
-        else {System.out.println();}
+    if (cmd0.equals("who")){
+      System.out.print ("Player " + this.playerID + " ($" + this.moneyCnt + ", " + this.creditCnt + "cr), Rank: " + this.rank);
+      if (this.myRole != null){
+        System.out.println(" working " + this.myRole.getRoleWho()); //Zak added a space before "working"
       }
+      else {System.out.println();}
+    }
 
-      else if (cmd0.equals("where")){ // prints player, player's current room, scene name and number if on a role. if not, lists open roles
-        whereAmI();
+    else if (cmd0.equals("where")){ // prints player, player's current room, scene name and number if on a role. if not, lists open roles
+      whereAmI();
+    }
+
+    else if (cmd0.equals("upgrade")){ // already checked in validateUserCommand that the user is in the casting office
+      if (command.size() == 2){
+        String paymentType = command.remove(0);
+        int level = Integer.parseInt(command.remove(0));
+        int reqCurrency = Board.getUpgradeReqs (paymentType, level);
+        doUpgrade (paymentType, level, reqCurrency);
       }
-
-      else if (cmd0.equals("upgrade")){ // already checked in validateUserCommand that the user is in the casting office
-        if (command.size() == 2){
-          String paymentType = command.remove(0);
-          int level = Integer.parseInt(command.remove(0));
-          int reqCurrency = Board.getUpgradeReqs (paymentType, level);
-          doUpgrade (paymentType, level, reqCurrency);
-        }
-        else{
-          System.out.println ("Wrong number of arguments for 'upgrade'.");
-        }
-      }
-
-      else if (cmd0.equals("end")){
-        turnDone = true;
-      }
-
-      else { // for commands which count as "one action per turn":
-
-        if (actionTaken == true){
-          System.out.println ("You have already used your action for the turn; you may ask 'where', 'who', or 'end' to end your turn.");
-        }
-
-        else { // if the player does have an action to take
-
-          if (cmd0.equals("rehearse")){
-            // add snarky comment about not needing to rehearse w/ so many practiceCnt s later
-            this.practiceCnt++;
-            System.out.println ("Total practice chips increased to " + this.practiceCnt);
-            actionTaken = true;
-          }
-
-          else if (cmd0.equals("work")){
-            String usrPart = String.join(" ", command.toArray(new CharSequence[command.size()]));
-            boolean result = takeRole (usrPart);
-            if(result){
-              System.out.println ("You took the role: " + usrPart);
-            }
-            actionTaken = result;
-          }
-
-          else if (cmd0.equals("move")){
-            String newRoom = String.join(" ", command.toArray(new CharSequence[command.size()]));
-            System.out.println ("Room to move to: " + newRoom);
-            if (this.myRoom.getAdjRoom(newRoom) != null){
-              this.myRoom = this.myRoom.getAdjRoom(newRoom);
-              if (this.myRoom.getScene() != null){
-                if (this.myRoom.getScene().isCardFlipped() == false){
-                  this.myRoom.getScene().flipSceneCard();
-                }
-              }
-              actionTaken = true;
-            }
-            else {
-              System.out.println ("Room is not adjacent or does not exist. Please try again.");
-            }
-          }
-
-          else if (cmd0.equals("act")){ // already checked in validateUserCommand that the user has a role
-            act();
-            actionTaken = true;
-          }
-        }
+      else{
+        System.out.println ("Wrong number of arguments for 'upgrade'.");
       }
     }
-    actionTaken = false;
+
+    else if (cmd0.equals("end")){
+      this.turnDone = true;
+    }
+
+    else { // for commands which count as "one action per turn":
+
+      if (this.actionTaken == true){
+        System.out.println ("You have already used your action for the turn; you may ask 'where', 'who', or 'end' to end your turn.");
+      }
+
+      else { // if the player does have an action to take
+
+        if (cmd0.equals("rehearse")){
+          // add snarky comment about not needing to rehearse w/ so many practiceCnt s later
+          this.practiceCnt++;
+          System.out.println ("Total practice chips increased to " + this.practiceCnt);
+          this.actionTaken = true;
+        }
+
+        else if (cmd0.equals("work")){
+          String usrPart = String.join(" ", command.toArray(new CharSequence[command.size()]));
+          boolean result = takeRole (usrPart);
+          if(result){
+            System.out.println ("You took the role: " + usrPart);
+          }
+          this.actionTaken = result;
+        }
+
+        else if (cmd0.equals("move")){
+          String newRoom = String.join(" ", command.toArray(new CharSequence[command.size()]));
+          System.out.println ("Room to move to: " + newRoom);
+          if (this.myRoom.getAdjRoom(newRoom) != null){
+            this.myRoom = this.myRoom.getAdjRoom(newRoom);
+            if (this.myRoom.getScene() != null){
+              if (this.myRoom.getScene().isCardFlipped() == false){
+                this.myRoom.getScene().flipSceneCard();
+              }
+            }
+            this.actionTaken = true;
+          }
+          else {
+            System.out.println ("Room is not adjacent or does not exist. Please try again.");
+          }
+        }
+
+        else if (cmd0.equals("act")){ // already checked in validateUserCommand that the user has a role
+          act();
+          this.actionTaken = true;
+        }
+      }
+      changed();
+    }
+    this.actionTaken = false;
   }
 
 

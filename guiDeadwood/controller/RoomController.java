@@ -3,6 +3,7 @@ package controller;
 import javax.swing.JPanel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 class RoomController extends JPanel{
 
@@ -22,6 +23,12 @@ class RoomController extends JPanel{
 
   private void clicked (){
     // tryToMove
+    model.Deadwood.validateUserCommand ("move");
+    ArrayList <String> command = new ArrayList <String>();
+    command.add("move");
+    command.add(rmModel.getRName());
+    model.Deadwood.takeAction (command);
+
     //String str = "move " + rm.getRName() + '\n';
     //InputStream usrInput = new StringReader (str);
     //System.setIn (usrInput);
