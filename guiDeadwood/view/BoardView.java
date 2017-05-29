@@ -6,6 +6,9 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.imageio.ImageIO;
 import java.util.HashMap;
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 
 public class BoardView extends JLayeredPane{
@@ -15,6 +18,7 @@ public class BoardView extends JLayeredPane{
 
   public BoardView (model.Board bModel, int numPlayers) throws Exception {
 
+    playerRoomLoc = new HashMap <String, int[][]>();
     initPlayerRoomLoc();
     initPlayerLabels(numPlayers);
 
@@ -42,14 +46,15 @@ public class BoardView extends JLayeredPane{
       scan = new Scanner (PlayerLocationsFile);
       while(scan.hasNextLine() != false){
         String roomName = scan.nextLine();
-
+        System.out.println(roomName);
         int [][] newLocations = new int[8][2];
         for(int i = 0; i < 8; i++){
-          String x = scan.Next();
-          String y = scan.Next();
-          newLocations[i][0] = Integer.parseInt(x);
-          newLocations[i][1] = Integer.parseInt(y);
+          String [] readLine = scan.nextLine().split(" ");
+          System.out.println(readLine[0] + "   " + readLine[1]);
+          newLocations[i][0] = Integer.parseInt(readLine[0]);
+          newLocations[i][1] = Integer.parseInt(readLine[1]);
         }
+
         playerRoomLoc.put(roomName, newLocations);
       }
     }
