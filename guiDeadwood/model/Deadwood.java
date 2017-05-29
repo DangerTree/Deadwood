@@ -15,6 +15,7 @@ public class Deadwood{
 
   //private static int numPlayer;
   private static Queue<Player> playerQueue = new LinkedList<Player>();
+  private static Player activePlayer = null;
 
   public static Board initGameboard (int numPlayer){
 
@@ -47,7 +48,7 @@ public class Deadwood{
     }
     return gameBoard;
   }
-  private static Player activePlayer = null;
+
 
   public static void initGameplay (){
 
@@ -60,13 +61,8 @@ public class Deadwood{
         /*while (!activePlayer.isTurnDone()){
           promptPlayer(); // prompts player in Status Window
           ArrayList <String> command = getUsrInput();
-          ArrayList <String> command = null;
-          Scanner scan = new Scanner ();
-
         }*/
         activePlayer.endTurn();
-
-
         //activePlayer.takeTurn();
         playerQueue.add(activePlayer);
       }
@@ -78,6 +74,18 @@ public class Deadwood{
 
   public static void takeAction (ArrayList <String> command){
     activePlayer.takeTurn (command);
+    if (command.get(0).equals("end")){
+      playerQueue.add(activePlayer);
+      activePlayer = playerQueue.poll();
+      if (Board.getScenesLeft() == 1){
+        Board.endDay();
+        System.out.println ("Ending day.");
+        System.out.println ("Days left: " + Board.getDaysLeft() + "\tScenes left: " + Board.getScenesLeft());
+        if (Board.getDaysLeft() == 0){
+          endGame();
+        }
+      }
+    }
     promptPlayer();
   }
 
@@ -91,29 +99,24 @@ public class Deadwood{
       activePlayer.setMode(1);
       System.out.println("Player " + activePlayer.getPlayerID() + ", what would you like to do?\n\tOPTIONS: who, where, or end.");
     }
-
     else if(activePlayer.getRole() != null){
       activePlayer.setMode(2);
       System.out.println("Player " + activePlayer.getPlayerID() + ", what would you like to do?\n\tOPTIONS: who, where, act, rehearse, or end.");
     }
-
     else if(activePlayer.getRoom().getRName().equals("Casting Office")){
       activePlayer.setMode(3);
       System.out.println("Player " + activePlayer.getPlayerID() + ", what would you like to do?\n\tOPTIONS: who, where, move, upgrade, or end.");
     }
-
     else if(activePlayer.getRoom().getRName().equals("Trailers")){
       activePlayer.setMode(4);
       System.out.println("Player " + activePlayer.getPlayerID() + ", what would you like to do?\n\tOPTIONS: who, where, move, or end.");
     }
-
     else if(activePlayer.getRole() == null){ // player in room, but without role
       activePlayer.setMode(5);
       System.out.println("Player " + activePlayer.getPlayerID() + ", what would you like to do?\n\tOPTIONS: who, where, work, or end.");
     }
     return;
   }
-
 
 
   /* validateUserCommand takes user input and ensures that it is valid given their location/status,
@@ -161,23 +164,6 @@ public class Deadwood{
     }
     return toRet;
   }
-
-
-
-
-  // do what the controller says
-  /*public static void doPlayerAction (String action, String[] args){
-
-    // if there are enought days and scenes left
-      if (!activePlayer.hasTakenAction()){
-
-        if (action.equals("move")){
-          activePlayer.tryMoving(args);
-        }
-      }
-    }
-    // try to do that action
-  }*/
 
 
   private static void endGame (){

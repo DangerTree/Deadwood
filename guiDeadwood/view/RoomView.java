@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import javax.imageio.ImageIO;
 
 public class RoomView extends JLayeredPane{
+  private model.Room rmModel;
   private JLabel roomRectangle;
 
   // rx, ry, rh, rw are the room placement and height/width params
@@ -14,23 +15,27 @@ public class RoomView extends JLayeredPane{
 
     roomRectangle = new JLabel ();
     roomRectangle.setBounds (rx, ry, rh, rw);
-    roomRectangle.setVisible(false);
+    roomRectangle.setVisible(true);
     add(roomRectangle, new Integer (1)); // add the board image as the first layer
     setBounds (roomRectangle.getBounds());
+    this.rmModel = rModel;
 
     // add this RoomView as a listener of a Room obj in the model
     //rModel.subscribe (this);
 
     // create a variable number of Role Views
     //RoleView rlv;
+    System.out.println ("\nRoomView:     " + this);
 
 
 
   }
 
   // sx, sy, sh, sw are the room's scene placement and height/width params
-  public void addSceneView (int sx, int sy, int sh, int sw){
+  public void addSceneView (int sx, int sy, int sh, int sw, model.Scene sModel){
     // makes a new scene view
+    SceneView sv = new SceneView (sx, sy, sh, sw, sModel);
+    add(sv, new Integer (3));
   }
 
 

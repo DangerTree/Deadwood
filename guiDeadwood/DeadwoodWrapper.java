@@ -36,7 +36,7 @@ public class DeadwoodWrapper{
     frame.pack();
     frame.setVisible(true);
 
-    model.Deadwood.initGameplay();
+    //model.Deadwood.initGameplay();
   }
 
 

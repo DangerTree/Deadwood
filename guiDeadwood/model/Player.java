@@ -79,6 +79,39 @@ public class Player {
     return myRoom;
   }
 
+  // rank getter
+  public int getRank(){
+    return rank;
+  }
+
+  // moneyCnt getter
+  public int getMoneyCnt(){
+    return moneyCnt;
+  }
+
+  // creditCnt getter
+  public int getCreditCnt(){
+    return creditCnt;
+  }
+
+  public void leaveRole(){
+    this.myRole = null;
+  }
+
+  public void awardOffCardBonus(){
+    this.moneyCnt += this.myRole.getRank();
+  }
+
+  public void payActor(int pay){
+    this.moneyCnt += pay;
+  }
+
+  public int getPlayerID(){
+    return this.playerID;
+  }
+
+
+
 
   // Handles the turn for the player
   public void takeTurn(ArrayList <String> command){
@@ -166,107 +199,6 @@ public class Player {
   }
 
 
-  // promptUser asks the user what actions they would like to take, given their location and status
-  // RETURNS: an int indicating their status/location
-  private int promptUser(boolean actionTaken){
-    int mode = 0;
-    //System.out.println ("MADE IT TO promptUser");
-
-    // if the player has already taken an action on their move, they can only enter who where or end (but not if they are in the casting office)
-    if (actionTaken == true && !this.myRoom.getRName().equals("Casting Office")){
-      mode = 1;
-      System.out.println("Player " + this.playerID + ", what would you like to do?\n\tOPTIONS: who, where, or end.");
-    }
-
-    else if(this.myRole != null){
-      mode = 2;
-      System.out.println("Player " + this.playerID + ", what would you like to do?\n\tOPTIONS: who, where, act, rehearse, or end.");
-    }
-
-    else if(this.myRoom.getRName().equals("Casting Office")){
-      mode = 3;
-      System.out.println("Player " + this.playerID + ", what would you like to do?\n\tOPTIONS: who, where, move, upgrade, or end.");
-    }
-
-    else if(this.myRoom.getRName().equals("Trailers")){
-      mode = 4;
-      System.out.println("Player " + this.playerID + ", what would you like to do?\n\tOPTIONS: who, where, move, or end.");
-    }
-
-    else if(this.myRole == null){ // player in room, but without role
-      mode = 5;
-      System.out.println("Player " + this.playerID + ", what would you like to do?\n\tOPTIONS: who, where, work, or end.");
-    }
-    return mode;
-  }
-
-
-  /* validateUserCommand takes user input and ensures that it is valid given their location/status,
-  * asking them to input a different command if it is invalid.
-  */
-  private ArrayList<String> validateUserCommand(int mode, ArrayList<String> command){
-    // Take command from user
-    System.out.print("> ");
-    Scanner scan = new Scanner (System.in);
-    command = new ArrayList <String> (Arrays.asList(scan.nextLine().split(" ")));
-
-    // check if valid command, given player's position / status
-    switch (mode){
-      case 1: // if player has already done an action this turn (and is not in the casting office)
-        while(!command.get(0).equals("who") && !command.get(0).equals("where") && !command.get(0).equals("end")){
-          System.out.println("You can not do that while you are working a role. Please enter a command from the list above.");
-          System.out.print("> ");
-          command = new ArrayList <String> (Arrays.asList(scan.nextLine().split(" ")));
-        }
-      break;
-      case 2: // if player has a role already
-        while(!command.get(0).equals("who") && !command.get(0).equals("where") && !command.get(0).equals("act") && !command.get(0).equals("rehearse") && !command.get(0).equals("end")){
-          System.out.println("You can not do that while you are working a role. Please enter a command from the list above.");
-          System.out.print("> ");
-          command = new ArrayList <String> (Arrays.asList(scan.nextLine().split(" ")));
-        }
-        break;
-      case 3: // if player is in casting office
-        while(!command.get(0).equals("who") && !command.get(0).equals("where") && !command.get(0).equals("upgrade") && !command.get(0).equals("move") && !command.get(0).equals("end")){
-          System.out.println("You can not do that while you are in the Casting Office. Please enter a command from the list above.");
-          System.out.print("> ");
-          command = new ArrayList <String> (Arrays.asList(scan.nextLine().split(" ")));
-        }
-        break;
-      case 4: // if player is in Trailers
-        while(!command.get(0).equals("who") && !command.get(0).equals("where") && !command.get(0).equals("move") && !command.get(0).equals("end")){
-          System.out.println("You can not do that while you are in the Trailers. Please enter a command from the list above.");
-          System.out.print("> ");
-          command = new ArrayList <String> (Arrays.asList(scan.nextLine().split(" ")));
-        }
-        break;
-      default: // player is not in Trailers or Casting Office, nor working a role (e.g. is in a room's whitespace w/o part)
-        while(!command.get(0).equals("who") && !command.get(0).equals("where") && !command.get(0).equals("move") && !command.get(0).equals("end") && !command.get(0).equals("work")){
-          System.out.println("You can not do that while you do not have a role. Please enter a command from the list above.");
-          System.out.print("> ");
-          command = new ArrayList <String> (Arrays.asList(scan.nextLine().split(" ")));
-        }
-    }
-    return command;
-  }
-
-
-  // rank getter
-  public int getRank(){
-    return rank;
-  }
-
-  // moneyCnt getter
-  public int getMoneyCnt(){
-    return moneyCnt;
-  }
-
-  // creditCnt getter
-  public int getCreditCnt(){
-    return creditCnt;
-  }
-
-
   // Moves the player to a new room
   private boolean move(String rName){
     Room temp = myRoom.getAdjRoom(rName);
@@ -321,19 +253,6 @@ public class Player {
     else {
       System.out.println("You failed, better luck next time.");
     }
-  }
-
-
-  public void leaveRole(){
-	  this.myRole = null;
-  }
-
-  public void awardOffCardBonus(){
-	  this.moneyCnt += this.myRole.getRank();
-  }
-
-  public void payActor(int pay){
-	  this.moneyCnt += pay;
   }
 
 
@@ -406,11 +325,6 @@ public class Player {
     }
     System.out.print ("Adjacent rooms: ");
     this.myRoom.displayAdjRooms();
-  }
-
-
-  public int getPlayerID(){
-    return this.playerID;
   }
 
 

@@ -5,6 +5,7 @@
 package model;
 
 import java.util.Collection;
+import java.util.LinkedList;
 
 public class Scene{
 
@@ -26,10 +27,10 @@ public class Scene{
 
 
 
-
   //Scene object constructor, takes all attributes as parameters
   public Scene(String movieName, String sceneDescript, int sNumber, int budget, Role[] sRoleList){
 
+    this.listeners = new LinkedList<Listener>();
 	  this.movieName = movieName;
 	  this.sceneDescript = sceneDescript;
 	  this.sNumber = sNumber;
