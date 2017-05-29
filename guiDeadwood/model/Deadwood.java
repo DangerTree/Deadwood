@@ -47,7 +47,7 @@ public class Deadwood{
     }
     return gameBoard;
   }
-
+  private static Player activePlayer = null;
 
   public static void initGameplay (){
 
@@ -55,10 +55,19 @@ public class Deadwood{
       System.out.println ("Days left: " + Board.getDaysLeft() + "\tScenes left: " + Board.getScenesLeft());
       while(Board.getScenesLeft() > 1){
         // call method which waits for user's click input
-        // g
-        System.out.println("It is player " + playerQueue.peek().getPlayerID() +"'s turn.");
-        Player activePlayer = playerQueue.remove();
-        activePlayer.takeTurn();
+        activePlayer = playerQueue.remove();
+        System.out.println("It is player " + activePlayer.getPlayerID() +"'s turn.");
+        /*while (!activePlayer.isTurnDone()){
+          promptPlayer(); // prompts player in Status Window
+          ArrayList <String> command = getUsrInput();
+          ArrayList <String> command = null;
+          Scanner scan = new Scanner ();
+
+        }*/
+        activePlayer.endTurn();
+
+
+        //activePlayer.takeTurn();
         playerQueue.add(activePlayer);
       }
       Board.endDay();
@@ -66,15 +75,109 @@ public class Deadwood{
     endGame();//Board.endGame();
   }
 
+
+  public static void takeAction (ArrayList <String> command){
+    activePlayer.takeTurn (command);
+    promptPlayer();
+  }
+
+
+  // promptPlayer asks the user what actions they would like to take, given their location and status
+  // RETURNS: an int indicating their status/location
+  private static void promptPlayer (){
+    //int mode = 0;
+    // if the player has already taken an action on their move, they can only enter who where or end (but not if they are in the casting office)
+    if (activePlayer.hasTakenAction() == true && !activePlayer.getRoom().getRName().equals("Casting Office")){
+      activePlayer.setMode(1);
+      System.out.println("Player " + activePlayer.getPlayerID() + ", what would you like to do?\n\tOPTIONS: who, where, or end.");
+    }
+
+    else if(activePlayer.getRole() != null){
+      activePlayer.setMode(2);
+      System.out.println("Player " + activePlayer.getPlayerID() + ", what would you like to do?\n\tOPTIONS: who, where, act, rehearse, or end.");
+    }
+
+    else if(activePlayer.getRoom().getRName().equals("Casting Office")){
+      activePlayer.setMode(3);
+      System.out.println("Player " + activePlayer.getPlayerID() + ", what would you like to do?\n\tOPTIONS: who, where, move, upgrade, or end.");
+    }
+
+    else if(activePlayer.getRoom().getRName().equals("Trailers")){
+      activePlayer.setMode(4);
+      System.out.println("Player " + activePlayer.getPlayerID() + ", what would you like to do?\n\tOPTIONS: who, where, move, or end.");
+    }
+
+    else if(activePlayer.getRole() == null){ // player in room, but without role
+      activePlayer.setMode(5);
+      System.out.println("Player " + activePlayer.getPlayerID() + ", what would you like to do?\n\tOPTIONS: who, where, work, or end.");
+    }
+    return;
+  }
+
+
+
+  /* validateUserCommand takes user input and ensures that it is valid given their location/status,
+  * asking them to input a different command if it is invalid.
+  */
+  public static boolean validateUserCommand (String command){
+    boolean toRet = true;
+
+    // check if valid command, given player's position / status
+    switch (activePlayer.getMode()){
+      case 1: // if player has already done an action this turn (and is not in the casting office)
+        if(!command.equals("who") && !command.equals("where") && !command.equals("end")){
+          System.out.println("You can not do that while you are working a role. Please enter a command from the list above.");
+          System.out.print("> ");
+          toRet = false;
+        }
+      break;
+      case 2: // if player has a role already
+        if(!command.equals("who") && !command.equals("where") && !command.equals("act") && !command.equals("rehearse") && !command.equals("end")){
+          System.out.println("You can not do that while you are working a role. Please enter a command from the list above.");
+          System.out.print("> ");
+          toRet = false;
+        }
+        break;
+      case 3: // if player is in casting office
+        if(!command.equals("who") && !command.equals("where") && !command.equals("upgrade") && !command.equals("move") && !command.equals("end")){
+          System.out.println("You can not do that while you are in the Casting Office. Please enter a command from the list above.");
+          System.out.print("> ");
+          toRet = false;
+        }
+        break;
+      case 4: // if player is in Trailers
+        if(!command.equals("who") && !command.equals("where") && !command.equals("move") && !command.equals("end")){
+          System.out.println("You can not do that while you are in the Trailers. Please enter a command from the list above.");
+          System.out.print("> ");
+          toRet = false;
+        }
+        break;
+      default: // player is not in Trailers or Casting Office, nor working a role (e.g. is in a room's whitespace w/o part)
+        if(!command.equals("who") && !command.equals("where") && !command.equals("move") && !command.equals("end") && !command.equals("work")){
+          System.out.println("You can not do that while you do not have a role. Please enter a command from the list above.");
+          System.out.print("> ");
+          toRet = false;
+        }
+    }
+    return toRet;
+  }
+
+
+
+
   // do what the controller says
-  public static void doPlayerAction (){
+  /*public static void doPlayerAction (String action, String[] args){
 
     // if there are enought days and scenes left
-    // make a string out of the click info
+      if (!activePlayer.hasTakenAction()){
+
+        if (action.equals("move")){
+          activePlayer.tryMoving(args);
+        }
+      }
+    }
     // try to do that action
-
-
-  }
+  }*/
 
 
   private static void endGame (){
