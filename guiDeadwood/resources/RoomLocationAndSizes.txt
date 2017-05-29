@@ -17,12 +17,6 @@ General Store
 Saloon
 600, 200, 250, 380
 
-Trailers
-980, 250, 200, 220
-
-Casting Office
-0, 450, 230, 225
-
 Ranch
 225, 450, 250, 375
 
@@ -37,3 +31,9 @@ Church
 
 Hotel
 970, 450, 450, 230
+
+Trailers
+980, 250, 200, 220
+
+Casting Office
+0, 450, 230, 225
