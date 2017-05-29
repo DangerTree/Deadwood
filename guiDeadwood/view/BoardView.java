@@ -15,6 +15,7 @@ public class BoardView extends JLayeredPane{
 
   public BoardView (model.Board bModel, int numPlayers) throws Exception {
 
+    initPlayerRoomLoc();
     initPlayerLabels(numPlayers);
 
     ResourcesDW r = ResourcesDW.getInstance();
@@ -29,6 +30,13 @@ public class BoardView extends JLayeredPane{
     // create room view objects
     makeSceneViews(bModel);
   }
+
+
+  private void initPlayerRoomLoc(){
+
+
+  }
+
 
   private void initPlayerLabels (int numPlayers){
 
