@@ -16,11 +16,13 @@ public class SceneView
     setBounds (x, y, h, w);
     sceneLabel = new JLabel();
     sceneLabel.setVisible(true);
-    add (sceneLabel, new Integer (0)); // THIS IS PROBABLY THE WRONG LAYER
+    add (sceneLabel, new Integer (3)); // THIS IS PROBABLY THE WRONG LAYER
     sceneLabel.setBounds(0, 0, h, w);
     ResourcesDW r = ResourcesDW.getInstance();
     sceneLabel.setIcon (r.getBackOfCard()); // face down card
 
+    System.out.println ("s: " + s);
+    System.out.println ("this: " + this);
     s.subscribe(this);
   }
 

@@ -28,11 +28,6 @@ class RoomController extends JPanel{
     command.add("move");
     command.add(rmModel.getRName());
     model.Deadwood.takeAction (command);
-
-    //String str = "move " + rm.getRName() + '\n';
-    //InputStream usrInput = new StringReader (str);
-    //System.setIn (usrInput);
-    // send a string
   }
 
 }
