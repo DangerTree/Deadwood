@@ -21,7 +21,11 @@ class RoomController extends JPanel{
   }
 
   private void clicked (){
-
+    // tryToMove
+    //String str = "move " + rm.getRName() + '\n';
+    //InputStream usrInput = new StringReader (str);
+    //System.setIn (usrInput);
+    // send a string
   }
 
 }

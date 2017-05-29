@@ -16,15 +16,6 @@ public class Deadwood{
   //private static int numPlayer;
   private static Queue<Player> playerQueue = new LinkedList<Player>();
 
-
-  /*public static void run (int numOfPlayers){
-
-    Board gameB = initGameboard(numOfPlayers);
-    initGameplay();
-    return;
-  }*/
-
-
   public static Board initGameboard (int numPlayer){
 
     Board gameBoard = null;
@@ -63,6 +54,8 @@ public class Deadwood{
     while(Board.getDaysLeft() != 0){
       System.out.println ("Days left: " + Board.getDaysLeft() + "\tScenes left: " + Board.getScenesLeft());
       while(Board.getScenesLeft() > 1){
+        // call method which waits for user's click input
+        // g
         System.out.println("It is player " + playerQueue.peek().getPlayerID() +"'s turn.");
         Player activePlayer = playerQueue.remove();
         activePlayer.takeTurn();
@@ -72,6 +65,17 @@ public class Deadwood{
     }
     endGame();//Board.endGame();
   }
+
+  // do what the controller says
+  public static void doPlayerAction (){
+
+    // if there are enought days and scenes left
+    // make a string out of the click info
+    // try to do that action
+
+
+  }
+
 
   private static void endGame (){
     int playerNum = playerQueue.size();

@@ -22,6 +22,8 @@ public class Player {
 
   private int rank, moneyCnt, creditCnt, practiceCnt, playerID;
 
+  private boolean actionTaken = false;
+
 
   // Player object constructor, takes the starting rank as a parameter
   public Player(int rank, int credits, Room trailer, int id){
@@ -35,7 +37,6 @@ public class Player {
 
   // Handles the turn for the player
   public void takeTurn(){
-    boolean actionTaken = false;
     //ArrayList <String> command = new ArrayList <String> ();
     ArrayList <String> command = null;
     boolean turnDone = false;
@@ -125,6 +126,7 @@ public class Player {
         }
       }
     }
+    actionTaken = false;
   }
 
 
