@@ -46,6 +46,7 @@ public class Deadwood{
     for (int i = 0; i < numPlayer; i ++){
       playerQueue.add(new Player(startingRank, startingCred, gameBoard.getTrailer(), i));
     }
+    activePlayer = playerQueue.poll();
     return gameBoard;
   }
 
