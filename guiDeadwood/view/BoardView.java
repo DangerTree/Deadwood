@@ -34,6 +34,8 @@ public class BoardView extends JLayeredPane{
     this.setBounds (boardLabel.getBounds());
 
     // create room view objects
+    //makeRViews();
+    //makeSViews();
     makeR_SViews(bModel);
   }
 
@@ -154,7 +156,6 @@ public class BoardView extends JLayeredPane{
       playerLabels[p.getPlayerID()].setVisible(false);
     }
   }
-
 
 
   /*

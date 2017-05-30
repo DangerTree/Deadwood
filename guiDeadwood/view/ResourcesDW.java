@@ -97,17 +97,10 @@ public class ResourcesDW {
 
 
   public static ImageIcon getPlayerIcon (int playerID, int rank){
-    System.out.println ("in getPlayerIcon PLAYERID: " + playerID);
-    System.out.println ("in getPlayerIcon RANK: " + rank);
     List <Integer> key = new ArrayList <Integer> (2);
     key.add(playerID);
     key.add(rank);
-    //int[] key = {playerID, rank};
-    //System.out.println ("playerIcons (Hashmap) size: " + playerIcons.size());
-    //System.out.println ("key: " + key);
-    //System.out.println ("Keyset for playerIcons (Hashmap): " + playerIcons.keySet().toArray();
     ImageIcon toRet = playerIcons.get(key);
-    System.out.println ("toRet: " + toRet);
     if (toRet == null){
       System.out.println ("Player mover die icon for [playerID, rank] = " + key.get(0) + " " + key.get(0) + " not found. Exiting game.");
       System.exit(1);
@@ -127,7 +120,6 @@ public class ResourcesDW {
   }
 
   public static ImageIcon getBG(){
-    System.out.println (background);
     return background;
   }
 

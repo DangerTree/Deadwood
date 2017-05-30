@@ -11,7 +11,7 @@ class RoomController extends JPanel{
 
   public RoomController (int x, int y, int h, int w, model.Room rm){
 
-    setBounds (x, y, h, w);
+    setBounds (x, y, w, h);
     setOpaque (false);
     addMouseListener (new MouseAdapter(){
       public void mouseClicked (MouseEvent e) {

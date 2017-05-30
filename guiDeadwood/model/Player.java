@@ -54,64 +54,6 @@ public class Player {
     changed();
   }
 
-  public boolean hasTakenAction(){
-    return this.actionTaken;
-  }
-
-  public boolean isTurnDone(){
-    return this.turnDone;
-  }
-
-  public void endTurn(){
-    this.turnDone = false;
-  }
-
-  public int getMode(){
-    return this.mode;
-  }
-
-  public void setMode(int newMode){
-    this.mode = newMode;
-  }
-
-  public Role getRole (){
-    return myRole;
-  }
-
-  public Room getRoom (){
-    return myRoom;
-  }
-
-  // rank getter
-  public int getRank(){
-    return rank;
-  }
-
-  // moneyCnt getter
-  public int getMoneyCnt(){
-    return moneyCnt;
-  }
-
-  // creditCnt getter
-  public int getCreditCnt(){
-    return creditCnt;
-  }
-
-  public void leaveRole(){
-    this.myRole = null;
-  }
-
-  public void awardOffCardBonus(){
-    this.moneyCnt += this.myRole.getRank();
-  }
-
-  public void payActor(int pay){
-    this.moneyCnt += pay;
-  }
-
-  public int getPlayerID(){
-    return this.playerID;
-  }
 
 
 
@@ -176,8 +118,8 @@ public class Player {
 
         else if (cmd0.equals("move")){
           String newRoom = String.join(" ", command.toArray(new CharSequence[command.size()]));
-          System.out.println ("Room to move to: " + newRoom);
           if (this.myRoom.getAdjRoom(newRoom) != null){
+            System.out.println ("You moved to: " + newRoom);
             this.myRoom = this.myRoom.getAdjRoom(newRoom);
             if (this.myRoom.getScene() != null){
               if (this.myRoom.getScene().isCardFlipped() == false){
@@ -189,6 +131,8 @@ public class Player {
           else {
             System.out.println ("Room is not adjacent or does not exist. Please try again.");
           }
+          System.out.println ("Player " + this.playerID + "is in room " + this.myRoom.getRName());
+          System.out.println ("Player " + this.playerID + " has taken action? " + actionTaken);
         }
 
         else if (cmd0.equals("act")){ // already checked in validateUserCommand that the user has a role
@@ -198,7 +142,7 @@ public class Player {
       }
       changed();
     }
-    this.actionTaken = false;
+    //this.actionTaken = false;
   }
 
 
@@ -337,6 +281,67 @@ public class Player {
     System.out.println ("Player " + this.playerID + " received a score of " + score + ".");
     return score;
   }
+
+
+  public boolean hasTakenAction(){
+    return this.actionTaken;
+  }
+
+  public boolean isTurnDone(){
+    return this.turnDone;
+  }
+
+  public void endTurn(){
+    this.turnDone = false;
+  }
+
+  public int getMode(){
+    return this.mode;
+  }
+
+  public void setMode(int newMode){
+    this.mode = newMode;
+  }
+
+  public Role getRole (){
+    return myRole;
+  }
+
+  public Room getRoom (){
+    return myRoom;
+  }
+
+  // rank getter
+  public int getRank(){
+    return rank;
+  }
+
+  // moneyCnt getter
+  public int getMoneyCnt(){
+    return moneyCnt;
+  }
+
+  // creditCnt getter
+  public int getCreditCnt(){
+    return creditCnt;
+  }
+
+  public void leaveRole(){
+    this.myRole = null;
+  }
+
+  public void awardOffCardBonus(){
+    this.moneyCnt += this.myRole.getRank();
+  }
+
+  public void payActor(int pay){
+    this.moneyCnt += pay;
+  }
+
+  public int getPlayerID(){
+    return this.playerID;
+  }
+
 
 
 }
