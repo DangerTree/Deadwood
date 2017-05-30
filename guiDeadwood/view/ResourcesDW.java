@@ -64,18 +64,13 @@ public class ResourcesDW {
           else if (firstChar=='v'){ dieID = 6;}
           else if (firstChar=='y'){ dieID = 7;}
           int dieRank = Character.getNumericValue(fileName.charAt(1));
-          System.out.println ("dieID: " + dieID);
-          System.out.println ("dieRank: " + dieRank);
-          System.out.println (scaledImg);
-            List <Integer> intList = new ArrayList <Integer>(2);
+          List <Integer> intList = new ArrayList <Integer>(2);
           intList.add(dieID);
-            intList.add(dieRank);
-            //int[] key = {dieID, dieRank};
+          intList.add(dieRank);
           playerIcons.put (intList, scaledImg);
-            //playerIcons.put (key, scaledImg);
         }
       }
-      /************ LOAD BACKGROUND AND BACK OR SCENE CARD IMGS **********/
+      /************ LOAD BACKGROUND, BACK-OF-SCENE-CARD, + SHOTCTR IMGS **********/
 
       background = new ImageIcon (ImageIO.read(new File("./resources/fullBoard.jpg")));
 
