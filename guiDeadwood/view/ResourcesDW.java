@@ -75,7 +75,7 @@ public class ResourcesDW {
       background = new ImageIcon (ImageIO.read(new File("./resources/fullBoard.jpg")));
 
       ImageIcon cardBack = new ImageIcon (ImageIO.read(new File("./resources/cardBack.png")).getScaledInstance(215, 125, 1));
-      //backOfCard = new ImageIcon(cardBack.getImage().getScaledInstance(215, 125, 1));
+      backOfCard = new ImageIcon(cardBack.getImage().getScaledInstance(215, 125, 1));
       shotIcon = new ImageIcon (ImageIO.read(new File("./resources/shot.png")));
 
     } catch (IOException e) {

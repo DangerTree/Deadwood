@@ -19,7 +19,7 @@ public class SceneView
     sceneLabel.setIcon (r.getBackOfCard()); // face down card
     sceneLabel.setBounds(0, 0, w, h); // establish bounds of scene card
     sceneLabel.setVisible(true);
-    add (sceneLabel, new Integer (1), new Integer (1)); // add sceneLabel to JLayeredPane
+    add (sceneLabel, new Integer (1)); // add sceneLabel to JLayeredPane
 
     //System.out.println ("s: " + s);
     //System.out.println ("this: " + this);
