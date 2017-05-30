@@ -47,6 +47,7 @@ public class Deadwood{
       playerQueue.add(new Player(startingRank, startingCred, gameBoard.getTrailer(), i));
     }
     activePlayer = playerQueue.poll();
+    promptPlayer();
     return;
   }
 
@@ -96,26 +97,36 @@ public class Deadwood{
   private static void promptPlayer (){
     //int mode = 0;
     // if the player has already taken an action on their move, they can only enter who where or end (but not if they are in the casting office)
+    System.out.println ("Player " + activePlayer.getPlayerID() + "has taken action? " + activePlayer.hasTakenAction() + "\nPlayer is in: " + activePlayer.getRoom().getRName());
+    System.out.println ("Player " + activePlayer.getPlayerID() + "'s role: " + activePlayer.getRole());
+
+
+    // Player HAS taken an action this turn + is NOT in casting office
     if (activePlayer.hasTakenAction() == true && !activePlayer.getRoom().getRName().equals("Casting Office")){
       activePlayer.setMode(1);
-      System.out.println("Player " + activePlayer.getPlayerID() + ", what would you like to do?\n\tOPTIONS: who, where, or end.");
+      System.out.println("\nPlayer " + activePlayer.getPlayerID() + ", what would you like to do?\n\tOPTIONS: who, where, or end.");
     }
+    // Player has NOT taken an action + HAS a role
     else if(activePlayer.getRole() != null){
       activePlayer.setMode(2);
-      System.out.println("Player " + activePlayer.getPlayerID() + ", what would you like to do?\n\tOPTIONS: who, where, act, rehearse, or end.");
+      System.out.println("\nPlayer " + activePlayer.getPlayerID() + ", what would you like to do?\n\tOPTIONS: who, where, act, rehearse, or end.");
     }
-    else if(activePlayer.getRoom().getRName().equals("Casting Office")){
+    // Player has NOT taken an action + IS in casting office
+    else if(activePlayer.hasTakenAction() == false && activePlayer.getRoom().getRName().equals("Casting Office")){
       activePlayer.setMode(3);
-      System.out.println("Player " + activePlayer.getPlayerID() + ", what would you like to do?\n\tOPTIONS: who, where, move, upgrade, or end.");
+      System.out.println("\nPlayer " + activePlayer.getPlayerID() + ", what would you like to do?\n\tOPTIONS: who, where, move, upgrade, or end.");
     }
+    // Player has NOT taken an action + IS in Trailers
     else if(activePlayer.getRoom().getRName().equals("Trailers")){
       activePlayer.setMode(4);
-      System.out.println("Player " + activePlayer.getPlayerID() + ", what would you like to do?\n\tOPTIONS: who, where, move, or end.");
+      System.out.println("\nPlayer " + activePlayer.getPlayerID() + ", what would you like to do?\n\tOPTIONS: who, where, move, or end.");
     }
+    // Player has NOT taken an action + does NOT have a role
     else if(activePlayer.getRole() == null){ // player in room, but without role
       activePlayer.setMode(5);
-      System.out.println("Player " + activePlayer.getPlayerID() + ", what would you like to do?\n\tOPTIONS: who, where, work, or end.");
+      System.out.println("\nPlayer " + activePlayer.getPlayerID() + ", what would you like to do?\n\tOPTIONS: who, where, work, or end.");
     }
+    System.out.println ("\nPlayer mode: " + activePlayer.getMode());
     return;
   }
 
@@ -130,7 +141,7 @@ public class Deadwood{
     switch (activePlayer.getMode()){
       case 1: // if player has already done an action this turn (and is not in the casting office)
         if(!command.equals("who") && !command.equals("where") && !command.equals("end")){
-          System.out.println("You can not do that while you are working a role. Please enter a command from the list above.");
+          System.out.println("You have already done an action this turn. Please enter a command from the list above.");
           System.out.print("> ");
           toRet = false;
         }

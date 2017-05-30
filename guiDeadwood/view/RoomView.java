@@ -18,9 +18,6 @@ public class RoomView extends JLayeredPane{
 
     setBounds (rx, ry, rw, rh); // set bounds of JLayeredPane
 
-
-    // create a
-
     //roomRectangle = new JLabel ();
     //roomRectangle.setVisible(false);
     //add(roomRectangle, new Integer (3));
@@ -31,9 +28,7 @@ public class RoomView extends JLayeredPane{
     // add this RoomView as a listener of a Room obj in the model
     //rModel.subscribe (this);
 
-    // create a variable number of Role Views
-    //RoleView rlv;
-    System.out.println ("\nRoomView:     " + this);
+    //System.out.println ("\nRoomView:     " + this);
   }
 
 
