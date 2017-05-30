@@ -182,6 +182,11 @@ public class Deadwood{
   }
 
 
+  public static Player getActivePlayer(){
+    return activePlayer;
+  }
+
+
   private static void endGame (){
     int playerNum = playerQueue.size();
     int [] scores = new int [playerNum];

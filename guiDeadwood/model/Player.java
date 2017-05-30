@@ -37,8 +37,10 @@ public class Player {
   }
 
   protected void changed(){
-    for (Listener l : listeners)
+    for (Listener l : listeners){
       l.changed(this);
+      System.out.println ("In player's changed() method");
+    }
   }
 
 
@@ -140,8 +142,8 @@ public class Player {
           this.actionTaken = true;
         }
       }
-      changed();
     }
+    changed();
     //this.actionTaken = false;
   }
 
