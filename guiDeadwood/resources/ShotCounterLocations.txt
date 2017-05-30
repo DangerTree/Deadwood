@@ -1,32 +1,32 @@
-Train Station
+Train Station_3
 35 12
 88 12
 142 12
-Jail
-443 158
-General Store
-313 278
-313 330
-Main Street
-802 23
-858 23
-922 23
-Saloon
-624 216
-678 216
-Ranch
-472 472
-524 472
-Bank
-840 548
-Secret Hideout
-245 764
-300 764
-354 764
-Church
-622 675
-682 675
-Hotel
-1005 683
-1058 683
-1110 683
+Jail_1
+193 158
+General Store_2
+83 28
+83 80
+Main Street_3
+322 23
+258 23
+202 23
+Saloon_2
+24 16
+78 16
+Ranch_2
+247 22
+299 22
+Bank_1
+240 98
+Secret Hideout_3
+245 64
+300 64
+354 64
+Church_2
+22 25
+82 25
+Hotel_3
+35 233
+88 233
+140 233
