@@ -6,16 +6,23 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.imageio.ImageIO;
 import java.util.HashMap;
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 
 public class BoardView extends JLayeredPane{
   private JLabel boardLabel;
   private JLabel[] playerLabels;
   private HashMap <String, int[][]> playerRoomLoc; // holds String "Room Name", [[player1 x_loc, player1 y_loc], [player1 x_loc, player1 y_loc]...]
+  private HashMap <String, int[][]> shotCounterLoc;
 
   public BoardView (model.Board bModel, int numPlayers) throws Exception {
 
+    playerRoomLoc = new HashMap <String, int[][]>();
+    shotCounterLoc = new HashMap <String, int[][]>();
     initPlayerRoomLoc();
+    initShotCounterLoc();
     initPlayerLabels(numPlayers);
 
     ResourcesDW r = ResourcesDW.getInstance();
@@ -34,7 +41,64 @@ public class BoardView extends JLayeredPane{
 
   private void initPlayerRoomLoc(){
 
+    File PlayerLocationsFile = null;
+    Scanner scan = null;
 
+    try{
+      PlayerLocationsFile = new File ("resources/PlayerLocations.txt");
+      scan = new Scanner (PlayerLocationsFile);
+      while(scan.hasNextLine() != false){
+        String roomName = scan.nextLine();
+        int [][] newLocations = new int[8][2];
+        for(int i = 0; i < 8; i++){
+          String [] readLine = scan.nextLine().split(" ");
+          newLocations[i][0] = Integer.parseInt(readLine[0]);
+          newLocations[i][1] = Integer.parseInt(readLine[1]);
+        }
+
+        playerRoomLoc.put(roomName, newLocations);
+      }
+    }
+    catch(FileNotFoundException e){
+      System.out.println("PlayerLocations.txt file not found.");
+      System.exit(1);
+    }
+    catch(NumberFormatException e){
+      System.out.println("PlayerLocations.txt file formatted incorrectly.");
+      System.exit(1);
+    }
+
+  }
+
+  private void initShotCounterLoc(){
+
+    File shotCounterLocationsFile = null;
+    Scanner scan = null;
+
+    try{
+      shotCounterLocationsFile = new File ("resources/ShotCounterLocations.txt");
+      scan = new Scanner (shotCounterLocationsFile);
+      while(scan.hasNextLine() != false){
+        String [] firstLine = scan.nextLine().split("_");
+        String roomName = firstLine[0];
+        int shotNum = Integer.parseInt(firstLine[1]);
+        int[][] newLocations = new int[shotNum][2];
+        for(int i = 0; i < shotNum; i ++){
+          String [] readLine = scan.nextLine().split(" ");
+          newLocations[i][0] = Integer.parseInt(readLine[0]);
+          newLocations[i][1] = Integer.parseInt(readLine[1]);
+        }
+        shotCounterLoc.put(roomName, newLocations);
+      }
+    }
+    catch(FileNotFoundException e){
+      System.out.println("ShotCounterLocations.txt file not found.");
+      System.exit(1);
+    }
+    catch(NumberFormatException e){
+      System.out.println("ShotCounterLocations.txt file formatted incorrectly.");
+      System.exit(1);
+    }
   }
 
 
