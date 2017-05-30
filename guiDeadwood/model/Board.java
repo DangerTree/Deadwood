@@ -27,6 +27,8 @@ public class Board{
 
   private static Board boardObj = new Board();
 
+  // getBoard is called by model.Deadwood
+  // initializes a board object and sets the daysLeft to # days remaining in game
   public static Board getBoard(int dayNum){
       boardObj.daysLeft = dayNum;
       makeScenes();
@@ -43,6 +45,10 @@ public class Board{
   }
 
 
+  /*
+  Reads a file describing adjacent rooms, and tells each Room object which..
+  ... other Room objs are adjacent to it. Room objs store this in a private HashMap
+  */
   private static void makeRoomAdjList(){
 
     File roomAdjFile = null;
@@ -80,7 +86,8 @@ public class Board{
   /* setupRooms: initializes all rooms
   INPUT: a file describing the contents of each room (and off-card scenes)
   POST-CONDITION: 10 rooms w/scenes and off-card roles and 2 rooms w/o scenes...
-    ...(trailer and casting office) are created and added to roomList
+    ...(trailer and casting office) are created and added to roomList.
+    Calls makeRoomAdjList
   */
   public void setupRooms(){
 
@@ -89,12 +96,10 @@ public class Board{
     try {
       room_file = new File ("model/infoFiles/roomInfo.txt");
       scan = new Scanner (room_file);//.useDelimiter("_");
-
       // goes through file descibing content of 10 acting rooms (not trailer or casting office)
       while (scan.hasNextLine() != false){
         // create the room / parse the first line
         String[] line = scan.nextLine().split("_");
-        //System.out.println ("room: " + line[0] + " shot ctrs: " + line[1]);
         Room myRoom = new Room (line[0], Integer.parseInt(line[1]));
         myRoom.placeScene(sceneDrawPile.remove());//we could recycle scenes in a later version
         scenesLeft++;
@@ -102,7 +107,6 @@ public class Board{
         int roleNum = Integer.parseInt(line[2]);
         for (int i = 0; i < roleNum; i++){
           String[] roleLine = scan.nextLine().split("_");
-          //System.out.println (roleLine[0] + " " +roleLine[1] + " " + roleLine[2]);
           myRoom.addRole (Integer.parseInt(roleLine[0]), roleLine[1], roleLine[2]);
         }
         roomHashMap.put(myRoom.getRName(), myRoom);

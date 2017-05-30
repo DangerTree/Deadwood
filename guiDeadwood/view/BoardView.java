@@ -15,7 +15,7 @@ public class BoardView extends JLayeredPane{
   private JLabel boardLabel;
   private JLabel[] playerLabels;
   private HashMap <String, int[][]> playerRoomLoc; // holds String "Room Name", [[player1 x_loc, player1 y_loc], [player1 x_loc, player1 y_loc]...]
-  private HashMap <String, int[][]> shotCounterLoc;
+  private HashMap <String, int[][]> shotCounterLoc; // <Room name, [ [x_loc1, y_loc1], [x_loc2, y_loc2] ...] (of shot counter image locations)
 
   public BoardView (model.Board bModel, int numPlayers) throws Exception {
 
@@ -30,15 +30,19 @@ public class BoardView extends JLayeredPane{
 
     boardLabel = new JLabel (backgroundImg);
     boardLabel.setBounds (0, 0, backgroundImg.getIconWidth(), backgroundImg.getIconHeight());
-    add(boardLabel, new Integer (1)); // add the board image as the first layer
+    add(boardLabel, new Integer (0)); // add the board image as the first layer
     setBounds (boardLabel.getBounds());
 
 
     // create room view objects
-    makeSceneViews(bModel);
+    makeR_SViews(bModel);
   }
 
 
+  /* initPlayerRoomLoc reads in the coordiates in each room where a player, ...
+  ... given their playerID, will move to when entering that room.
+  POST-CONDITION: hashmap playerRoomLoc is populated
+  */
   private void initPlayerRoomLoc(){
 
     File PlayerLocationsFile = null;
@@ -70,6 +74,11 @@ public class BoardView extends JLayeredPane{
 
   }
 
+
+  /* initShotCounterLoc reads in the coordiates in each room where its ...
+  ... shot counters are positioned.
+  POST-CONDITION: hashmap shotCounterLoc is populated
+  */
   private void initShotCounterLoc(){
 
     File shotCounterLocationsFile = null;
@@ -102,6 +111,12 @@ public class BoardView extends JLayeredPane{
   }
 
 
+  /*
+  initPlayerLabels initializes the playerLabels list by creating a JLabel ...
+  ... for each player and adding it to the JLayeredPane.
+  POST-CONDITION: playerLabels array is populated with JLabels with the players'...
+  ... coorresponding mover die image. JLabels are located in "Trailers".
+  */
   private void initPlayerLabels (int numPlayers){
 
     ResourcesDW r = ResourcesDW.getInstance();
@@ -121,6 +136,8 @@ public class BoardView extends JLayeredPane{
 
 
   // if the player is in whitespace, update it's postion, visually
+  /*
+  */
   public void changed (model.Player p){
     // depict where player is at
     if (p.getRole() == null){
@@ -141,8 +158,14 @@ public class BoardView extends JLayeredPane{
 
 
 
-
-  private void makeSceneViews(model.Board bModel) throws Exception{
+  /*
+  makeR_SViews: for each room on the board, this method:
+    1) creates a new RoomView, and associates it with a model.Room
+    2) sets up the shot counters in the room view
+    3) creates a new SceneView, and associates it with a model.Scene
+    4) adds the RoomView and SceneView to the JLayeredPane
+  */
+  private void makeR_SViews(model.Board bModel) throws Exception{
 
     RoomView rv;
     SceneView sv;
@@ -150,8 +173,8 @@ public class BoardView extends JLayeredPane{
     rv = new RoomView (0, 0, 450, 230, bModel.getRoom ("Train Station"));
     rv.setupShots(shotCounterLoc.get("Train Station"));
     sv = new SceneView (15, 65, 125, 215, bModel.getRoom ("Train Station").getScene());
-    this.add(rv, new Integer (1));
     this.add(sv, new Integer (2));
+    this.add(rv, new Integer (1));
 
     rv = new RoomView (250, 0, 250, 350, bModel.getRoom ("Jail"));
     rv.setupShots(shotCounterLoc.get("Jail"));

@@ -15,12 +15,11 @@ public class SceneView
 
     setBounds (x, y, w, h); // create bounds of JLayeredPane
     sceneLabel = new JLabel(); // create new JLabel (will hold scene card image) in JLayeredPane
-    sceneLabel.setBounds(0, 0, w, h); // establish bounds of scene card
-    sceneLabel.setVisible(true);
-    add (sceneLabel, new Integer (0)); // add sceneLabel to JLayeredPane
-
     ResourcesDW r = ResourcesDW.getInstance();
     sceneLabel.setIcon (r.getBackOfCard()); // face down card
+    sceneLabel.setBounds(0, 0, w, h); // establish bounds of scene card
+    sceneLabel.setVisible(true);
+    add (sceneLabel, new Integer (1), new Integer (1)); // add sceneLabel to JLayeredPane
 
     //System.out.println ("s: " + s);
     //System.out.println ("this: " + this);

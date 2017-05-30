@@ -17,7 +17,7 @@ public class Deadwood{
   private static Queue<Player> playerQueue = new LinkedList<Player>();
   private static Player activePlayer = null;
 
-  public static Board initGameboard (int numPlayer){
+  public static void initGameboard (int numPlayer){
 
     Board gameBoard = null;
     if (numPlayer == 2 || numPlayer == 3){
@@ -47,7 +47,7 @@ public class Deadwood{
       playerQueue.add(new Player(startingRank, startingCred, gameBoard.getTrailer(), i));
     }
     activePlayer = playerQueue.poll();
-    return gameBoard;
+    return;
   }
 
 

@@ -1,11 +1,13 @@
 // boardView organizes roompanels?
 package view;
 
+//import javax.swing.JLayer;
 import javax.swing.JLayeredPane;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.imageio.ImageIO;
 
+//public class RoomView extends JLayer{
 public class RoomView extends JLayeredPane{
   private model.Room rmModel;
   //private JLabel roomRectangle;
@@ -14,7 +16,7 @@ public class RoomView extends JLayeredPane{
   // rx, ry, rh, rw are the room placement and height/width params
   public RoomView (int rx, int ry, int rh, int rw, model.Room rModel) throws Exception {
 
-    setBounds (rx, ry, rh, rw); // set bounds of JLayeredPane
+    setBounds (rx, ry, rw, rh); // set bounds of JLayeredPane
 
 
     // create a
@@ -50,6 +52,9 @@ public class RoomView extends JLayeredPane{
   }
 
 
+  /* setupShots:
+  PARAMETER:  2d int array of all the x, y coordiates of the shot counters in the room
+  */
   public void setupShots (int [][] shotCtrLocations){
     int shotNum = shotCtrLocations.length;
     ResourcesDW r = ResourcesDW.getInstance();
@@ -60,7 +65,7 @@ public class RoomView extends JLayeredPane{
       shotCounterLabels[i].setIcon(shotIcon);
       shotCounterLabels[i].setBounds(shotCtrLocations[i][0], shotCtrLocations[i][1], shotIcon.getIconWidth(), shotIcon.getIconHeight());
       shotCounterLabels[i].setVisible(true);
-      add(shotCounterLabels[i]);
+      add(shotCounterLabels[i], new Integer (1));
     }
   }
 
