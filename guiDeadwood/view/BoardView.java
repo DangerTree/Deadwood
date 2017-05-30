@@ -40,12 +40,6 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
     makeSceneViews(bModel);
 
     // subscribe to all players
-    model.Player[] thePQ = (model.Player[]) model.Deadwood.getPlayerQ().toArray();
-    //Queue<model.Player> thePQ = new model.Deadwood.getPlayerQ();
-    for (int i = 0; i < thePQ.length; i++){
-      //thePQ.get(i).subscribe(this);
-      thePQ[i].subscribe(this);
-    }
   }
 
 
