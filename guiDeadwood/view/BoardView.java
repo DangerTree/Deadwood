@@ -9,9 +9,11 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Queue;
+import java.util.LinkedList;
 
 
-public class BoardView extends JLayeredPane{
+public class BoardView extends JLayeredPane implements model.Player.Listener{
   private JLabel boardLabel;
   private JLabel[] playerLabels;
   private HashMap <String, int[][]> playerRoomLoc; // holds String "Room Name", [[player1 x_loc, player1 y_loc], [player1 x_loc, player1 y_loc]...]
@@ -36,7 +38,14 @@ public class BoardView extends JLayeredPane{
     // create room view objects
     makeRoomViews(bModel);
     makeSceneViews(bModel);
-    //makeR_SViews(bModel);
+
+    // subscribe to all players
+    model.Player[] thePQ = (model.Player[]) model.Deadwood.getPlayerQ().toArray();
+    //Queue<model.Player> thePQ = new model.Deadwood.getPlayerQ();
+    for (int i = 0; i < thePQ.length; i++){
+      //thePQ.get(i).subscribe(this);
+      thePQ[i].subscribe(this);
+    }
   }
 
 

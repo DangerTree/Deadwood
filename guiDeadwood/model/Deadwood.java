@@ -95,7 +95,6 @@ public class Deadwood{
   // promptPlayer asks the user what actions they would like to take, given their location and status
   // RETURNS: an int indicating their status/location
   private static void promptPlayer (){
-    //int mode = 0;
     // if the player has already taken an action on their move, they can only enter who where or end (but not if they are in the casting office)
     System.out.println ("Player " + activePlayer.getPlayerID() + "has taken action? " + activePlayer.hasTakenAction() + "\nPlayer is in: " + activePlayer.getRoom().getRName());
     System.out.println ("Player " + activePlayer.getPlayerID() + "'s role: " + activePlayer.getRole());
@@ -175,6 +174,11 @@ public class Deadwood{
         }
     }
     return toRet;
+  }
+
+
+  public static Queue<Player> getPlayerQ (){
+    return playerQueue;
   }
 
 
