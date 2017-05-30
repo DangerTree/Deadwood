@@ -9,15 +9,16 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import java.util.HashMap;
 import java.lang.String;
-import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
 
 // This singleton class loads the 7-segment images once and keeps track of them
 // throughout the program's execution.
 public class ResourcesDW {
   // This array actually holds the images, which are indexed by the displayed
   // number.  That is, sceneIcons[1] is the 7-segment number 1.
-  private static Map<String, ImageIcon> sceneIcons = new HashMap <String, ImageIcon>();
-  private static Map<int[], ImageIcon> playerIcons = new HashMap <int[], ImageIcon>();; // where int[] = [player id, rank], and ImageIcon is the coorresponding mover die
+  private static HashMap <String, ImageIcon> sceneIcons = new HashMap <String, ImageIcon>();
+  private static HashMap <List<Integer>, ImageIcon> playerIcons = new HashMap <List<Integer>, ImageIcon>();; // where int[] = [player id, rank], and ImageIcon is the coorresponding mover die
   private static ImageIcon background, backOfCard, shotIcon;
   static ResourcesDW instance = new ResourcesDW();
 
@@ -66,8 +67,12 @@ public class ResourcesDW {
           System.out.println ("dieID: " + dieID);
           System.out.println ("dieRank: " + dieRank);
           System.out.println (scaledImg);
-          int[] key = {dieID, dieRank};
-          playerIcons.put (key, scaledImg);
+            List <Integer> intList = new ArrayList <Integer>(2);
+          intList.add(dieID);
+            intList.add(dieRank);
+            //int[] key = {dieID, dieRank};
+          playerIcons.put (intList, scaledImg);
+            //playerIcons.put (key, scaledImg);
         }
       }
       /************ LOAD BACKGROUND AND BACK OR SCENE CARD IMGS **********/
@@ -99,14 +104,17 @@ public class ResourcesDW {
   public static ImageIcon getPlayerIcon (int playerID, int rank){
     System.out.println ("in getPlayerIcon PLAYERID: " + playerID);
     System.out.println ("in getPlayerIcon RANK: " + rank);
-    int[] key = {playerID, rank};
-    System.out.println ("playerIcons (Hashmap) size: " + playerIcons.size());
-    System.out.println ("key: " + key);
+    List <Integer> key = new ArrayList <Integer> (2);
+    key.add(playerID);
+    key.add(rank);
+    //int[] key = {playerID, rank};
+    //System.out.println ("playerIcons (Hashmap) size: " + playerIcons.size());
+    //System.out.println ("key: " + key);
     //System.out.println ("Keyset for playerIcons (Hashmap): " + playerIcons.keySet().toArray();
     ImageIcon toRet = playerIcons.get(key);
     System.out.println ("toRet: " + toRet);
     if (toRet == null){
-      System.out.println ("Player mover die icon for [playerID, rank] = " + key[0] + " " + key[1] + " not found. Exiting game.");
+      System.out.println ("Player mover die icon for [playerID, rank] = " + key.get(0) + " " + key.get(0) + " not found. Exiting game.");
       System.exit(1);
     }
     return toRet;
