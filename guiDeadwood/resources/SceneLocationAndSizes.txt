@@ -1,33 +1,20 @@
-Room Name
-Location of top left pixel(x, y), dimension of scene card (horizontal, vertical)
-
-
 Train Station
-15, 65, 125, 215
-
+15 65 125 215
 Jail
-275, 25, 125, 215
-
+275 25 125 215
 Main Street
-965, 25, 125, 215
-
+965 25 125 215
 General Store
-365, 280, 125, 215
-
+365 280 125 215
 Saloon
-625, 275, 125, 215
-
+625 275 125 215
 Ranch
-245, 470, 125, 215
-
+245 470 125 215
 Secret Hideout
-20, 725, 125, 215
-
+20 725 125 215
 Bank
-618, 470, 125, 215
-
+618 470 125 215
 Church
-618, 730, 125, 215
-
+618 730 125 215
 Hotel
-965, 735, 125, 215
+965 735 125 215
