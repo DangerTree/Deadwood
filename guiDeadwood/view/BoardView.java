@@ -77,6 +77,7 @@ public class BoardView extends JLayeredPane{
 
 
 
+
   private void makeSceneViews(model.Board bModel) throws Exception{
 
     SceneView sv;
@@ -116,6 +117,7 @@ public class BoardView extends JLayeredPane{
     RoomView rv;
 
     rv = new RoomView (0, 0, 450, 230, bModel.getRoom ("Train Station"));
+    rv.setupShots(shotCounterLoc.get("Train Station"));
     rv.addSceneView (15, 65, 125, 215, bModel.getRoom ("Train Station").getScene());
     this.add(rv, new Integer (2));
 

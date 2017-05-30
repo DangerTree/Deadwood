@@ -1,5 +1,8 @@
 ################## May 29th, 2017: #################
 
+### 6:34pm
+    change ResourcesDW so that it can recognize keys from playerIDIcon stuff.
+
 ### 12:45pm
     read image locations from outside file (not hard coding them)
     resize face-down scene cards to fit the bounds of the JLabel (?)

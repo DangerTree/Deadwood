@@ -5,6 +5,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Scanner;
 
 public class Room{
@@ -16,8 +17,29 @@ public class Room{
   private ArrayList<Role> rRoleList = new ArrayList<Role>(); // ArrayList of off-card roles in the room
 
 
+  /**************************************************************/
+
+  public interface Listener {
+    public void changedShotCounter (int rmShotNum);
+  }
+
+  private Collection<Listener> listeners;
+
+  public void subscribe(Listener l){
+    listeners.add(l);
+  }
+
+  public void changedShotCounter (int rmShotNum){
+    for(Listener l: listeners)
+      l.changedShotCounter(rmShotNum);
+  }
+
+  /**************************************************************/
+
+
   //Room object constructor, takes name of room as parameter to make a new room
   public Room(String roomName, int shotCtr){
+    listeners = new ArrayList<Listener>();
     this.maxShotCtr = shotCtr;
     this.shotCtr = shotCtr;
     this.rName = roomName;
@@ -29,25 +51,27 @@ public class Room{
   }
 
 
-  // Adds an off-card role to the rRoleList
+  // Adds an off-card role obj to the rRoleList arrayList
   public void addRole(int rank, String name, String quote){
-
-    // create new role obj
-    // put role in role arrayList
     rRoleList.add(new Role(name, quote, rank));
-
   }
+
+
+  public int getShotCtr (){
+    return this.shotCtr;
+  }
+
 
   public void addAdjRoom (Room newAdjRoom){
     this.adjRoomList.add(newAdjRoom);
   }
 
 
-
   // Decrements number of shot counters in room after successful acting action
   // Returns number of shots left
   public int rmShotCounter(){
     this.shotCtr--;
+    changedShotCounter(this.shotCtr);
     return this.shotCtr;
   }
 
@@ -55,6 +79,7 @@ public class Room{
   // Resets the number of shot counters after a new scene is placed(called from placeScene())
   public void resetShotCounter(){
     this.shotCtr = this.maxShotCtr;
+    changedShotCounter(this.shotCtr);
   }
 
 
