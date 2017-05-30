@@ -35,7 +35,9 @@ public class BoardView extends JLayeredPane{
 
 
     // create room view objects
-    makeR_SViews(bModel);
+    makeRooms(bModel);
+    makeScenes(bModel);
+    //makeR_SViews(bModel);
   }
 
 
@@ -157,6 +159,58 @@ public class BoardView extends JLayeredPane{
   }
 
 
+  private void makeRooms(model.Board bModel) throws Exception{
+    RoomView rv;
+    File RoomViewLocationsFile = null;
+    Scanner scan = null;
+
+    try{
+      RoomViewLocationsFile = new File("resources/RoomLocationAndSizes.txt");
+      scan = new Scanner(RoomViewLocationsFile);
+      while(scan.hasNextLine() != false){
+        String name = scan.nextLine();
+        String [] location = scan.nextLine().split(" ");
+        rv = new RoomView(Integer.parseInt(location[0]), Integer.parseInt(location[1]), Integer.parseInt(location[2]), Integer.parseInt(location[3]), bModel.getRoom(name));
+        if(!name.equals("Trailers") && !name.equals("Casting Office")){
+          rv.setupShots(shotCounterLoc.get(name));
+        }
+        this.add(rv, new Integer (1));
+      }
+    }
+    catch(FileNotFoundException e){
+      System.out.println("RoomLocationAndSizes.txt file not found.");
+      System.exit(1);
+    }
+    catch(NumberFormatException e){
+      System.out.println("RoomLocationAndSizes.txt file formatted incorrectly.");
+      System.exit(1);
+    }
+  }
+
+  private void makeScenes(model.Board bModel) throws Exception{
+    SceneView sv;
+    File SceneViewLocationsFile = null;
+    Scanner scan = null;
+
+    try{
+      SceneViewLocationsFile = new File("resources/SceneLocationAndSizes.txt");
+      scan = new Scanner(SceneViewLocationsFile);
+      while(scan.hasNextLine() != false){
+        String name = scan.nextLine();
+        String [] location = scan.nextLine().split(" ");
+        sv = new SceneView(Integer.parseInt(location[0]), Integer.parseInt(location[1]), Integer.parseInt(location[2]), Integer.parseInt(location[3]), bModel.getRoom(name).getScene());
+        this.add(sv, new Integer (2));
+      }
+    }
+    catch(FileNotFoundException e){
+      System.out.println("RoomLocationAndSizes.txt file not found.");
+      System.exit(1);
+    }
+    catch(NumberFormatException e){
+      System.out.println("RoomLocationAndSizes.txt file formatted incorrectly.");
+      System.exit(1);
+    }
+  }
 
   /*
   makeR_SViews: for each room on the board, this method:
