@@ -132,17 +132,18 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
   private void initPlayerLabels (int numPlayers){
 
     ResourcesDW r = ResourcesDW.getInstance();
-
+    int startingRank = 1;
+    if (numPlayers == 7 || numPlayers == 8){
+      startingRank = 2;
+    }
     playerLabels = new JLabel[numPlayers];
     for (int i = 0; i < numPlayers; i++){
       playerLabels [i] = new JLabel();
-      playerLabels[i].setIcon (r.getPlayerIcon(i, 1)); // rank 1; color determined by ID
+      playerLabels[i].setIcon (r.getPlayerIcon(i, startingRank)); // rank 1; color determined by ID
       int[] pLoc = playerRoomLoc.get("Trailers")[i];
       playerLabels[i].setBounds(pLoc[0], pLoc[1], 30, 30); // establish bounds of scene card
       playerLabels[i].setVisible(true);
       add (playerLabels[i], new Integer (4)); // add sceneLabel to JLayeredPane
-
-
     }
   }
 
@@ -159,6 +160,7 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
       ResourcesDW r = ResourcesDW.getInstance();
       // update the player's mover dice icon
       playerLabels[pID].setIcon (r.getPlayerIcon (pID, p.getRank()));
+      System.out.println ("player " + p.getPlayerID() + "'s rank: " + p.getRank());
       // update its location
       int[] newLoc = playerRoomLoc.get(p.getRoom().getRName())[pID];
       playerLabels[pID].setLocation(newLoc[0], newLoc[1]);
