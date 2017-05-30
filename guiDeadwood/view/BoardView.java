@@ -40,6 +40,14 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
     makeSceneViews(bModel);
 
     // subscribe to all players
+    Queue<model.Player> thePQ =  model.Deadwood.getPlayerQ();
+
+    for (model.Player p: thePQ){
+      System.out.println ("BoardView subscribing to player " + p.getPlayerID());
+      p.subscribe(this);
+      System.out.println ("BoardView player subscription");
+    }
+    model.Deadwood.getActivePlayer().subscribe(this);
   }
 
 
@@ -144,6 +152,7 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
   */
   public void changed (model.Player p){
     // depict where player is at
+    System.out.println ("In BoardView's changed() method");
     if (p.getRole() == null){
       int pID = p.getPlayerID();
       // MOVE THE PLAYER ICON
@@ -154,6 +163,7 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
       int[] newLoc = playerRoomLoc.get(p.getRoom().getRName())[pID];
       playerLabels[pID].setLocation(newLoc[0], newLoc[1]);
       playerLabels[p.getPlayerID()].setVisible(true); // make the jLabel visible
+      System.out.println ("Player " + p.getPlayerID() + "'s new location: " + newLoc[0] + ", " + newLoc[1]);
     }
     else { // if the player is not in the whitespace of a room
       playerLabels[p.getPlayerID()].setVisible(false);
