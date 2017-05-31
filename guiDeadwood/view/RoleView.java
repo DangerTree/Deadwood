@@ -17,7 +17,7 @@ public class RoleView
     roleLabel = new JLabel(); // create new JLabel (will hold scene card image) in JLayeredPane
     roleLabel.setBounds(0, 0, w, h); // establish bounds of scene card
     roleLabel.setVisible(true);
-    add (roleLabel, new Integer (0)); // add roleLabel to JLayeredPane
+    add (roleLabel, new Integer (5)); // add roleLabel to JLayeredPane
 
     //System.out.println ("s: " + s);
     //System.out.println ("this: " + this);
