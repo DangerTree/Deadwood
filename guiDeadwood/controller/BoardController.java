@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
 
 public class BoardController extends JLayeredPane{
 
@@ -21,7 +22,34 @@ public class BoardController extends JLayeredPane{
 
     makeRoomControllers(bModel);
     makeSceneControllers(bModel);
+    makeRoleControllers(bModel);
 
+  }
+
+  private void makeRoleControllers(model.Board bModel){
+    RoleController rlc;
+    File RoleLocationsFile = null;
+    Scanner scan = null;
+    HashMap<String, model.Role> roleMap = model.Board.getRoleMap();
+
+    try{
+      RoleLocationsFile = new File("resources/RoleLocationAndSizes.txt");
+      scan = new Scanner(RoleLocationsFile);
+      while(scan.hasNextLine() != false){
+        String name = scan.nextLine();
+        String [] location = scan.nextLine().split(" ");
+        rlc = new RoleController(Integer.parseInt(location[0]), Integer.parseInt(location[1]), Integer.parseInt(location[2]), Integer.parseInt(location[3]), roleMap.get(name));
+        this.add(rlc, new Integer(3));
+      }
+    }
+    catch(FileNotFoundException e){
+      System.out.println("RoleLocationAndSizes.txt file not found.");
+      System.exit(1);
+    }
+    catch(NumberFormatException e){
+      System.out.println("RoleLocationAndSizes.txt file formatted incorrectly.");
+      System.exit(1);
+    }
   }
 
   private void makeRoomControllers(model.Board bModel) throws Exception{
