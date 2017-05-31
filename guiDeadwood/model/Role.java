@@ -31,6 +31,8 @@ public class Role{
       l.changed(this);
   }
 
+
+
   /**************************************************************/
 
   public Role (String roleName, String roleQuote, int rank){

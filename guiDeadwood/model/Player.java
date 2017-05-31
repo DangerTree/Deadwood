@@ -110,6 +110,7 @@ public class Player {
 
         else if (cmd0.equals("work")){
           String usrPart = String.join(" ", command.toArray(new CharSequence[command.size()]));
+
           boolean result = takeRole (usrPart);
           if(result){
             System.out.println ("You took the role: " + usrPart);
@@ -245,11 +246,14 @@ public class Player {
         System.out.println ("Please try again.");
         return false;
       }
-      else {
+      else if (this.rank >= tempRole.getRank()){ // if the player has sufficient rank
         this.myRole = tempRole;
         this.myRole.addActor(this);
         this.myScene = myRoom.getScene();
         return true;
+      }
+      else {
+        return false;
       }
     }
   }

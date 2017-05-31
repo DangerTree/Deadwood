@@ -35,21 +35,21 @@ public class SceneView
     switch (s.getSRoleListSize()){
       case 1: // make a role view positioned on the card for only 1 role
         rl_v = new RoleView (87, 51, 47, 47, roleList[0]);
-        this.add (rl_v, new Integer (1));
+        this.add (rl_v, new Integer (2));
         break;
       case 2:
         rl_v = new RoleView (122, 51, 47, 47, roleList[0]);
-        this.add (rl_v, new Integer (1));
+        this.add (rl_v, new Integer (2));
         rl_v = new RoleView (56, 51, 47, 47, roleList[1]);
-        this.add (rl_v, new Integer (1));
+        this.add (rl_v, new Integer (2));
         break;
       case 3:
         rl_v = new RoleView (152, 51, 47, 47, roleList[0]);
-        this.add (rl_v, new Integer (1));
+        this.add (rl_v, new Integer (2));
         rl_v = new RoleView (86, 51, 47, 47, roleList[1]);
         this.add (rl_v, new Integer (1));
         rl_v = new RoleView (21, 51, 47, 47, roleList[2]);
-        this.add (rl_v, new Integer (1));
+        this.add (rl_v, new Integer (2));
         break;
     }
 
