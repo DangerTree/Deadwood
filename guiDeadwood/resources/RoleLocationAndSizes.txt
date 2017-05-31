@@ -1,0 +1,58 @@
+Dragged by Train
+50 268 47 47
+Crusty Prospector
+112 226 47 47
+Cyrus the Gunfighter
+48 354 47 47
+Preacher with Bag
+113 318 47 47
+Prisoner in Cell
+518 24 47 47
+Feller in Irons
+518 105 47 47
+Man in Overalls
+235 276 47 47
+Mister Keach
+235 358 47 47
+Man Under Horse
+487 524 47 47
+Saucy Fred
+487 607 47 47
+Shot in Leg
+411 607 47 47
+Clumsy Pit Fighter
+434 719 47 47
+Thug with Knife
+521 719 47 47
+Dangerous Tom
+435 808 47 47
+Penny, who is Lost
+521 808 47 47
+Railroad Worker
+637 22 47 47
+Falls off Roof
+719 22 47 47
+Woman in Black Dress
+637 104 47 47
+Mayor McGinty
+719 104 47 47
+Woman in Red Dress
+877 275 47 47
+Reluctant Farmer
+877 352 47 47
+Flustered Teller
+911 469 47 47
+Suspicious Gentleman
+911 553 47 47
+Dead Man
+856 729 47 47
+Crying Woman
+858 809 47 47
+Faro Player
+1043 509 47 47
+Sleeping Drunkard
+1110 468 47 47
+Australian Bartender
+1045 595 47 47
+Falls from Balcony
+1110 556 47 47
