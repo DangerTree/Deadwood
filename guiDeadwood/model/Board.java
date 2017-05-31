@@ -115,7 +115,9 @@ public class Board{
           Role myRole;
           myRole = myRoom.addRole (Integer.parseInt(roleLine[0]), roleLine[1], roleLine[2]);
           roleHashMap.put(myRole.getRoleName(), myRole);
+          //System.out.println("Role Name added to hashMap: " + roleHashMap.get(myRole.getRoleName()).getRoleName() );
         }
+        //System.out.println("Man in Overalls: " + roleHashMap.get("Man in Overalls").getRoleName());
         roomHashMap.put(myRoom.getRName(), myRoom);
       }
       // setup casting office and trailer
