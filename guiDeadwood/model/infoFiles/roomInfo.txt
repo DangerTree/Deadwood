@@ -2,7 +2,7 @@ Jail_1_2
 2_Prisoner in Cell_"Zzzzz... Whiskey!"
 3_Feller in Irons_"Ah kilt the wrong man!"
 General Store_2_2
-1_Man In Overalls_"Looks like a storm's comin' in."
+1_Man in Overalls_"Looks like a storm's comin' in."
 3_Mister Keach_"Howdy, stranger."
 Train Station_3_4
 1_Dragged by Train_"Omgeezers!"
