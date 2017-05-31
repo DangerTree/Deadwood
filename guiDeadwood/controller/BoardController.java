@@ -24,6 +24,7 @@ public class BoardController extends JLayeredPane{
 
   }
 
+
   private void makeRoomControllers(model.Board bModel) throws Exception{
     RoomController rc;
     File RoomViewLocationsFile = null;
@@ -63,6 +64,9 @@ public class BoardController extends JLayeredPane{
         String [] location = scan.nextLine().split(" ");
         sc = new SceneController(Integer.parseInt(location[0]), Integer.parseInt(location[1]), Integer.parseInt(location[2]), Integer.parseInt(location[3]), bModel.getRoom(name).getScene());
         this.add(sc, new Integer (3));
+        model.Role[] roleList = bModel.getRoom(name).getScene().getSRoleList();
+        //makeRoleControllers (roleList);
+
       }
     }
     catch(FileNotFoundException e){
@@ -72,6 +76,34 @@ public class BoardController extends JLayeredPane{
     catch(NumberFormatException e){
       System.out.println("RoomLocationAndSizes.txt file formatted incorrectly.");
       System.exit(1);
+    }
+  }
+
+
+  // grab the role info from the scene: for every role in the scene, make a role controller and associate it with a model.Role
+  private void makeRoleControllers (model.Role[] roleList){
+
+    RoleController rl_c;
+
+    switch (roleList.length){
+      case 1: // make a role view positioned on the card for only 1 role
+        rl_c = new RoleController (87, 51, 47, 47, roleList[0]);
+        this.add (rl_c, new Integer (4));
+        break;
+      case 2:
+        rl_c = new RoleController (122, 51, 47, 47, roleList[0]);
+        this.add (rl_c, new Integer (4));
+        rl_c = new RoleController (56, 51, 47, 47, roleList[1]);
+        this.add (rl_c, new Integer (4));
+        break;
+      case 3:
+        rl_c = new RoleController (152, 51, 47, 47, roleList[0]);
+        this.add (rl_c, new Integer (4));
+        rl_c = new RoleController (86, 51, 47, 47, roleList[1]);
+        this.add (rl_c, new Integer (4));
+        rl_c = new RoleController (21, 51, 47, 47, roleList[2]);
+        this.add (rl_c, new Integer (4));
+        break;
     }
   }
 

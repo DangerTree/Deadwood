@@ -43,7 +43,7 @@ public class DeadwoodWrapper{
     model.Board bModel = model.Board.getBoard();
     view.BoardView bView = new view.BoardView (bModel, numPlayers); // connect board view to the model
     controller.BoardController bContr = new controller.BoardController (bModel); // connect board controller to model
-
+    //view.CtrlPanelView ctrlView = new view.BoardView ();
 
 
     pane.add (bView, new Integer (0));

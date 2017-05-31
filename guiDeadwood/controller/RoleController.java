@@ -23,6 +23,7 @@ class RoleController extends JPanel{
 
   private void clicked(){
     if(model.Deadwood.validateUserCommand("work")){
+      System.out.println ("Trying to work (RoleController)");
       ArrayList<String> command = new ArrayList<String>();
       command.add("work");
       command.add(rlModel.getRoleName());
