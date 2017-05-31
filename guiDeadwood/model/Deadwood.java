@@ -78,6 +78,7 @@ public class Deadwood{
     String buffer = command.get(0);
     activePlayer.takeTurn (command);
     if (buffer.equals("end")){
+      activePlayer.setActionTaken(false);
       playerQueue.add(activePlayer);
       activePlayer = playerQueue.poll();
       if (Board.getScenesLeft() == 1){
