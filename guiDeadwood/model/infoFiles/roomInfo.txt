@@ -4,36 +4,36 @@ Jail_1_2
 General Store_2_2
 1_Man In Overalls_"Looks like a storm's comin' in."
 3_Mister Keach_"Howdy, stranger."
-Train Station_3_4_
-1_Dragged by Train_"Omgeezers!"_
-1_Crusty Prospector_"Aww, peaches!"_
-2_Preacher with Bag_"The Lord will provide."_
-4_Cyrus the Gunfighter_"Git to fightin' or git away!"_
-Bank_1_2_
-2_Suspicious Gentleman_"Can you be more specific?"_
-3_Flustered Teller_"Would you like a large bill, sir?"_
-Church_2_2_
-1_Dead Man_"..."_
-2_Crying Woman_"Oh, the humanity!"_
-Hotel_3_4_
-1_Faro Player_"Hit me!"_
-1_Sleeping Drunkard_"Zzzzzz... Whiskey!"_
-2_Falls from Balcony_"Arrrgghh!!"_
-3_Australian Bartender_"What'll it be, mate?"_
-Main Street_3_4_
-1_Railroad Worker_"I'm a steel-drivin'man!"_
-2_Falls off Roof_"Aaaaiiiigggghh!"_
-2_Woman in Black Dress_"Well, I'll be!"_
-4_Mayor McGinty_"People of Deadwood!"_
+Train Station_3_4
+1_Dragged by Train_"Omgeezers!"
+1_Crusty Prospector_"Aww, peaches!"
+2_Preacher with Bag_"The Lord will provide."
+4_Cyrus the Gunfighter_"Git to fightin' or git away!"
+Bank_1_2
+2_Suspicious Gentleman_"Can you be more specific?"
+3_Flustered Teller_"Would you like a large bill, sir?"
+Church_2_2
+1_Dead Man_"..."
+2_Crying Woman_"Oh, the humanity!"
+Hotel_3_4
+1_Faro Player_"Hit me!"
+1_Sleeping Drunkard_"Zzzzzz... Whiskey!"
+2_Falls from Balcony_"Arrrgghh!!"
+3_Australian Bartender_"What'll it be, mate?"
+Main Street_3_4
+1_Railroad Worker_"I'm a steel-drivin'man!"
+2_Falls off Roof_"Aaaaiiiigggghh!"
+2_Woman in Black Dress_"Well, I'll be!"
+4_Mayor McGinty_"People of Deadwood!"
 Saloon_2_2
 1_Reluctant Farmer_"I ain't so sure about that!"
 2_Woman in Red Dress_"Come up and see me!"
-Ranch_2_3_
-1_Shot in Leg_"Ow! Me leg!"_
-2_Saucy Fred_"That's what she said!"_
-3_Man Under Horse_"A little help here!"_
-Secret Hideout_3_4_
-1_Clumsy Pit Fighter_"Hit me!"_
-2_Thug with Knife_"Meet Suzy, my murderin' knife."_
-3_Dangerous Tom_"There's two ways we can do this...."_
-4_Penny, who is Lost_"Oh, woe! For I am lost!"_
+Ranch_2_3
+1_Shot in Leg_"Ow! Me leg!"
+2_Saucy Fred_"That's what she said!"
+3_Man Under Horse_"A little help here!"
+Secret Hideout_3_4
+1_Clumsy Pit Fighter_"Hit me!"
+2_Thug with Knife_"Meet Suzy, my murderin' knife."
+3_Dangerous Tom_"There's two ways we can do this...."
+4_Penny, who is Lost_"Oh, woe! For I am lost!"

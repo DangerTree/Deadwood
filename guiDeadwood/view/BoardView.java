@@ -24,7 +24,6 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
 
     playerRoomLoc = new HashMap <String, int[][]>();
     shotCounterLoc = new HashMap <String, int[][]>();
-    roleMap = model.Board.getRoleMap();
     initPlayerRoomLoc();
     initShotCounterLoc();
     initPlayerLabels(numPlayers);
@@ -232,17 +231,17 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
     RoleView rl_v;
     File RoleLocationsFile = null;
     Scanner scan = null;
-    HashMap<String, model.Role> roleMap = model.Board.getRoleMap();
+    //HashMap<String, model.Role> roleMap = model.Board.getRoleMap();
 
     try{
       RoleLocationsFile = new File("resources/RoleLocationAndSizes.txt");
       scan = new Scanner(RoleLocationsFile);
       while(scan.hasNextLine() != false){
         String name = scan.nextLine();
-        System.out.println ("scanner's nextLine: " + name);
+        System.out.println ("scanner's nextLine: " + name + "___");
         String [] location = scan.nextLine().split(" ");
-        System.out.println (roleMap.get(name).getRoleName());
-        rl_v = new RoleView(Integer.parseInt(location[0]), Integer.parseInt(location[1]), Integer.parseInt(location[2]), Integer.parseInt(location[3]), roleMap.get(name));
+        System.out.println (model.Board.getRoleMap().get(name).getRoleName());
+        rl_v = new RoleView(Integer.parseInt(location[0]), Integer.parseInt(location[1]), Integer.parseInt(location[2]), Integer.parseInt(location[3]), model.Board.getRoleMap().get(name));
         this.add(rl_v, new Integer(4));
       }
     }
