@@ -16,6 +16,7 @@ import java.util.LinkedList;
 public class BoardView extends JLayeredPane implements model.Player.Listener{
   private JLabel boardLabel;
   private JLabel[] playerLabels;
+  private HashMap<String, model.Role> roleMap;
   private HashMap <String, int[][]> playerRoomLoc; // holds String "Room Name", [[player1 x_loc, player1 y_loc], [player1 x_loc, player1 y_loc]...]
   private HashMap <String, int[][]> shotCounterLoc; // <Room name, [ [x_loc1, y_loc1], [x_loc2, y_loc2] ...] (of shot counter image locations)
 
@@ -23,6 +24,7 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
 
     playerRoomLoc = new HashMap <String, int[][]>();
     shotCounterLoc = new HashMap <String, int[][]>();
+    roleMap = model.Board.getRoleMap();
     initPlayerRoomLoc();
     initShotCounterLoc();
     initPlayerLabels(numPlayers);
@@ -35,9 +37,10 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
     add(boardLabel, new Integer (0)); // add the board image as the first layer
     this.setBounds (boardLabel.getBounds());
 
-    // create room view objects
+    // create room, scene, and off-card role view objects
     makeRoomViews(bModel);
     makeSceneViews(bModel);
+    makeOffCardRoleViews(bModel);
 
     // subscribe to all players
     Queue<model.Player> thePQ =  model.Deadwood.getPlayerQ();
@@ -220,6 +223,39 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
       System.out.println("RoomLocationAndSizes.txt file formatted incorrectly.");
       System.exit(1);
     }
+  }
+
+
+  private void makeOffCardRoleViews(model.Board bModel) throws Exception{
+
+
+    RoleView rl_v;
+    File RoleLocationsFile = null;
+    Scanner scan = null;
+    HashMap<String, model.Role> roleMap = model.Board.getRoleMap();
+
+    try{
+      RoleLocationsFile = new File("resources/RoleLocationAndSizes.txt");
+      scan = new Scanner(RoleLocationsFile);
+      while(scan.hasNextLine() != false){
+        String name = scan.nextLine();
+        System.out.println ("scanner's nextLine: " + name);
+        String [] location = scan.nextLine().split(" ");
+        System.out.println (roleMap.get(name).getRoleName());
+        rl_v = new RoleView(Integer.parseInt(location[0]), Integer.parseInt(location[1]), Integer.parseInt(location[2]), Integer.parseInt(location[3]), roleMap.get(name));
+        this.add(rl_v, new Integer(4));
+      }
+    }
+    catch(FileNotFoundException e){
+      System.out.println("RoleLocationAndSizes.txt file not found.");
+      System.exit(1);
+    }
+    catch(NumberFormatException e){
+      System.out.println("RoleLocationAndSizes.txt file formatted incorrectly.");
+      System.exit(1);
+    }
+
+
   }
 
   /*
