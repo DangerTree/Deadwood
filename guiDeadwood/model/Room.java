@@ -52,8 +52,10 @@ public class Room{
 
 
   // Adds an off-card role obj to the rRoleList arrayList
-  public void addRole(int rank, String name, String quote){
-    rRoleList.add(new Role(name, quote, rank));
+  public Role addRole(int rank, String name, String quote){
+    Role toRet = new Role(name, quote, rank);
+    rRoleList.add(toRet);
+    return toRet;
   }
 
 

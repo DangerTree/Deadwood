@@ -19,8 +19,6 @@ public class RoleView
     roleLabel.setVisible(true);
     add (roleLabel, new Integer (5)); // add roleLabel to JLayeredPane
 
-    //System.out.println ("s: " + s);
-    //System.out.println ("this: " + this);
     rl.subscribe(this); // tell the scene model that it is listening to it
 
   }
@@ -28,6 +26,7 @@ public class RoleView
 
   // If a player took or left the role, indicate that
   public void changed (model.Role rl){
+    System.out.println ("changed in RoleView");
     if (rl.getActor() != null){
       ResourcesDW r = ResourcesDW.getInstance();
       // update the role's label to be a pic of the player's die

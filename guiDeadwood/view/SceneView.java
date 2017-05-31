@@ -21,8 +21,6 @@ public class SceneView
     sceneLabel.setVisible(true);
     add (sceneLabel, new Integer (1)); // add sceneLabel to JLayeredPane
 
-    //System.out.println ("s: " + s);
-    //System.out.println ("this: " + this);
     s.subscribe(this); // tell the scene model that it is listening to it
 
     makeRoleViews(s);

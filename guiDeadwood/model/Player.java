@@ -234,7 +234,6 @@ public class Player {
       return false;
     }
     else {
-      //Role tempRole = this.myRoom.findRole(usrPart);
       Role tempRole = this.myRoom.findOnCardRole(usrPart);
       if (tempRole == null){
         tempRole = this.myRoom.findOffCardRole(usrPart);
