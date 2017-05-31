@@ -79,10 +79,19 @@ public class Player {
 
     else if (cmd0.equals("upgrade")){ // already checked in validateUserCommand that the user is in the casting office
       if (command.size() == 2){
-        String paymentType = command.remove(0);
-        int level = Integer.parseInt(command.remove(0));
-        int reqCurrency = Board.getUpgradeReqs (paymentType, level);
-        doUpgrade (paymentType, level, reqCurrency);
+        try {
+          String paymentType = command.remove(0);
+          int level = Integer.parseInt(command.remove(0));
+          if (level >=2 && level <= 6){
+            int reqCurrency = Board.getUpgradeReqs (paymentType, level);
+            doUpgrade (paymentType, level, reqCurrency);
+          }
+          else {
+            System.out.println ("Invalid rank. Please choose from 2 to 6");
+          }
+        } catch (NumberFormatException e){
+          System.out.println ("Desired rank cannot be parsed. Please enter a number between 2 and 6");
+        }
       }
       else{
         System.out.println ("Wrong number of arguments for 'upgrade'.");
@@ -210,6 +219,7 @@ public class Player {
       if (this.moneyCnt >= reqCurrency){
         this.moneyCnt -= reqCurrency;
         this.rank = level;
+        System.out.println ("Upgraded to rank " + this.rank + "!");
       }
       else{
         System.out.println ("You're too poor!!! " + paymentType + reqCurrency + " required for upgrade.");
@@ -219,6 +229,7 @@ public class Player {
       if (this.creditCnt >= reqCurrency){
         this.creditCnt -= reqCurrency;
         this.rank = level;
+        System.out.println ("Upgraded to rank " + this.rank + "!");
       }
       else{
         System.out.println ("You're not popular enough!!! " + paymentType + reqCurrency + " required for upgrade.");
@@ -331,14 +342,17 @@ public class Player {
 
   public void leaveRole(){
     this.myRole = null;
+    changed();
   }
 
   public void awardOffCardBonus(){
     this.moneyCnt += this.myRole.getRank();
+    changed();
   }
 
   public void payActor(int pay){
     this.moneyCnt += pay;
+    changed();
   }
 
   public int getPlayerID(){

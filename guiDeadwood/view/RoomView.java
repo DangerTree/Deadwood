@@ -8,7 +8,7 @@ import javax.swing.ImageIcon;
 import javax.imageio.ImageIO;
 
 //public class RoomView extends JLayer{
-public class RoomView extends JLayeredPane{
+public class RoomView extends JLayeredPane implements model.Room.Listener{
   private model.Room rmModel;
   //private JLabel roomRectangle;
   private JLabel[] shotCounterLabels;
@@ -17,18 +17,9 @@ public class RoomView extends JLayeredPane{
   public RoomView (int rx, int ry, int rh, int rw, model.Room rModel) throws Exception {
 
     setBounds (rx, ry, rw, rh); // set bounds of JLayeredPane
-
-    //roomRectangle = new JLabel ();
-    //roomRectangle.setVisible(false);
-    //add(roomRectangle, new Integer (3));
-    //roomRectangle.setBounds (0, 0, rh, rw);
-
     this.rmModel = rModel;
-
     // add this RoomView as a listener of a Room obj in the model
-    //rModel.subscribe (this);
-
-    //System.out.println ("\nRoomView:     " + this);
+    rmModel.subscribe (this);
   }
 
 

@@ -112,8 +112,8 @@ public class Deadwood{
       activePlayer.setMode(2);
       System.out.println("\nPlayer " + activePlayer.getPlayerID() + ", what would you like to do?\n\tOPTIONS: who, where, act, rehearse, or end.");
     }
-    // Player has NOT taken an action + IS in casting office
-    else if(activePlayer.hasTakenAction() == false && activePlayer.getRoom().getRName().equals("Casting Office")){
+    // Player HAS taken an action + IS in casting office
+    else if(activePlayer.hasTakenAction() == true && activePlayer.getRoom().getRName().equals("Casting Office")){
       activePlayer.setMode(3);
       System.out.println("\nPlayer " + activePlayer.getPlayerID() + ", what would you like to do?\n\tOPTIONS: who, where, move, upgrade, or end.");
     }
@@ -170,7 +170,7 @@ public class Deadwood{
         break;
       default: // player is not in Trailers or Casting Office, nor working a role (e.g. is in a room's whitespace w/o part)
         if(!command.equals("who") && !command.equals("where") && !command.equals("move") && !command.equals("end") && !command.equals("work")){
-          System.out.println("You can not do that while you do not have a role. Please enter a command from the list above.");
+          System.out.println("You cannot do that right now. Please enter a command from the list above.");
           System.out.print("> ");
           toRet = false;
         }
