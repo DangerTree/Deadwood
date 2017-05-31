@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.JTextArea;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -18,6 +20,12 @@ public class DeadwoodWrapper{
   }
 
   JLabel mLabel;
+  JLabel activeP_label;
+  JLabel pRank_label;
+  JLabel pPracChip_label;
+  JLabel pMcnt_label;
+  JLabel pCrcnt_label;
+
 
   static JButton bAct;
   static JButton bRehearse;
@@ -25,7 +33,8 @@ public class DeadwoodWrapper{
   static JButton bUpgradeM;
   static JButton bUpgradeCR;
   static JComboBox upgradeChoice;
-  static TextField inputRank;
+  static JTextField inputRank;
+  static JTextArea playerInfo;
 
   static JLabel ActivePlayerLabel;
 
@@ -56,18 +65,34 @@ public class DeadwoodWrapper{
     frame.addWindowListener (new Closer());
 
     JLabel mLabel = new JLabel ("MENU");
-    mLabel.setBounds(1240, 0, 100, 20);
+    mLabel.setBounds(1240, 0, 140, 20);
     pane.add(mLabel, new Integer(2));
+
+    /****************** Display active player... *****************/
+    /*
+    JLabel activeP_label = new JLabel ("Active Player");
+    activeP_label.setBounds(1210, );
+    JLabel pRank_label = new JLabel ("Rank:");;
+    JLabel pPracChip_label = new JLabel ("Practice Chips:");;
+    JLabel pMcnt_label = new JLabel ("Money Count:");;
+    JLabel pCrcnt_label = new JLabel ("Credit Number:");;
+    */
+    /************************************************************/
 
     bAct = new JButton("ACT");
     bAct.setBackground(Color.white);
-    bAct.setBounds(1210, 30, 100, 20);
+    bAct.setBounds(1210, 30, 140, 20);
     bAct.addMouseListener(new boardMouseListener());
 
     bRehearse = new JButton("REHEARSE");
     bRehearse.setBackground(Color.white);
-    bRehearse.setBounds(1210, 60, 100, 20);
+    bRehearse.setBounds(1210, 60, 140, 20);
     bRehearse.addMouseListener(new boardMouseListener());
+
+    bEnd = new JButton("END");
+    bEnd.setBackground(Color.white);
+    bEnd.setBounds(1210, 90, 140, 20);
+    bEnd.addMouseListener(new boardMouseListener());
 
     bUpgradeM = new JButton("UPGRADE($)");
     bUpgradeM.setBackground(Color.white);
@@ -79,14 +104,11 @@ public class DeadwoodWrapper{
     bUpgradeCR.setBounds(1320, 170, 130, 20);
     bUpgradeCR.addMouseListener(new boardMouseListener());
 
-    inputRank = new TextField("RANK");
+    inputRank = new JTextField("RANK");
     inputRank.setBounds(1210, 160, 100, 20);
 
+    //playerInfo = new JTextArea ("")
 
-    bEnd = new JButton("END");
-    bEnd.setBackground(Color.white);
-    bEnd.setBounds(1210, 90, 100, 20);
-    bEnd.addMouseListener(new boardMouseListener());
 
     /* Trying to make a choice box for upgrade ranks
     String[] ranks = { "2", "3", "4", "5", "6"};
@@ -142,12 +164,22 @@ public class DeadwoodWrapper{
 
       if(e.getSource() == bAct){
         System.out.println("pushed act");
+        if (model.Deadwood.validateUserCommand ("act")){
+          ArrayList <String> command = new ArrayList <String>();
+          command.add("act");
+          model.Deadwood.takeAction (command);
+        }
       }
       else if(e.getSource() == bRehearse){
-        System.out.println("pushed rehearse");
+        //System.out.println("pushed rehearse");
+        if(model.Deadwood.validateUserCommand("rehearse")){
+          ArrayList<String> command = new ArrayList<String>();
+          command.add("rehearse");
+          model.Deadwood.takeAction(command);
+        }
       }
       else if(e.getSource() == bEnd){
-        System.out.println("PUSHED END");
+        //System.out.println("PUSHED END");
         if(model.Deadwood.validateUserCommand("end")){
           ArrayList<String> command = new ArrayList<String>();
           command.add("end");
@@ -155,10 +187,26 @@ public class DeadwoodWrapper{
         }
       }
       else if(e.getSource() == bUpgradeM){
-        System.out.println("Pushed upgrade$");
+        //System.out.println("Pushed upgrade$");
+        //String inputtedText = inputRank.getText();
+        //System.out.println ("inputtedText: " + inputtedText);
+        if(model.Deadwood.validateUserCommand("upgrade")){
+          ArrayList<String> command = new ArrayList<String>();
+          command.add("upgrade");
+          command.add("$");
+          command.add(inputRank.getText());
+          model.Deadwood.takeAction(command);
+        }
       }
       else if(e.getSource() == bUpgradeCR){
-        System.out.println("Pushed upgradeCR");
+        //System.out.println("Pushed upgradeCR");
+        if(model.Deadwood.validateUserCommand("upgrade")){
+          ArrayList<String> command = new ArrayList<String>();
+          command.add("upgrade");
+          command.add("cr");
+          command.add(inputRank.getText());
+          model.Deadwood.takeAction(command);
+        }
       }
     }
     public void mousePressed(MouseEvent e){

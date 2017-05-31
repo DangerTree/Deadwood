@@ -181,11 +181,13 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
       while(scan.hasNextLine() != false){
         String name = scan.nextLine();
         String [] location = scan.nextLine().split(" ");
-        rv = new RoomView(Integer.parseInt(location[0]), Integer.parseInt(location[1]), Integer.parseInt(location[2]), Integer.parseInt(location[3]), bModel.getRoom(name));
+        //rv = new RoomView(Integer.parseInt(location[0]), Integer.parseInt(location[1]), Integer.parseInt(location[2]), Integer.parseInt(location[3]), bModel.getRoom(name));
         if(!name.equals("Trailers") && !name.equals("Casting Office")){
+          rv = new RoomView(Integer.parseInt(location[0]), Integer.parseInt(location[1]), Integer.parseInt(location[2]), Integer.parseInt(location[3]), bModel.getRoom(name));
           rv.setupShots(shotCounterLoc.get(name));
+          this.add(rv, new Integer (1));
         }
-        this.add(rv, new Integer (1));
+        //this.add(rv, new Integer (1));
       }
     }
     catch(FileNotFoundException e){
@@ -238,9 +240,7 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
       scan = new Scanner(RoleLocationsFile);
       while(scan.hasNextLine() != false){
         String name = scan.nextLine();
-        System.out.println ("scanner's nextLine: " + name + "___");
         String [] location = scan.nextLine().split(" ");
-        System.out.println (model.Board.getRoleMap().get(name).getRoleName());
         rl_v = new RoleView(Integer.parseInt(location[0]), Integer.parseInt(location[1]), Integer.parseInt(location[2]), Integer.parseInt(location[3]), model.Board.getRoleMap().get(name));
         this.add(rl_v, new Integer(4));
       }
