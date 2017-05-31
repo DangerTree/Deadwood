@@ -39,7 +39,6 @@ public class Player {
   protected void changed(){
     for (Listener l : listeners){
       l.changed(this);
-      System.out.println ("In player's changed() method");
     }
   }
 
@@ -133,8 +132,8 @@ public class Player {
           else {
             System.out.println ("Room is not adjacent or does not exist. Please try again.");
           }
-          System.out.println ("Player " + this.playerID + "is in room " + this.myRoom.getRName());
-          System.out.println ("Player " + this.playerID + " has taken action? " + actionTaken);
+          //System.out.println ("Player " + this.playerID + "is in room " + this.myRoom.getRName());
+          //System.out.println ("Player " + this.playerID + " has taken action? " + actionTaken);
         }
 
         else if (cmd0.equals("act")){ // already checked in validateUserCommand that the user has a role
@@ -144,7 +143,6 @@ public class Player {
       }
     }
     changed();
-    //this.actionTaken = false;
   }
 
 

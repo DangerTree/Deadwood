@@ -97,8 +97,8 @@ public class Deadwood{
   // RETURNS: an int indicating their status/location
   private static void promptPlayer (){
     // if the player has already taken an action on their move, they can only enter who where or end (but not if they are in the casting office)
-    System.out.println ("Player " + activePlayer.getPlayerID() + "has taken action? " + activePlayer.hasTakenAction() + "\nPlayer is in: " + activePlayer.getRoom().getRName());
-    System.out.println ("Player " + activePlayer.getPlayerID() + "'s role: " + activePlayer.getRole());
+    //System.out.println ("Player " + activePlayer.getPlayerID() + "has taken action? " + activePlayer.hasTakenAction() + "\nPlayer is in: " + activePlayer.getRoom().getRName());
+    //System.out.println ("Player " + activePlayer.getPlayerID() + "'s role: " + activePlayer.getRole());
 
 
     // Player HAS taken an action this turn + is NOT in casting office
@@ -126,7 +126,7 @@ public class Deadwood{
       activePlayer.setMode(5);
       System.out.println("\nPlayer " + activePlayer.getPlayerID() + ", what would you like to do?\n\tOPTIONS: who, where, work, or end.");
     }
-    System.out.println ("\nPlayer mode: " + activePlayer.getMode());
+    //System.out.println ("\nPlayer mode: " + activePlayer.getMode());
     return;
   }
 
