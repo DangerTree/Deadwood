@@ -342,6 +342,10 @@ public class Player {
     return this.playerID;
   }
 
+  public void setActionTaken(boolean set){
+    this.actionTaken = set;
+  }
+
 
 
 }
