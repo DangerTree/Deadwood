@@ -24,6 +24,7 @@ public class Board{
   private static HashMap <String, Room> roomHashMap= new HashMap <String, Room>();
   private static LinkedList<Scene> sceneDrawPile = new LinkedList<Scene>();
   private static int[][] upgradeReqs = {{4,5}, {10,10}, {18,15}, {28,20}, {40, 25}};
+  private static HashMap <String, Role> roleHashMap = new HashMap <String, Role>();
 
   private static Board boardObj = new Board();
 
@@ -42,6 +43,10 @@ public class Board{
 
   public static Room getRoom(String rName){
     return roomHashMap.get(rName);
+  }
+
+  public static HashMap<String, Role> getRoleMap(){
+    return roleHashMap;
   }
 
 
@@ -107,7 +112,9 @@ public class Board{
         int roleNum = Integer.parseInt(line[2]);
         for (int i = 0; i < roleNum; i++){
           String[] roleLine = scan.nextLine().split("_");
-          myRoom.addRole (Integer.parseInt(roleLine[0]), roleLine[1], roleLine[2]);
+          Role myRole;
+          myRole = myRoom.addRole (Integer.parseInt(roleLine[0]), roleLine[1], roleLine[2]);
+          roleHashMap.put(myRole.getRoleName(), myRole);
         }
         roomHashMap.put(myRoom.getRName(), myRoom);
       }
