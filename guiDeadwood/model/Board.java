@@ -24,7 +24,7 @@ public class Board{
   private static HashMap <String, Room> roomHashMap= new HashMap <String, Room>();
   private static LinkedList<Scene> sceneDrawPile = new LinkedList<Scene>();
   private static int[][] upgradeReqs = {{4,5}, {10,10}, {18,15}, {28,20}, {40, 25}};
-  private static HashMap <String, Role> roleHashMap = new HashMap <String, Role>();
+  private static HashMap <String, Role> roleHashMap = new HashMap <String, Role>(); // maps all offcard roles
 
   private static Board boardObj = new Board();
 
