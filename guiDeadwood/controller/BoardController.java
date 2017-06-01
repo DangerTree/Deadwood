@@ -52,6 +52,7 @@ public class BoardController extends JLayeredPane{
     }
   }
 
+
   private void makeRoomControllers(model.Board bModel) throws Exception{
     RoomController rc;
     File RoomViewLocationsFile = null;
@@ -64,7 +65,7 @@ public class BoardController extends JLayeredPane{
         String name = scan.nextLine();
         String [] location = scan.nextLine().split(" ");
         rc = new RoomController(Integer.parseInt(location[0]), Integer.parseInt(location[1]), Integer.parseInt(location[2]), Integer.parseInt(location[3]), bModel.getRoom(name));
-        this.add(rc, new Integer (2));
+        this.add(rc, new Integer (1));
       }
     }
     catch(FileNotFoundException e){
@@ -90,7 +91,7 @@ public class BoardController extends JLayeredPane{
         String name = scan.nextLine();
         String [] location = scan.nextLine().split(" ");
         sc = new SceneController(Integer.parseInt(location[0]), Integer.parseInt(location[1]), Integer.parseInt(location[2]), Integer.parseInt(location[3]), bModel.getRoom(name).getScene());
-        this.add(sc, new Integer (3));
+        this.add(sc, new Integer (4));
       }
     }
     catch(FileNotFoundException e){

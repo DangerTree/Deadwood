@@ -26,22 +26,26 @@ class SceneController extends JPanel implements model.Scene.Listener{
 
   // if scene is flipped, make role controllers
   public void flipSceneCard (model.Scene s){
-
+    System.out.println ("in SceneController's flipSceneCard");
     model.Role[] roleList = s.getSRoleList();
+    System.out.println ("number of roles in this scene: " + s.getSRoleListSize());
     RoleController rl_c;
 
     switch (roleList.length){
       case 1: // make a role view positioned on the card for only 1 role
+        System.out.println ("RoleController case 1");
         rl_c = new RoleController (87, 51, 47, 47, roleList[0]);
         this.add (rl_c, new Integer (4));
         break;
       case 2:
+      System.out.println ("RoleController case 2");
         rl_c = new RoleController (122, 51, 47, 47, roleList[0]);
         this.add (rl_c, new Integer (4));
         rl_c = new RoleController (56, 51, 47, 47, roleList[1]);
         this.add (rl_c, new Integer (4));
         break;
       case 3:
+        System.out.println ("RoleController case 3");
         rl_c = new RoleController (152, 51, 47, 47, roleList[0]);
         this.add (rl_c, new Integer (4));
         rl_c = new RoleController (86, 51, 47, 47, roleList[1]);

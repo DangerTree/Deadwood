@@ -57,7 +57,7 @@ public class DeadwoodWrapper{
     controller.BoardController bContr = new controller.BoardController (bModel); // connect board controller to model
 
     pane.add (bView, new Integer (0));
-    pane.add (bContr, new Integer (1));
+    pane.add (bContr, new Integer (6));
     pane.setVisible (true);
 
     frame.setTitle ("Deadwood");
@@ -135,14 +135,14 @@ public class DeadwoodWrapper{
     //playerInfo = new playerStatusBoxView();
 
     playerInfo = new JTextArea ();
-    playerInfo.append("Rank: ");
+    /*playerInfo.append("Rank: ");
     playerInfo.append("\nMoney: ");
     playerInfo.append("\nCredits: ");
     playerInfo.append("\nPractice Chips: ");
-    
+    */
     playerInfo.setWrapStyleWord(true);
     playerInfo.setLineWrap(true);
-    playerInfo.setBounds(1210, 280, 280, 150);
+    playerInfo.setBounds(1210, 280, 800, 150);
     pane.add(playerInfo, new Integer (2));
   }
 
@@ -206,11 +206,10 @@ public class DeadwoodWrapper{
 
 
   private void updatePlayerStats (){
-    playerInfo.append("PlayerID: " + Integer.toString (model.Deadwood.getActivePlayer().getPlayerID()) + "\n");
-    playerInfo.append("Rank: ");
-    playerInfo.append (Integer.toString (model.Deadwood.getActivePlayer().getRank()));
-    playerInfo.append("\nMoney: ");
-    playerInfo.append("\nCredits: ");
+    playerInfo.append("\n\nPlayerID: " + Integer.toString (model.Deadwood.getActivePlayer().getPlayerID()));
+    playerInfo.append("\nRank: " + Integer.toString (model.Deadwood.getActivePlayer().getRank()));
+    playerInfo.append("\nMoney: " + Integer.toString (model.Deadwood.getActivePlayer().getMoneyCnt()));
+    playerInfo.append("\nCredits: " + Integer.toString (model.Deadwood.getActivePlayer().getCreditCnt()));
     playerInfo.append("\nPractice Chips: ");
   }
 

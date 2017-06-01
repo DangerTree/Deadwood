@@ -218,8 +218,10 @@ public class Board{
         room.placeScene(sceneDrawPile.remove());
       }
     }
+
     view.BoardView.endDayView (daysLeft);
     Queue <Player> thePQ = Deadwood.getPlayerQ();
+    Deadwood.getActivePlayer().moveToTrailer(roomHashMap.get("Trailers"));
     for (Player p: thePQ){
       p.moveToTrailer(roomHashMap.get("Trailers"));
     }

@@ -10,7 +10,7 @@ class RoleController extends JPanel implements model.Role.Listener{
   private model.Role rlModel;
 
   public RoleController (int x, int y, int h, int w, model.Role role){
-    //System.out.println ("creating new RoleController");
+    System.out.println ("creating new RoleController");
     rlModel = role;
     setBounds (x, y, w, h);
     setOpaque (false);
@@ -23,6 +23,7 @@ class RoleController extends JPanel implements model.Role.Listener{
   }
 
   private void clicked(){
+    System.out.println ("clicked RoleController");
     // try to take role
     if (model.Deadwood.validateUserCommand ("work")){
       ArrayList <String> command = new ArrayList <String>();
