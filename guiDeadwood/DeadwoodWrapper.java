@@ -19,13 +19,13 @@ public class DeadwoodWrapper{
     }
   }
 
-  JLabel mLabel;
   JLabel activeP_label;
   JLabel pRank_label;
   JLabel pPracChip_label;
   JLabel pMcnt_label;
   JLabel pCrcnt_label;
 
+  JLabel mLabel;
   static JButton bAct;
   static JButton bRehearse;
   static JButton bEnd;
@@ -35,7 +35,7 @@ public class DeadwoodWrapper{
   static JTextField inputRank;
   static JTextArea playerInfo;
 
-  static JLabel ActivePlayerLabel;
+  static JLabel activePlayerLabel;
 
 
   public static void main(String[] args) throws Exception{
@@ -84,7 +84,7 @@ public class DeadwoodWrapper{
   public void addCtrlPanel(JLayeredPane pane){
 
     JLabel mLabel = new JLabel ("MENU");
-    mLabel.setBounds(1240, 0, 140, 20);
+    mLabel.setBounds(1250, 0, 140, 20);
     pane.add(mLabel, new Integer(2));
 
     bAct = new JButton("ACT");
@@ -116,8 +116,35 @@ public class DeadwoodWrapper{
     inputRank.setBounds(1210, 160, 100, 20);
 
     /****************** Display active player... *****************/
+
+    JLabel activePlayerLabel = new JLabel ("Active Player Stats");
+    activePlayerLabel.setBounds(1250, 250, 140, 30);
+    pane.add(activePlayerLabel, new Integer(2));
+
     /*
-    //playerInfo = new JTextArea ("")
+    JLabel activeP_label;
+    JLabel pRank_label;
+    JLabel pPracChip_label;
+    JLabel pMcnt_label;
+    JLabel pCrcnt_label;
+    */
+
+    /*playerInfo = new JTextArea ("Rank" +
+                                  "Money: " +
+                                  "Credits: " +
+                                  "Pracice Chips");
+                                  */
+    playerInfo = new JTextArea ();
+    playerInfo.append("Rank: ");
+    playerInfo.append("\nMoney: ");
+    playerInfo.append("\nCredits: ");
+    playerInfo.append("\nPracice Chips: ");
+
+    playerInfo.setWrapStyleWord(true);
+    playerInfo.setLineWrap(true);
+    playerInfo.setBounds(1210, 280, 280, 150);
+    pane.add(playerInfo, new Integer (2));
+    /*
     JLabel activeP_label = new JLabel ("Active Player");
     activeP_label.setBounds(1210, );
     JLabel pRank_label = new JLabel ("Rank:");;
