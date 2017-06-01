@@ -15,7 +15,7 @@ import java.lang.StringBuilder;
 
 public class DeadwoodWrapper{
 
-  public static class Closer extends WindowAdapter {
+  public static class Closer extends WindowAdapter{
     public void windowClosing (WindowEvent e) {
       System.exit(0);
     }
@@ -132,30 +132,21 @@ public class DeadwoodWrapper{
     JLabel pCrcnt_label;
     */
 
+    //playerInfo = new playerStatusBoxView();
 
     playerInfo = new JTextArea ();
     playerInfo.append("Rank: ");
     playerInfo.append("\nMoney: ");
     playerInfo.append("\nCredits: ");
     playerInfo.append("\nPractice Chips: ");
-
+    
     playerInfo.setWrapStyleWord(true);
     playerInfo.setLineWrap(true);
     playerInfo.setBounds(1210, 280, 280, 150);
     pane.add(playerInfo, new Integer (2));
-    /*
-    JLabel activeP_label = new JLabel ("Active Player");
-    activeP_label.setBounds(1210, );
-    JLabel pRank_label = new JLabel ("Rank:");;
-    JLabel pPracChip_label = new JLabel ("Practice Chips:");;
-    JLabel pMcnt_label = new JLabel ("Money Count:");;
-    JLabel pCrcnt_label = new JLabel ("Credit Number:");;
-    */
-    /************************************************************/
-
   }
 
-
+  /************************************************************/
   class boardMouseListener implements MouseListener{
     public void mouseClicked(MouseEvent e){
 
@@ -168,7 +159,6 @@ public class DeadwoodWrapper{
         }
       }
       else if(e.getSource() == bRehearse){
-        //System.out.println("pushed rehearse");
         if(model.Deadwood.validateUserCommand("rehearse")){
           ArrayList<String> command = new ArrayList<String>();
           command.add("rehearse");
@@ -176,7 +166,6 @@ public class DeadwoodWrapper{
         }
       }
       else if(e.getSource() == bEnd){
-        //System.out.println("PUSHED END");
         if(model.Deadwood.validateUserCommand("end")){
           ArrayList<String> command = new ArrayList<String>();
           command.add("end");
@@ -184,9 +173,6 @@ public class DeadwoodWrapper{
         }
       }
       else if(e.getSource() == bUpgradeM){
-        //System.out.println("Pushed upgrade$");
-        //String inputtedText = inputRank.getText();
-        //System.out.println ("inputtedText: " + inputtedText);
         if(model.Deadwood.validateUserCommand("upgrade")){
           ArrayList<String> command = new ArrayList<String>();
           command.add("upgrade");
@@ -196,7 +182,6 @@ public class DeadwoodWrapper{
         }
       }
       else if(e.getSource() == bUpgradeCR){
-        //System.out.println("Pushed upgradeCR");
         if(model.Deadwood.validateUserCommand("upgrade")){
           ArrayList<String> command = new ArrayList<String>();
           command.add("upgrade");
@@ -205,6 +190,7 @@ public class DeadwoodWrapper{
           model.Deadwood.takeAction(command);
         }
       }
+      updatePlayerStats();
     }
     public void mousePressed(MouseEvent e){
     }
@@ -214,6 +200,18 @@ public class DeadwoodWrapper{
     }
     public void mouseExited(MouseEvent e){
     }
+  }
+
+
+
+
+  private void updatePlayerStats (){
+    playerInfo.append("PlayerID: " + Integer.toString (model.Deadwood.getActivePlayer().getPlayerID()) + "\n");
+    playerInfo.append("Rank: ");
+    playerInfo.append (Integer.toString (model.Deadwood.getActivePlayer().getRank()));
+    playerInfo.append("\nMoney: ");
+    playerInfo.append("\nCredits: ");
+    playerInfo.append("\nPractice Chips: ");
   }
 
 
@@ -245,42 +243,6 @@ public class DeadwoodWrapper{
     model.Deadwood.initGameboard(np); // setup the model
     return np;
   }
-
-
-  /*
-  public static void endGameView (int[] scores, int highestScore){
-
-    ArrayList <Integer> winners = new ArrayList <Integer> (scores.length);
-    // Just in case of a tie, winners ArrayList with the playerID of all winners
-    for (int j = 0; j < scores.length; j++){
-      if (scores[j] == highestScore){
-        winners.add(j);
-      }
-    }
-
-    StringBuilder winnerAnnounce = new StringBuilder ();
-    if (winners.size() > 1){
-      winnerAnnounce.append ("THERE IS A TIE!!\nWinners:\n");
-      for (int i = 0; i < winners.size(); i++){
-        winnerAnnounce.append ("Player " + winners.get(i) + " scored " + scores[i] + " points!\n");
-      }
-    }
-    // annouce other player's scores
-    StringBuilder otherScores = new StringBuilder ("\nOther players:\n");
-    for (int j = 0; j < scores.length - winners.size(); j++){
-      if (!winners.contains(new Integer (j))){ // only print non-winner's scores
-        otherScores.append ("Player " + j + " scored " + scores[j] + " points.\n");
-      }
-    }
-
-    // add the two announcements together
-    StringBuilder toAnnounce = winnerAnnounce.append(otherScores);
-
-    JOptionPane.showMessageDialog(null, toAnnounce.toString(), "Game Over!", JOptionPane.PLAIN_MESSAGE);
-
-    // when player clicks ok, end game
-    System.exit(0);
-  }*/
 
 
 }
