@@ -83,7 +83,7 @@ public class Deadwood{
       activePlayer = playerQueue.poll();
       if (Board.getScenesLeft() == 1){
         Board.endDay();
-        
+
         System.out.println ("Ending day.");
         System.out.println ("Days left: " + Board.getDaysLeft() + "\tScenes left: " + Board.getScenesLeft());
         if (Board.getDaysLeft() == 0){
@@ -192,19 +192,52 @@ public class Deadwood{
 
   private static void endGame (){
     int playerNum = playerQueue.size();
-    int [] scores = new int [playerNum];
-    int highestScorerID = 0;
+    int [] scores = new int [playerNum]; // holds scores of all players
+    int highestScore = 0; // saves highest score
     ArrayList <Integer> winners = new ArrayList <Integer> (playerNum);
 
+    // get highest scorer
     for (int i = 0; i < playerNum; i++){
       scores[i] = playerQueue.poll().calculateScore();
-      if (scores[i] > scores[highestScorerID]){
-        highestScorerID = i;
+      if (scores[i] >= highestScore){
+        highestScore = scores[i];
       }
     }
+
+    // Just in case of a tie, winners ArrayList with the playerID of all winners
+    for (int j = 0; j < scores.length; j++){
+      if (scores[j] == highestScore){
+        winners.add(j);
+      }
+    }
+
+    // create a string with the announcement for winning players
+    StringBuilder winnerAnnounce = new StringBuilder ();
+    if (winners.size() > 1){
+      winnerAnnounce.append ("THERE IS A TIE!!\n");
+    }
+    winnerAnnounce.append ("Winners:\n");
+    for (int i = 0; i < winners.size(); i++){
+      winnerAnnounce.append ("Player " + winners.get(i) + " scored " + scores[i] + " points!\n");
+    }
+
+    // annouce other player's scores
+    StringBuilder otherScores = new StringBuilder ("\nOther players:\n");
+    for (int j = 0; j < scores.length - winners.size(); j++){
+      if (!winners.contains(new Integer (j))){ // only print non-winner's scores
+        otherScores.append ("Player " + j + " scored " + scores[j] + " points.\n");
+      }
+    }
+
+    // add the two announcements together
+    StringBuilder toAnnounce = winnerAnnounce.append(otherScores);
+
+    view.BoardView.endGameView(otherScores.toString());
+
+
     // Fill winners ArrayList with the playerID of the winners
-    for (int j = 0; j < playerNum; j++){
-      if (scores[j] == highestScorerID){
+    /*for (int j = 0; j < playerNum; j++){
+      if (scores[j] >= highestScore){
         winners.add(j);
       }
     }
@@ -218,7 +251,7 @@ public class Deadwood{
     }
     else {
       System.out.println ("Player " + highestScorerID + " won!");
-    }
+    }*/
   }
 
 }

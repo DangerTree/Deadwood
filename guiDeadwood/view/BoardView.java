@@ -17,6 +17,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Queue;
 import java.util.LinkedList;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 
 public class BoardView extends JLayeredPane implements model.Player.Listener{
@@ -174,11 +176,6 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
   }
 
 
-  //public void endingDay (){
-    // put
-  //}
-
-
   /*
   makeRoomViews: for each room in RoomLocationAndSizes.txt this method:
     1) creates a new RoomView, and associates it with a model.Room
@@ -279,8 +276,45 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
       System.out.println("RoleLocationAndSizes.txt file formatted incorrectly.");
       System.exit(1);
     }
+  }
 
 
+  public static void endGameView (String announcement){
+
+    JOptionPane.showMessageDialog(null, announcement, "Game Over!", JOptionPane.PLAIN_MESSAGE);
+    // when player clicks ok, end game
+    System.exit(0);
+    
+    /*
+    ArrayList <Integer> winners = new ArrayList <Integer> (scores.length);
+    // Just in case of a tie, winners ArrayList with the playerID of all winners
+    for (int j = 0; j < scores.length; j++){
+      if (scores[j] == highestScore){
+        winners.add(j);
+      }
+    }
+
+    // create a string with the announcement for winning players
+    StringBuilder winnerAnnounce = new StringBuilder ();
+    if (winners.size() > 1){
+      winnerAnnounce.append ("THERE IS A TIE!!\n");
+    }
+    winnerAnnounce.append ("Winners:\n");
+    for (int i = 0; i < winners.size(); i++){
+      winnerAnnounce.append ("Player " + winners.get(i) + " scored " + scores[i] + " points!\n");
+    }
+
+    // annouce other player's scores
+    StringBuilder otherScores = new StringBuilder ("\nOther players:\n");
+    for (int j = 0; j < scores.length - winners.size(); j++){
+      if (!winners.contains(new Integer (j))){ // only print non-winner's scores
+        otherScores.append ("Player " + j + " scored " + scores[j] + " points.\n");
+      }
+    }
+
+    // add the two announcements together
+    StringBuilder toAnnounce = winnerAnnounce.append(otherScores);
+    */
   }
 
 

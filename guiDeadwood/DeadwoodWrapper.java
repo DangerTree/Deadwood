@@ -10,6 +10,8 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.lang.StringBuilder;
+
 
 public class DeadwoodWrapper{
 
@@ -246,6 +248,42 @@ public class DeadwoodWrapper{
     model.Deadwood.initGameboard(np); // setup the model
     return np;
   }
+
+
+  /*
+  public static void endGameView (int[] scores, int highestScore){
+
+    ArrayList <Integer> winners = new ArrayList <Integer> (scores.length);
+    // Just in case of a tie, winners ArrayList with the playerID of all winners
+    for (int j = 0; j < scores.length; j++){
+      if (scores[j] == highestScore){
+        winners.add(j);
+      }
+    }
+
+    StringBuilder winnerAnnounce = new StringBuilder ();
+    if (winners.size() > 1){
+      winnerAnnounce.append ("THERE IS A TIE!!\nWinners:\n");
+      for (int i = 0; i < winners.size(); i++){
+        winnerAnnounce.append ("Player " + winners.get(i) + " scored " + scores[i] + " points!\n");
+      }
+    }
+    // annouce other player's scores
+    StringBuilder otherScores = new StringBuilder ("\nOther players:\n");
+    for (int j = 0; j < scores.length - winners.size(); j++){
+      if (!winners.contains(new Integer (j))){ // only print non-winner's scores
+        otherScores.append ("Player " + j + " scored " + scores[j] + " points.\n");
+      }
+    }
+
+    // add the two announcements together
+    StringBuilder toAnnounce = winnerAnnounce.append(otherScores);
+
+    JOptionPane.showMessageDialog(null, toAnnounce.toString(), "Game Over!", JOptionPane.PLAIN_MESSAGE);
+
+    // when player clicks ok, end game
+    System.exit(0);
+  }*/
 
 
 }

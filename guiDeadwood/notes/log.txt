@@ -1,3 +1,12 @@
+################## June 1st, 2017: #################
+
+### 12:34
+	may have fixed issue where players where not going to trailers after a day ends. Its a janky fix... but I think it works. Zak is testing it.
+
+TODO:
+	make endgame work: popup w/scores then exit game
+
+
 ################## May 29th, 2017: #################
 
 ### 6:34pm
