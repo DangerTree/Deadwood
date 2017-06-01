@@ -141,8 +141,7 @@ public class Room{
     // discard scene card
     //this.rScene.signalWrapping();
     this.rScene = null;
-    // decrement scene num
-    Board.decSceneNum();
+    Board.decSceneNum(); // decrement scene num
   }
 
 
@@ -218,94 +217,62 @@ public Role findOffCardRole (String roleName){
   return null;
 }
 
-  // findRole: returns the Role object with the same indicated roleName, or null otherwise
-  /*public Role findRole (String roleName){
-    // find off-card roles
-    for (int k = 0; k < rRoleList.size(); k++){
-      if (rRoleList.get(k).getRoleName().equals(rName)){
-        if (rRoleList.get(k).getActor() != null){
-          System.out.print ("Sorry, this role is already taken.");
-          return null;
-        }
-        else{
-          return rRoleList.get(k);
-        }
+
+// getRName returns the room's name
+public String getRName(){
+  return rName;
+}
+
+
+public Scene getScene(){
+  return this.rScene;
+}
+
+// hasScene returns true it this room has an affiliated scene, or false otherwise
+public boolean hasScene(){
+  if (this.rScene == null){
+    return false;
+  }
+  return true;
+}
+
+
+// getSName returns the name of the Room's scene
+public String getSName(){
+  return this.rScene.getSName();
+}
+
+
+// getSNumber returns the # of the Room's scene
+public int getSNumber(){
+  return this.rScene.getSNumber();
+}
+
+// print all oncard and off card roles
+// returns false if the room has no scene; true if otherwise
+public boolean displayAllRoles(){
+
+  // print on card roles
+  if (this.rScene != null){
+    System.out.println("\nAvailable on-card roles:");
+    for (int i = 0; i < rScene.getSRoleListSize(); i++){
+      if (this.rScene.getSRoleList()[i].getActor() == null){ // if the role is available
+        System.out.println("Rank " + this.rScene.getSRoleList()[i].getRank() + " " + this.rScene.getSRoleList()[i].getRoleWho());
       }
     }
-    // Look for on-card roles
-    if (this.rScene != null){
-      for (int i = 0; i < rScene.getSRoleListSize(); i++){
-        if (this.rScene.getSRoleList()[i].getRoleName().equals(rName)){
-          if (this.rScene.getSRoleList()[i].getActor() != null){ // if the role is available
-            System.out.print ("Sorry, this role is already taken.");
-            return null;
-          }
-          else {
-            return this.rScene.getSRoleList()[i];
-          }
-        }
-      }
+  }
+  else {
+    return false;
+  }
+  // print off-card roles
+  System.out.println("\nAvailable off-card roles:");
+  for (int i = 0; i < rRoleList.size(); i++){
+    if (rRoleList.get(i).getActor() == null){
+      System.out.println("Rank " + rRoleList.get(i).getRank() + ": " + rRoleList.get(i).getRoleWho());
     }
-    System.out.print ("No role found with that name.");
-    return null;
-  }*/
-
-
-  // getRName returns the room's name
-  public String getRName(){
-    return rName;
   }
-
-
-  public Scene getScene(){
-    return this.rScene;
-  }
-
-  // hasScene returns true it this room has an affiliated scene, or false otherwise
-  public boolean hasScene(){
-    if (this.rScene == null){
-      return false;
-    }
-    return true;
-  }
-
-
-  // getSName returns the name of the Room's scene
-  public String getSName(){
-    return this.rScene.getSName();
-  }
-
-
-  // getSNumber returns the # of the Room's scene
-  public int getSNumber(){
-    return this.rScene.getSNumber();
-  }
-
-  // print all oncard and off card roles
-  // returns false if the room has no scene; true if otherwise
-  public boolean displayAllRoles(){
-
-    // print on card roles
-    if (this.rScene != null){
-      System.out.println("\nAvailable on-card roles:");
-      for (int i = 0; i < rScene.getSRoleListSize(); i++){
-        if (this.rScene.getSRoleList()[i].getActor() == null){ // if the role is available
-          System.out.println("Rank " + this.rScene.getSRoleList()[i].getRank() + " " + this.rScene.getSRoleList()[i].getRoleWho());
-        }
-      }
-    }
-    else {
-      return false;
-    }
-    // print off-card roles
-    System.out.println("\nAvailable off-card roles:");
-    for (int i = 0; i < rRoleList.size(); i++){
-      if (rRoleList.get(i).getActor() == null){
-        System.out.println("Rank " + rRoleList.get(i).getRank() + ": " + rRoleList.get(i).getRoleWho());
-      }
-    }
-    return true;
-  }
+  return true;
+}
 
 
 }

@@ -83,6 +83,7 @@ public class Deadwood{
       activePlayer = playerQueue.poll();
       if (Board.getScenesLeft() == 1){
         Board.endDay();
+        
         System.out.println ("Ending day.");
         System.out.println ("Days left: " + Board.getDaysLeft() + "\tScenes left: " + Board.getScenesLeft());
         if (Board.getDaysLeft() == 0){

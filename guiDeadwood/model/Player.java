@@ -156,15 +156,23 @@ public class Player {
   }
 
 
-  // Moves the player to a new room
-  private boolean move(String rName){
-    Room temp = myRoom.getAdjRoom(rName);
-    if (temp == null){
-      System.out.println("Indicated room is not adjacent.");
-      return false;
+  /*
+  moveToTrailer is called by Board's endDay method
+  resets all player attributes except $, cr, rank, and ID
+  */
+  public void moveToTrailer(Room trailers){
+    this.myRoom = trailers;
+    if (this.myRole != null){
+      this.myRole.actorLeaves();
     }
-    this.myRoom = temp;
-    return true;
+    this.myRole = null;
+    this.myScene = null;
+    this.practiceCnt = 0;
+    this.actionTaken = false;
+    this.turnDone = false;
+    this.roleOnCard = false;
+    this.mode = 0;
+    changed();
   }
 
 

@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Queue;
 
 
 public class Board{
@@ -213,6 +214,10 @@ public class Board{
         room.resetShotCounter();
         room.placeScene(sceneDrawPile.remove());
       }
+    }
+    Queue <Player> thePQ = Deadwood.getPlayerQ();
+    for (Player p: thePQ){
+      p.moveToTrailer(roomHashMap.get("Trailers"));
     }
     scenesLeft = 10; //Zak added this line, should fix game ending too early glitch
     daysLeft--;

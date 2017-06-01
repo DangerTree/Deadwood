@@ -1,4 +1,10 @@
-// boardView organizes roompanels?
+/*
+boardView does the following:
+  1) creates RoomViews (layer 1), SceneViews (layer 2), and RoleViews (layer 4) for off-card roles
+  2) listens to model.Player objs and updates their position (visually) on board
+  3)
+*/
+
 package view;
 
 import javax.swing.JLayeredPane;
@@ -148,9 +154,7 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
   }
 
 
-  // if the player is in whitespace, update it's postion, visually
-  /*
-  */
+  // if the player is in whitespace, update it's postion visually
   public void changed (model.Player p){
     // depict where player is at
     if (p.getRole() == null){
@@ -170,6 +174,17 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
   }
 
 
+  //public void endingDay (){
+    // put
+  //}
+
+
+  /*
+  makeRoomViews: for each room in RoomLocationAndSizes.txt this method:
+    1) creates a new RoomView, and associates it with a model.Room
+    2) sets up the shot counters in the room view
+    3) adds the RoomView to the JLayeredPane
+  */
   private void makeRoomViews(model.Board bModel) throws Exception{
     RoomView rv;
     File RoomViewLocationsFile = null;
@@ -201,6 +216,12 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
   }
 
 
+  /*
+  makeSceneViews: for every scene read from SceneLocationAndSizes.txt:
+    1) create a new SceneView, and associates it with a model.Scene
+      1b) the SceneView constructor will make the appropriate # of on-card RoleViews
+    2) adds the SceneView to the JLayeredPane
+  */
   private void makeSceneViews(model.Board bModel) throws Exception{
     SceneView sv;
     File SceneViewLocationsFile = null;
@@ -227,6 +248,11 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
   }
 
 
+  /*
+  makeRoomViews: for every off card role read from RoleLocationAndSizes.txt:
+    1) create a new RoleView, and associate it with a model.Role
+    2) adds the RoleView to the JLayeredPane
+  */
   private void makeOffCardRoleViews(model.Board bModel) throws Exception{
 
 
@@ -257,86 +283,5 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
 
   }
 
-  /*
-  makeR_SViews: for each room on the board, this method:
-    1) creates a new RoomView, and associates it with a model.Room
-    2) sets up the shot counters in the room view
-    3) creates a new SceneView, and associates it with a model.Scene
-    4) adds the RoomView and SceneView to the JLayeredPane
-
-  private void makeR_SViews(model.Board bModel) throws Exception{
-
-    RoomView rv;
-    SceneView sv;
-
-    rv = new RoomView (0, 0, 450, 230, bModel.getRoom ("Train Station"));
-    rv.setupShots(shotCounterLoc.get("Train Station"));
-    sv = new SceneView (15, 65, 125, 215, bModel.getRoom ("Train Station").getScene());
-    this.add(sv, new Integer (2));
-    this.add(rv, new Integer (1));
-
-    rv = new RoomView (250, 0, 250, 350, bModel.getRoom ("Jail"));
-    rv.setupShots(shotCounterLoc.get("Jail"));
-    sv = new SceneView (275, 25, 125, 215, bModel.getRoom ("Jail").getScene());
-    this.add(sv, new Integer (2));
-    this.add(rv, new Integer (1));
-
-    rv = new RoomView (600, 0, 200, 600, bModel.getRoom ("Main Street"));
-    rv.setupShots(shotCounterLoc.get("Main Street"));
-    sv = new SceneView (965, 25, 125, 215, bModel.getRoom ("Main Street").getScene());
-    this.add(sv, new Integer (2));
-    this.add(rv, new Integer (1));
-
-    rv = new RoomView (230, 250, 200, 370, bModel.getRoom ("General Store"));
-    rv.setupShots(shotCounterLoc.get("General Store"));
-    sv = new SceneView (365, 280, 125, 215, bModel.getRoom ("General Store").getScene());
-    this.add(sv, new Integer (2));
-    this.add(rv, new Integer (1));
-
-    rv = new RoomView (600, 200, 250, 380, bModel.getRoom ("Saloon"));
-    rv.setupShots(shotCounterLoc.get("Saloon"));
-    sv = new SceneView (625, 275, 125, 215, bModel.getRoom ("Saloon").getScene());
-    this.add(sv, new Integer (2));
-    this.add(rv, new Integer (1));
-
-    rv = new RoomView (225, 450, 250, 375, bModel.getRoom ("Ranch"));
-    rv.setupShots(shotCounterLoc.get("Ranch"));
-    sv = new SceneView (245, 470, 125, 215, bModel.getRoom ("Ranch").getScene());
-    this.add(sv, new Integer (2));
-    this.add(rv, new Integer (1));
-
-    rv = new RoomView (0, 700, 200, 600, bModel.getRoom ("Secret Hideout"));
-    rv.setupShots(shotCounterLoc.get("Secret Hideout"));
-    sv = new SceneView (20, 725, 125, 215, bModel.getRoom ("Secret Hideout").getScene());
-    this.add(sv, new Integer (2));
-    this.add(rv, new Integer (1));
-
-    rv = new RoomView (600, 450, 200, 370, bModel.getRoom ("Bank"));
-    rv.setupShots(shotCounterLoc.get("Bank"));
-    sv = new SceneView (618, 470, 125, 215, bModel.getRoom ("Bank").getScene());
-    this.add(sv, new Integer (2));
-    this.add(rv, new Integer (1));
-
-    rv = new RoomView (600, 650, 250, 340, bModel.getRoom ("Church"));
-    rv.setupShots(shotCounterLoc.get("Church"));
-    sv = new SceneView (618, 730, 125, 215, bModel.getRoom ("Church").getScene());
-    this.add(sv, new Integer (2));
-    this.add(rv, new Integer (1));
-
-    rv = new RoomView (970, 450, 450, 230, bModel.getRoom ("Hotel"));
-    rv.setupShots(shotCounterLoc.get("Hotel"));
-    sv = new SceneView (965, 735, 125, 215, bModel.getRoom ("Hotel").getScene());
-    this.add(sv, new Integer (2));
-    this.add(rv, new Integer (1));
-
-    rv = new RoomView (980, 250, 200, 220, bModel.getRoom ("Trailers"));
-    this.add(rv, new Integer (1));
-
-    rv = new RoomView (0, 450, 230, 225, bModel.getRoom ("Casting Office"));
-    this.add(rv, new Integer (1));
-
-
-
-  }*/
 
 }
