@@ -26,7 +26,6 @@ public class DeadwoodWrapper{
   JLabel pMcnt_label;
   JLabel pCrcnt_label;
 
-
   static JButton bAct;
   static JButton bRehearse;
   static JButton bEnd;
@@ -38,10 +37,11 @@ public class DeadwoodWrapper{
 
   static JLabel ActivePlayerLabel;
 
+
   public static void main(String[] args) throws Exception{
     DeadwoodWrapper board = new DeadwoodWrapper();
-    //model.Deadwood.initGameplay();
   }
+
 
   public DeadwoodWrapper() throws Exception{
     int numPlayers = startModel();
@@ -52,8 +52,6 @@ public class DeadwoodWrapper{
     model.Board bModel = model.Board.getBoard();
     view.BoardView bView = new view.BoardView (bModel, numPlayers); // connect board view to the model
     controller.BoardController bContr = new controller.BoardController (bModel); // connect board controller to model
-    //view.CtrlPanelView ctrlView = new view.BoardView ();
-
 
     pane.add (bView, new Integer (0));
     pane.add (bContr, new Integer (1));
@@ -64,20 +62,30 @@ public class DeadwoodWrapper{
     frame.setResizable (false);
     frame.addWindowListener (new Closer());
 
+    addCtrlPanel(pane);
+
+    pane.add(bAct, new Integer(2));
+    pane.add(bRehearse, new Integer(2));
+    pane.add(bEnd, new Integer(2));
+    pane.add(bUpgradeM, new Integer(2));
+    pane.add(bUpgradeCR, new Integer(2));
+    pane.add(inputRank, new Integer(2));
+    //pane.add(upgradeChoice, new Integer(2));
+
+    frame.add (pane);
+    frame.pack();
+    frame.setVisible(true);
+
+  }
+
+
+  // addCtrlPanel creates and adds elements to the control panel on ...
+  // ... the right side of the board.
+  public void addCtrlPanel(JLayeredPane pane){
+
     JLabel mLabel = new JLabel ("MENU");
     mLabel.setBounds(1240, 0, 140, 20);
     pane.add(mLabel, new Integer(2));
-
-    /****************** Display active player... *****************/
-    /*
-    JLabel activeP_label = new JLabel ("Active Player");
-    activeP_label.setBounds(1210, );
-    JLabel pRank_label = new JLabel ("Rank:");;
-    JLabel pPracChip_label = new JLabel ("Practice Chips:");;
-    JLabel pMcnt_label = new JLabel ("Money Count:");;
-    JLabel pCrcnt_label = new JLabel ("Credit Number:");;
-    */
-    /************************************************************/
 
     bAct = new JButton("ACT");
     bAct.setBackground(Color.white);
@@ -107,57 +115,20 @@ public class DeadwoodWrapper{
     inputRank = new JTextField("RANK");
     inputRank.setBounds(1210, 160, 100, 20);
 
+    /****************** Display active player... *****************/
+    /*
     //playerInfo = new JTextArea ("")
-
-
-    /* Trying to make a choice box for upgrade ranks
-    String[] ranks = { "2", "3", "4", "5", "6"};
-    upgradeChoice = new JComboBox(ranks);
-    upgradeChoice.setSelectedIndex(0);
-    upgradeChoice.setBounds(1210, 120, 100, 20);
-    upgradeChoice.addActionListener(this);
+    JLabel activeP_label = new JLabel ("Active Player");
+    activeP_label.setBounds(1210, );
+    JLabel pRank_label = new JLabel ("Rank:");;
+    JLabel pPracChip_label = new JLabel ("Practice Chips:");;
+    JLabel pMcnt_label = new JLabel ("Money Count:");;
+    JLabel pCrcnt_label = new JLabel ("Credit Number:");;
     */
-
-    pane.add(bAct, new Integer(2));
-    pane.add(bRehearse, new Integer(2));
-    pane.add(bEnd, new Integer(2));
-    pane.add(bUpgradeM, new Integer(2));
-    pane.add(bUpgradeCR, new Integer(2));
-    pane.add(inputRank, new Integer(2));
-    //pane.add(upgradeChoice, new Integer(2));
-
-    frame.add (pane);
-    frame.pack();
-    frame.setVisible(true);
+    /************************************************************/
 
   }
 
-
-  private static int startModel (){
-    Object[] playerNumOptions = {"2", "3", "4", "5", "6", "7", "8"};
-    int np = 0;
-    String numOfPlayers = (String)JOptionPane.showInputDialog(null,
-                                                    "How many players?\n",
-                                                    "Welcome to Deadwood!",
-                                                    JOptionPane.PLAIN_MESSAGE,
-                                                    null,
-                                                    playerNumOptions,
-                                                    playerNumOptions[0]);
-    try {
-      np = Integer.parseInt(numOfPlayers);
-      if (np < 2 || np > 8){
-        System.out.println ("Invalid number of players. Must be between 2 and 8 players, inclusive.");
-        System.exit(1);
-      }
-    }
-    catch (NumberFormatException e){
-      System.out.println ("Wrong format for argument 0 [number of players]. Please input an integer.");
-      System.exit(1);
-    }
-
-    model.Deadwood.initGameboard(np); // setup the model
-    return np;
-  }
 
   class boardMouseListener implements MouseListener{
     public void mouseClicked(MouseEvent e){
@@ -219,6 +190,35 @@ public class DeadwoodWrapper{
     }
   }
 
+
+
+  // startModel creates a popup asking how many players there are ...
+  // then calls a method in model.Deadwood to populate/init the model
+  private static int startModel (){
+    Object[] playerNumOptions = {"2", "3", "4", "5", "6", "7", "8"};
+    int np = 0;
+    String numOfPlayers = (String)JOptionPane.showInputDialog(null,
+                                                    "How many players?\n",
+                                                    "Welcome to Deadwood!",
+                                                    JOptionPane.PLAIN_MESSAGE,
+                                                    null,
+                                                    playerNumOptions,
+                                                    playerNumOptions[0]);
+    try {
+      np = Integer.parseInt(numOfPlayers);
+      if (np < 2 || np > 8){
+        System.out.println ("Invalid number of players. Must be between 2 and 8 players, inclusive.");
+        System.exit(1);
+      }
+    }
+    catch (NumberFormatException e){
+      System.out.println ("Wrong format for argument 0 [number of players]. Please input an integer.");
+      System.exit(1);
+    }
+
+    model.Deadwood.initGameboard(np); // setup the model
+    return np;
+  }
 
 
 }
