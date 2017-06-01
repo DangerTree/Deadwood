@@ -139,7 +139,7 @@ public class Room{
 		  }
 	  }
     // discard scene card
-    //this.rScene.signalWrapping();
+    this.rScene.signalWrapping();
     this.rScene = null;
     Board.decSceneNum(); // decrement scene num
   }
@@ -153,6 +153,7 @@ public class Room{
 			  rRoleList.get(i).actorLeaves();
 		  }
 	  }
+    this.rScene.signalWrapping();
 	  this.rScene = null; //discards scene card
 	  Board.decSceneNum(); //decrements number of scenes left on the board
   }
