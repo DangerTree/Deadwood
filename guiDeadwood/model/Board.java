@@ -29,6 +29,7 @@ public class Board{
 
   private static Board boardObj = new Board();
 
+
   // getBoard is called by model.Deadwood
   // initializes a board object and sets the daysLeft to # days remaining in game
   public static Board getBoard(int dayNum){
@@ -209,18 +210,19 @@ public class Board{
   POST-CONDITION: Players are in Trailers, all Rooms have new Scenes and full shot ctrs
   */
   public static void endDay(){
+    scenesLeft = 10; //Zak added this line, should fix game ending too early glitch
+    daysLeft--;
     for (Room room : roomHashMap.values()){
       if (! room.getRName().equals("Casting Office") && ! room.getRName().equals("Trailers")){
         room.resetShotCounter();
         room.placeScene(sceneDrawPile.remove());
       }
     }
+    view.BoardView.endDayView (daysLeft);
     Queue <Player> thePQ = Deadwood.getPlayerQ();
     for (Player p: thePQ){
       p.moveToTrailer(roomHashMap.get("Trailers"));
     }
-    scenesLeft = 10; //Zak added this line, should fix game ending too early glitch
-    daysLeft--;
   }
 
 

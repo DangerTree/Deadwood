@@ -52,7 +52,8 @@ public class DeadwoodWrapper{
     JLayeredPane pane = new JLayeredPane();
 
     model.Board bModel = model.Board.getBoard();
-    view.BoardView bView = new view.BoardView (bModel, numPlayers); // connect board view to the model
+    //view.BoardView bView = new view.BoardView (bModel, numPlayers); // connect board view to the model
+    view.BoardView bView = view.BoardView.getBoardView (bModel, numPlayers); // connect board view to the model
     controller.BoardController bContr = new controller.BoardController (bModel); // connect board controller to model
 
     pane.add (bView, new Integer (0));
@@ -131,16 +132,12 @@ public class DeadwoodWrapper{
     JLabel pCrcnt_label;
     */
 
-    /*playerInfo = new JTextArea ("Rank" +
-                                  "Money: " +
-                                  "Credits: " +
-                                  "Pracice Chips");
-                                  */
+
     playerInfo = new JTextArea ();
     playerInfo.append("Rank: ");
     playerInfo.append("\nMoney: ");
     playerInfo.append("\nCredits: ");
-    playerInfo.append("\nPracice Chips: ");
+    playerInfo.append("\nPractice Chips: ");
 
     playerInfo.setWrapStyleWord(true);
     playerInfo.setLineWrap(true);

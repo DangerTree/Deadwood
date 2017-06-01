@@ -116,12 +116,6 @@ public class Room{
         System.out.println ("Awarding player " + temp.getPlayerID() + " a $" + bonusDice[i] + " bonus.");
 		  }
 	  }
-    /*
-    for (int i = bonusDice.length - 1; i >= 0; i++){ //awards on card actors their bonuses
-      if (rScene.getSRoleList()[i % rScene.getSRoleList().length].getActor() != null){ //if there is a player in this role, award it a bonus equal to the correct assignment of bonus dice
-        rScene.getSRoleList()[i % rScene.getSRoleList().length].getActor().payActor(bonusDice[i]);
-      }
-    }*/
 
 	  for (int i = 0; i< rScene.getSRoleListSize(); i ++){ //removes on card actors from their roles
 		  if (rScene.getSRoleList()[i].getActor() != null){

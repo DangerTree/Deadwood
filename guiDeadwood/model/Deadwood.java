@@ -82,13 +82,12 @@ public class Deadwood{
       playerQueue.add(activePlayer);
       activePlayer = playerQueue.poll();
       if (Board.getScenesLeft() == 1){
-        Board.endDay();
-
         System.out.println ("Ending day.");
-        System.out.println ("Days left: " + Board.getDaysLeft() + "\tScenes left: " + Board.getScenesLeft());
-        if (Board.getDaysLeft() == 0){
+        if (Board.getDaysLeft() == 0){ // end game if no more days
           endGame();
         }
+        Board.endDay();
+        System.out.println ("Days left: " + Board.getDaysLeft() + "\tScenes left: " + Board.getScenesLeft());
       }
     }
     promptPlayer();
@@ -233,25 +232,6 @@ public class Deadwood{
     StringBuilder toAnnounce = winnerAnnounce.append(otherScores);
 
     view.BoardView.endGameView(otherScores.toString());
-
-
-    // Fill winners ArrayList with the playerID of the winners
-    /*for (int j = 0; j < playerNum; j++){
-      if (scores[j] >= highestScore){
-        winners.add(j);
-      }
-    }
-    // Print our winners
-    if (winners.size() > 1){
-      System.out.print ("There is a tie! Players ");
-      for (int k = 0; k < winners.size() -1 ; k++){
-        System.out.print (winners.get(k) + ", ");
-      }
-      System.out.print ("and " + winners.get(winners.size()-1) + " won!");
-    }
-    else {
-      System.out.println ("Player " + highestScorerID + " won!");
-    }*/
   }
 
 }

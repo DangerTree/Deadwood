@@ -3,8 +3,14 @@
 ### 12:34
 	may have fixed issue where players where not going to trailers after a day ends. Its a janky fix... but I think it works. Zak is testing it.
 
+	end game popup and system exit may work. model.Deadwood endGame() calcs scores and makes an announcement string which is passed to view.BoardView's endGameView() for the popup
+
 TODO:
-	make endgame work: popup w/scores then exit game
+	ending a day. 
+		boardview popup saying end of day
+		boardview needs to discard scene views, make new ones
+
+
 
 
 ################## May 29th, 2017: #################

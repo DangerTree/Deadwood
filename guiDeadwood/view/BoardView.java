@@ -22,13 +22,61 @@ import javax.swing.JOptionPane;
 
 
 public class BoardView extends JLayeredPane implements model.Player.Listener{
-  private JLabel boardLabel;
-  private JLabel[] playerLabels;
-  private HashMap<String, model.Role> roleMap;
-  private HashMap <String, int[][]> playerRoomLoc; // holds String "Room Name", [[player1 x_loc, player1 y_loc], [player1 x_loc, player1 y_loc]...]
-  private HashMap <String, int[][]> shotCounterLoc; // <Room name, [ [x_loc1, y_loc1], [x_loc2, y_loc2] ...] (of shot counter image locations)
+  private static model.Board mBoard;
 
-  public BoardView (model.Board bModel, int numPlayers) throws Exception {
+  private static JLabel boardLabel;
+  private static JLabel[] playerLabels;
+  private static HashMap<String, model.Role> roleMap;
+  private static HashMap <String, int[][]> playerRoomLoc; // holds String "Room Name", [[player1 x_loc, player1 y_loc], [player1 x_loc, player1 y_loc]...]
+  private static HashMap <String, int[][]> shotCounterLoc; // <Room name, [ [x_loc1, y_loc1], [x_loc2, y_loc2] ...] (of shot counter image locations)
+
+  private static int roomLayerLevel = 1;
+  private static int sceneLayerLevel = 2;
+  private static int offCardLayerLevel = 3;
+  //private static Integer roomLayerLevel = 1;
+  //private static Integer sceneLayerLevel = 2;
+  //private static Integer offCardLayerLevel = 3;
+
+  private static BoardView boardV = new BoardView();
+
+
+  public static BoardView getBoardView (model.Board mBoard, int numPlayers) throws Exception {
+    boardV.mBoard = mBoard;
+
+    playerRoomLoc = new HashMap <String, int[][]>();
+    shotCounterLoc = new HashMap <String, int[][]>();
+    initPlayerRoomLoc();
+    initShotCounterLoc();
+    initPlayerLabels(numPlayers);
+
+    ResourcesDW r = ResourcesDW.getInstance();
+    ImageIcon backgroundImg = r.getBG();
+
+    boardLabel = new JLabel (backgroundImg);
+    boardLabel.setBounds (0, 0, backgroundImg.getIconWidth(), backgroundImg.getIconHeight());
+    boardV.add(boardLabel, new Integer (0)); // add the board image as the first layer
+    boardV.setBounds (boardLabel.getBounds());
+
+    // create room, scene, and off-card role view objects
+    makeRoomViews();
+    makeSceneViews();
+    makeOffCardRoleViews();
+
+    // subscribe to all players
+    Queue<model.Player> thePQ =  model.Deadwood.getPlayerQ();
+
+    for (model.Player p: thePQ){
+      p.subscribe(boardV);
+    }
+    model.Deadwood.getActivePlayer().subscribe(boardV);
+
+    return boardV;
+  }
+
+  /*
+  public BoardView (model.Board mBoard, int numPlayers) throws Exception {
+
+    this.mBoard = mBoard;
 
     playerRoomLoc = new HashMap <String, int[][]>();
     shotCounterLoc = new HashMap <String, int[][]>();
@@ -45,9 +93,9 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
     this.setBounds (boardLabel.getBounds());
 
     // create room, scene, and off-card role view objects
-    makeRoomViews(bModel);
-    makeSceneViews(bModel);
-    makeOffCardRoleViews(bModel);
+    makeRoomViews();
+    makeSceneViews();
+    makeOffCardRoleViews();
 
     // subscribe to all players
     Queue<model.Player> thePQ =  model.Deadwood.getPlayerQ();
@@ -57,13 +105,13 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
     }
     model.Deadwood.getActivePlayer().subscribe(this);
   }
-
+  */
 
   /* initPlayerRoomLoc reads in the coordiates in each room where a player, ...
   ... given their playerID, will move to when entering that room.
   POST-CONDITION: hashmap playerRoomLoc is populated
   */
-  private void initPlayerRoomLoc(){
+  private static void initPlayerRoomLoc(){
 
     File PlayerLocationsFile = null;
     Scanner scan = null;
@@ -99,7 +147,7 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
   ... shot counters are positioned.
   POST-CONDITION: hashmap shotCounterLoc is populated
   */
-  private void initShotCounterLoc(){
+  private static void initShotCounterLoc(){
 
     File shotCounterLocationsFile = null;
     Scanner scan = null;
@@ -137,7 +185,7 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
   POST-CONDITION: playerLabels array is populated with JLabels with the players'...
   ... coorresponding mover die image. JLabels are located in "Trailers".
   */
-  private void initPlayerLabels (int numPlayers){
+  private static void initPlayerLabels (int numPlayers){
 
     ResourcesDW r = ResourcesDW.getInstance();
     int startingRank = 1;
@@ -151,7 +199,7 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
       int[] pLoc = playerRoomLoc.get("Trailers")[i];
       playerLabels[i].setBounds(pLoc[0], pLoc[1], 30, 30); // establish bounds of scene card
       playerLabels[i].setVisible(true);
-      add (playerLabels[i], new Integer (4)); // add sceneLabel to JLayeredPane
+      boardV.add (playerLabels[i], new Integer (4)); // add sceneLabel to JLayeredPane
     }
   }
 
@@ -182,7 +230,7 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
     2) sets up the shot counters in the room view
     3) adds the RoomView to the JLayeredPane
   */
-  private void makeRoomViews(model.Board bModel) throws Exception{
+  private static void makeRoomViews() throws Exception{
     RoomView rv;
     File RoomViewLocationsFile = null;
     Scanner scan = null;
@@ -193,11 +241,11 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
       while(scan.hasNextLine() != false){
         String name = scan.nextLine();
         String [] location = scan.nextLine().split(" ");
-        //rv = new RoomView(Integer.parseInt(location[0]), Integer.parseInt(location[1]), Integer.parseInt(location[2]), Integer.parseInt(location[3]), bModel.getRoom(name));
+        //rv = new RoomView(Integer.parseInt(location[0]), Integer.parseInt(location[1]), Integer.parseInt(location[2]), Integer.parseInt(location[3]), mBoard.getRoom(name));
         if(!name.equals("Trailers") && !name.equals("Casting Office")){
-          rv = new RoomView(Integer.parseInt(location[0]), Integer.parseInt(location[1]), Integer.parseInt(location[2]), Integer.parseInt(location[3]), bModel.getRoom(name));
+          rv = new RoomView(Integer.parseInt(location[0]), Integer.parseInt(location[1]), Integer.parseInt(location[2]), Integer.parseInt(location[3]), mBoard.getRoom(name));
           rv.setupShots(shotCounterLoc.get(name));
-          this.add(rv, new Integer (1));
+          boardV.add(rv, new Integer (roomLayerLevel));
         }
         //this.add(rv, new Integer (1));
       }
@@ -219,7 +267,7 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
       1b) the SceneView constructor will make the appropriate # of on-card RoleViews
     2) adds the SceneView to the JLayeredPane
   */
-  private void makeSceneViews(model.Board bModel) throws Exception{
+  private static void makeSceneViews() throws Exception{
     SceneView sv;
     File SceneViewLocationsFile = null;
     Scanner scan = null;
@@ -230,8 +278,8 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
       while(scan.hasNextLine() != false){
         String name = scan.nextLine();
         String [] location = scan.nextLine().split(" ");
-        sv = new SceneView(Integer.parseInt(location[0]), Integer.parseInt(location[1]), Integer.parseInt(location[2]), Integer.parseInt(location[3]), bModel.getRoom(name).getScene());
-        this.add(sv, new Integer (2));
+        sv = new SceneView(Integer.parseInt(location[0]), Integer.parseInt(location[1]), Integer.parseInt(location[2]), Integer.parseInt(location[3]), mBoard.getRoom(name).getScene());
+        boardV.add(sv, new Integer (sceneLayerLevel));
       }
     }
     catch(FileNotFoundException e){
@@ -250,7 +298,7 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
     1) create a new RoleView, and associate it with a model.Role
     2) adds the RoleView to the JLayeredPane
   */
-  private void makeOffCardRoleViews(model.Board bModel) throws Exception{
+  private static void makeOffCardRoleViews() throws Exception{
 
 
     RoleView rl_v;
@@ -265,7 +313,7 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
         String name = scan.nextLine();
         String [] location = scan.nextLine().split(" ");
         rl_v = new RoleView(Integer.parseInt(location[0]), Integer.parseInt(location[1]), Integer.parseInt(location[2]), Integer.parseInt(location[3]), model.Board.getRoleMap().get(name));
-        this.add(rl_v, new Integer(4));
+        boardV.add(rl_v, new Integer (offCardLayerLevel));
       }
     }
     catch(FileNotFoundException e){
@@ -279,42 +327,25 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
   }
 
 
+  public static void endDayView (int daysLeft){
+    String announcement = Integer.toString(daysLeft) + " days left!";
+    JOptionPane.showMessageDialog(null, announcement, "End of day", JOptionPane.PLAIN_MESSAGE);
+    boardV.remove(sceneLayerLevel);
+    try{
+      makeSceneViews();
+    } catch (Exception e){
+      System.out.println ("Caught exception in in view.BoardView endDayView()");
+    }
+  }
+
+
+  // endGameView displays a popup with the final scores then exits the game
   public static void endGameView (String announcement){
 
     JOptionPane.showMessageDialog(null, announcement, "Game Over!", JOptionPane.PLAIN_MESSAGE);
     // when player clicks ok, end game
     System.exit(0);
-    
-    /*
-    ArrayList <Integer> winners = new ArrayList <Integer> (scores.length);
-    // Just in case of a tie, winners ArrayList with the playerID of all winners
-    for (int j = 0; j < scores.length; j++){
-      if (scores[j] == highestScore){
-        winners.add(j);
-      }
-    }
 
-    // create a string with the announcement for winning players
-    StringBuilder winnerAnnounce = new StringBuilder ();
-    if (winners.size() > 1){
-      winnerAnnounce.append ("THERE IS A TIE!!\n");
-    }
-    winnerAnnounce.append ("Winners:\n");
-    for (int i = 0; i < winners.size(); i++){
-      winnerAnnounce.append ("Player " + winners.get(i) + " scored " + scores[i] + " points!\n");
-    }
-
-    // annouce other player's scores
-    StringBuilder otherScores = new StringBuilder ("\nOther players:\n");
-    for (int j = 0; j < scores.length - winners.size(); j++){
-      if (!winners.contains(new Integer (j))){ // only print non-winner's scores
-        otherScores.append ("Player " + j + " scored " + scores[j] + " points.\n");
-      }
-    }
-
-    // add the two announcements together
-    StringBuilder toAnnounce = winnerAnnounce.append(otherScores);
-    */
   }
 
 
