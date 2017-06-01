@@ -59,7 +59,7 @@ Disaster at Flying J_5_6_After the mine explosion, the traveling circus takes ti
 4_Falls on Hoe_"Ow!"
 3_Man in Turban_"My stars!"
 2_Piano Player_"It's a nocturne!"
-Shakespear in Lubbock_3_23_William decides that it is time to be movin' on.  Julia convinces him to stick around just long enough to get into big trouble._3
+Shakespeare in Lubbock_3_23_William decides that it is time to be movin' on.  Julia convinces him to stick around just long enough to get into big trouble._3
 4_Man with Whistle_"Tweeeeet!"
 3_Laughing Woman_"Tis to laugh!"
 1_Falls from Tree_"What ho!"
