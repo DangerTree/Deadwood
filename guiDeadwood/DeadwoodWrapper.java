@@ -1,4 +1,4 @@
-
+//package guiDeadwood;
 
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
@@ -160,36 +160,35 @@ public class DeadwoodWrapper{
                                   "Pracice Chips");
                                   */
     rankInfo = new JTextArea ();
-    rankInfo.append(model.Deadwood.getActivePlayer().getRank() + "");
 
 
     rankInfo.setWrapStyleWord(true);
     rankInfo.setLineWrap(true);
     rankInfo.setBounds(1320, 280, 30, 15);
-    pane.add(rankInfo, new Integer (2));
 
     moneyInfo = new JTextArea();
-    moneyInfo.append(model.Deadwood.getActivePlayer().getMoneyCnt() + "");
 
     moneyInfo.setWrapStyleWord(true);
     moneyInfo.setLineWrap(true);
     moneyInfo.setBounds(1320, 300, 30, 15);
-    pane.add(moneyInfo, new Integer(2));
 
     creditInfo = new JTextArea();
-    creditInfo.append(model.Deadwood.getActivePlayer().getCreditCnt() + "");
 
     creditInfo.setWrapStyleWord(true);
     creditInfo.setLineWrap(true);
     creditInfo.setBounds(1320, 320, 30, 15);
-    pane.add(creditInfo, new Integer(2));
 
     practiceInfo = new JTextArea();
-    practiceInfo.append(model.Deadwood.getActivePlayer().getPracticeCnt() + "");
 
     practiceInfo.setWrapStyleWord(true);
     practiceInfo.setLineWrap(true);
     practiceInfo.setBounds(1320, 340, 30, 15);
+
+    updatePlayerStats();
+
+    pane.add(moneyInfo, new Integer(2));
+    pane.add(creditInfo, new Integer(2));
+    pane.add(rankInfo, new Integer (2));
     pane.add(practiceInfo, new Integer(2));
 
 
@@ -209,11 +208,10 @@ public class DeadwoodWrapper{
 
   public static void updatePlayerStats(){
 
-    rankInfo.setText(model.Deadwood.getActivePlayer().getMoneyCnt() + "");
+    rankInfo.setText(model.Deadwood.getActivePlayer().getRank() + "");
     moneyInfo.setText(model.Deadwood.getActivePlayer().getMoneyCnt() + "");
     creditInfo.setText(model.Deadwood.getActivePlayer().getCreditCnt() + "");
     practiceInfo.setText(model.Deadwood.getActivePlayer().getPracticeCnt() + "");
-
 
   }
 

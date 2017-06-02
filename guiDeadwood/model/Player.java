@@ -153,7 +153,7 @@ public class Player {
       }
     }
     changed();
-    view.DeadwoodWrapper.updatePlayerStats();
+    //guiDeadwood.DeadwoodWrapper.updatePlayerStats();
   }
 
 
