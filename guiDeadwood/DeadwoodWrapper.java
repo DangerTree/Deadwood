@@ -61,17 +61,20 @@ public class DeadwoodWrapper{
     model.Board bModel = model.Board.getBoard();
     view.BoardView bView = new view.BoardView (bModel, numPlayers); // connect board view to the model
     controller.BoardController bContr = new controller.BoardController (bModel); // connect board controller to model
+    //view.PlayerStatusBoxView pStatBox = new view.PlayerStatusBoxView (model.Deadwood.getPlayerQ());
+    view.PlayerStatusBoxView pStatBox = new view.PlayerStatusBoxView ();
 
     pane.add (bView, new Integer (0));
     pane.add (bContr, new Integer (1));
+    pane.add (pStatBox, new Integer (2));
+    addCtrlPanel(pane);
+
     pane.setVisible (true);
 
     frame.setTitle ("Deadwood");
     frame.setPreferredSize (new Dimension (1500,900));
     frame.setResizable (false);
     frame.addWindowListener (new Closer());
-
-    addCtrlPanel(pane);
 
     pane.add(bAct, new Integer(2));
     pane.add(bRehearse, new Integer(2));
@@ -126,6 +129,8 @@ public class DeadwoodWrapper{
 
     /****************** Display active player... *****************/
 
+    /*
+
     JLabel activePlayerLabel = new JLabel ("Active Player Stats");
     activePlayerLabel.setBounds(1250, 250, 140, 30);
     pane.add(activePlayerLabel, new Integer(2));
@@ -146,19 +151,10 @@ public class DeadwoodWrapper{
     practiceLabel.setBounds(1250, 340, 150, 15);
     pane.add(practiceLabel, new Integer(2));
 
-    /*
-    JLabel activeP_label;
-    JLabel pRank_label;
-    JLabel pPracChip_label;
-    JLabel pMcnt_label;
-    JLabel pCrcnt_label;
-    */
 
-    /*playerInfo = new JTextArea ("Rank" +
-                                  "Money: " +
-                                  "Credits: " +
-                                  "Pracice Chips");
-                                  */
+
+
+
     rankInfo = new JTextArea ();
     rankInfo.append(model.Deadwood.getActivePlayer().getRank() + "");
 
@@ -191,20 +187,7 @@ public class DeadwoodWrapper{
     practiceInfo.setLineWrap(true);
     practiceInfo.setBounds(1320, 340, 30, 15);
     pane.add(practiceInfo, new Integer(2));
-
-
-
-
-    /*
-    JLabel activeP_label = new JLabel ("Active Player");
-    activeP_label.setBounds(1210, );
-    JLabel pRank_label = new JLabel ("Rank:");;
-    JLabel pPracChip_label = new JLabel ("Practice Chips:");;
-    JLabel pMcnt_label = new JLabel ("Money Count:");;
-    JLabel pCrcnt_label = new JLabel ("Credit Number:");;
     */
-    /************************************************************/
-
   }
 
   public static void updatePlayerStats(){
