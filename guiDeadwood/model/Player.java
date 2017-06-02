@@ -271,6 +271,7 @@ public class Player {
         return true;
       }
       else {
+        System.out.println ("This part is out of your league!");
         return false;
       }
     }

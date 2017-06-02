@@ -52,28 +52,6 @@ public class Deadwood{
   }
 
 
-  public static void initGameplay (){
-
-    while(Board.getDaysLeft() != 0){
-      System.out.println ("Days left: " + Board.getDaysLeft() + "\tScenes left: " + Board.getScenesLeft());
-      while(Board.getScenesLeft() > 1){
-        // call method which waits for user's click input
-        activePlayer = playerQueue.remove();
-        System.out.println("It is player " + activePlayer.getPlayerID() +"'s turn.");
-        /*while (!activePlayer.isTurnDone()){
-          promptPlayer(); // prompts player in Status Window
-          ArrayList <String> command = getUsrInput();
-        }*/
-        activePlayer.endTurn();
-        //activePlayer.takeTurn();
-        playerQueue.add(activePlayer);
-      }
-      Board.endDay();
-    }
-    endGame();//Board.endGame();
-  }
-
-
   public static void takeAction (ArrayList <String> command){
     String buffer = command.get(0);
     activePlayer.takeTurn (command);
