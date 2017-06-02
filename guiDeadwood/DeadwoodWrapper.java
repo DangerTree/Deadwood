@@ -67,7 +67,7 @@ public class DeadwoodWrapper{
 
     pane.add (bView, new Integer (0));
     pane.add (bContr, new Integer (1));
-    //pane.add (pStatBox, new Integer (2));
+    pane.add (pStatBox, new Integer (2));
     addCtrlPanel(pane);
 
     pane.setVisible (true);

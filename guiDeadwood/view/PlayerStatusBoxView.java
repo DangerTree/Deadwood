@@ -8,13 +8,14 @@ import java.util.Queue;
 
 public class PlayerStatusBoxView extends JLayeredPane implements model.Player.Listener{
 
+  private JLabel titleLabel;
   private JLabel activePlayerLabel;
   private JLabel rankLabel;
   private JLabel moneyLabel;
   private JLabel creditLabel;
   private JLabel practiceLabel;
 
-  private JTextArea playerNum;
+  private JTextArea playerNumInfo;
   private JTextArea rankInfo;
   private JTextArea moneyInfo;
   private JTextArea creditInfo;
@@ -26,6 +27,10 @@ public class PlayerStatusBoxView extends JLayeredPane implements model.Player.Li
     createLabels();
     // initialize status box (only once)
     initStats();
+
+    this.setBounds (1200, 0, 300, 900);
+
+    System.out.println ("in PlayerStatusBoxView constructor");
 
     Queue<model.Player> thePQ =  model.Deadwood.getPlayerQ();
 
@@ -40,7 +45,8 @@ public class PlayerStatusBoxView extends JLayeredPane implements model.Player.Li
 
   public void changed (model.Player p){
 
-    rankInfo.setText(model.Deadwood.getActivePlayer().getMoneyCnt() + "");
+    playerNumInfo.setText(model.Deadwood.getActivePlayer().getPlayerID() + "");
+    rankInfo.setText(model.Deadwood.getActivePlayer().getRank() + "");
     moneyInfo.setText(model.Deadwood.getActivePlayer().getMoneyCnt() + "");
     creditInfo.setText(model.Deadwood.getActivePlayer().getCreditCnt() + "");
     practiceInfo.setText(model.Deadwood.getActivePlayer().getPracticeCnt() + "");
@@ -50,36 +56,55 @@ public class PlayerStatusBoxView extends JLayeredPane implements model.Player.Li
 
   private void createLabels(){
 
-    activePlayerLabel = new JLabel ("Active Player Stats");
-    activePlayerLabel.setBounds(1250, 250, 140, 30);
-    add(activePlayerLabel, new Integer(2));
+    titleLabel = new JLabel ("Active Player Stats");
+    titleLabel.setBounds(50, 250, 140, 30);
+
+
+    activePlayerLabel = new JLabel("Player #: ");
+    activePlayerLabel.setBounds(45, 280, 150, 15);
+
 
     rankLabel = new JLabel ("Rank:");
-    rankLabel.setBounds(1270, 280, 80, 15);
-    add(rankLabel, new Integer(2));
+    rankLabel.setBounds(70, 300, 80, 15);
+
 
     moneyLabel = new JLabel("Money: ");
-    moneyLabel.setBounds(1260, 300, 80, 15);
-    add(moneyLabel, new Integer(2));
+    moneyLabel.setBounds(60, 320, 80, 15);
+
 
     creditLabel = new JLabel("Credits: ");
-    creditLabel.setBounds(1255, 320, 80, 15);
-    add(creditLabel, new Integer(2));
+    creditLabel.setBounds(55, 340, 80, 15);
+
 
     practiceLabel = new JLabel("Practice: ");
-    practiceLabel.setBounds(1250, 340, 150, 15);
+    practiceLabel.setBounds(50, 360, 150, 15);
+
+    add(titleLabel, new Integer(2));
+    add(activePlayerLabel, new Integer(2));
     add(practiceLabel, new Integer(2));
+    add(rankLabel, new Integer(2));
+    add(moneyLabel, new Integer(2));
+    add(creditLabel, new Integer(2));
   }
 
 
   private void initStats(){
+    playerNumInfo = new JTextArea ();
+    playerNumInfo.append(model.Deadwood.getActivePlayer().getPlayerID() + "");
+
+
+    playerNumInfo.setWrapStyleWord(true);
+    playerNumInfo.setLineWrap(true);
+    playerNumInfo.setBounds(120, 280, 30, 15);
+    add(playerNumInfo, new Integer (2));
+
     rankInfo = new JTextArea ();
     rankInfo.append(model.Deadwood.getActivePlayer().getRank() + "");
 
 
     rankInfo.setWrapStyleWord(true);
     rankInfo.setLineWrap(true);
-    rankInfo.setBounds(1320, 280, 30, 15);
+    rankInfo.setBounds(120, 300, 30, 15);
     add(rankInfo, new Integer (2));
 
     moneyInfo = new JTextArea();
@@ -87,7 +112,7 @@ public class PlayerStatusBoxView extends JLayeredPane implements model.Player.Li
 
     moneyInfo.setWrapStyleWord(true);
     moneyInfo.setLineWrap(true);
-    moneyInfo.setBounds(1320, 300, 30, 15);
+    moneyInfo.setBounds(120, 320, 30, 15);
     add(moneyInfo, new Integer(2));
 
     creditInfo = new JTextArea();
@@ -95,7 +120,7 @@ public class PlayerStatusBoxView extends JLayeredPane implements model.Player.Li
 
     creditInfo.setWrapStyleWord(true);
     creditInfo.setLineWrap(true);
-    creditInfo.setBounds(1320, 320, 30, 15);
+    creditInfo.setBounds(120, 340, 30, 15);
     add(creditInfo, new Integer(2));
 
     practiceInfo = new JTextArea();
@@ -103,7 +128,7 @@ public class PlayerStatusBoxView extends JLayeredPane implements model.Player.Li
 
     practiceInfo.setWrapStyleWord(true);
     practiceInfo.setLineWrap(true);
-    practiceInfo.setBounds(1320, 340, 30, 15);
+    practiceInfo.setBounds(120, 360, 30, 15);
     add(practiceInfo, new Integer(2));
 
   }

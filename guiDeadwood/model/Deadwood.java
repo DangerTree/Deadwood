@@ -59,6 +59,7 @@ public class Deadwood{
       activePlayer.setActionTaken(false);
       playerQueue.add(activePlayer);
       activePlayer = playerQueue.poll();
+      activePlayer.changed(); // update the Active Player stats in PlayerStatusBoxView
       if (Board.getScenesLeft() == 1){
         Board.endDay();
 
