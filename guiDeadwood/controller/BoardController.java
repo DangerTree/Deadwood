@@ -12,6 +12,7 @@ import java.util.HashMap;
 public class BoardController extends JLayeredPane{
 
   //private model.Room rmModel;
+  //private HashMap<String, SceneController> sceneHashMap = new HashMap<String, SceneController>();
 
   public BoardController (model.Board bModel) throws Exception{
     setBounds (0, 0, 1200, 900);
@@ -90,6 +91,7 @@ public class BoardController extends JLayeredPane{
         String name = scan.nextLine();
         String [] location = scan.nextLine().split(" ");
         sc = new SceneController(Integer.parseInt(location[0]), Integer.parseInt(location[1]), Integer.parseInt(location[2]), Integer.parseInt(location[3]), bModel.getRoom(name).getScene());
+        //SceneHashMap.put(name, sc);
         this.add(sc, new Integer (3));
       }
     }
@@ -102,6 +104,10 @@ public class BoardController extends JLayeredPane{
       System.exit(1);
     }
   }
+
+  /*public SceneController getSceneFromMap(String name){
+    return SceneHashMap.get(name);
+  }*/
 
 
 }

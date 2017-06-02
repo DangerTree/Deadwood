@@ -10,6 +10,7 @@ import javax.swing.JLayeredPane;
 class SceneController extends JLayeredPane implements model.Scene.Listener{
 
   private model.Scene sModel;
+  private String roomName;
 
   public SceneController (int x, int y, int h, int w, model.Scene scene){
     sModel = scene;
@@ -23,6 +24,16 @@ class SceneController extends JLayeredPane implements model.Scene.Listener{
       }
     });
 
+  }
+
+  public void newScene(model.Scene scene){
+    sModel = scene;
+    scene.subscribe(this);
+
+  }
+
+  public void changed(){
+    //update the image for this scene
   }
 
 

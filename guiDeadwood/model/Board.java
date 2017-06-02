@@ -212,13 +212,20 @@ public class Board{
     for (Room room : roomHashMap.values()){
       if (! room.getRName().equals("Casting Office") && ! room.getRName().equals("Trailers")){
         room.resetShotCounter();
-        room.placeScene(sceneDrawPile.remove());
+        Scene toPlace = sceneDrawPile.remove();
+        room.placeScene(toPlace);
+        //controller.BoardController.getSceneFromMap(room.getRName()).newScene(toPlace);
+        view.BoardView.getSceneView(room.getRName()).newScene(toPlace);
+        toPlace.changed();
       }
     }
     Queue <Player> thePQ = Deadwood.getPlayerQ();
     for (Player p: thePQ){
       p.moveToTrailer(roomHashMap.get("Trailers"));
+      p.changed();
     }
+    Deadwood.getActivePlayer().moveToTrailer(roomHashMap.get("Trailers"));
+    Deadwood.getActivePlayer().changed();
     scenesLeft = 10; //Zak added this line, should fix game ending too early glitch
     daysLeft--;
   }

@@ -27,6 +27,7 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
   private HashMap<String, model.Role> roleMap;
   private HashMap <String, int[][]> playerRoomLoc; // holds String "Room Name", [[player1 x_loc, player1 y_loc], [player1 x_loc, player1 y_loc]...]
   private HashMap <String, int[][]> shotCounterLoc; // <Room name, [ [x_loc1, y_loc1], [x_loc2, y_loc2] ...] (of shot counter image locations)
+  private static HashMap <String, SceneView> sceneHashMap = new HashMap<String, SceneView>();
 
   public BoardView (model.Board bModel, int numPlayers) throws Exception {
 
@@ -231,6 +232,7 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
         String name = scan.nextLine();
         String [] location = scan.nextLine().split(" ");
         sv = new SceneView(Integer.parseInt(location[0]), Integer.parseInt(location[1]), Integer.parseInt(location[2]), Integer.parseInt(location[3]), bModel.getRoom(name).getScene());
+        sceneHashMap.put(name, sv);
         this.add(sv, new Integer (2));
       }
     }
@@ -242,6 +244,10 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
       System.out.println("RoomLocationAndSizes.txt file formatted incorrectly.");
       System.exit(1);
     }
+  }
+
+  public static SceneView getSceneView(String name){
+    return sceneHashMap.get(name);
   }
 
 
@@ -284,7 +290,7 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
     JOptionPane.showMessageDialog(null, announcement, "Game Over!", JOptionPane.PLAIN_MESSAGE);
     // when player clicks ok, end game
     System.exit(0);
-    
+
     /*
     ArrayList <Integer> winners = new ArrayList <Integer> (scores.length);
     // Just in case of a tie, winners ArrayList with the playerID of all winners

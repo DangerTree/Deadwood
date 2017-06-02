@@ -96,6 +96,7 @@ public class PlayerStatusBoxView extends JLayeredPane implements model.Player.Li
     playerNumInfo.setWrapStyleWord(true);
     playerNumInfo.setLineWrap(true);
     playerNumInfo.setBounds(120, 280, 30, 15);
+    playerNumInfo.setEditable(false);
     add(playerNumInfo, new Integer (2));
 
     rankInfo = new JTextArea ();
@@ -105,6 +106,7 @@ public class PlayerStatusBoxView extends JLayeredPane implements model.Player.Li
     rankInfo.setWrapStyleWord(true);
     rankInfo.setLineWrap(true);
     rankInfo.setBounds(120, 300, 30, 15);
+    rankInfo.setEditable(false);
     add(rankInfo, new Integer (2));
 
     moneyInfo = new JTextArea();
@@ -113,6 +115,7 @@ public class PlayerStatusBoxView extends JLayeredPane implements model.Player.Li
     moneyInfo.setWrapStyleWord(true);
     moneyInfo.setLineWrap(true);
     moneyInfo.setBounds(120, 320, 30, 15);
+    moneyInfo.setEditable(false);
     add(moneyInfo, new Integer(2));
 
     creditInfo = new JTextArea();
@@ -121,6 +124,7 @@ public class PlayerStatusBoxView extends JLayeredPane implements model.Player.Li
     creditInfo.setWrapStyleWord(true);
     creditInfo.setLineWrap(true);
     creditInfo.setBounds(120, 340, 30, 15);
+    creditInfo.setEditable(false);
     add(creditInfo, new Integer(2));
 
     practiceInfo = new JTextArea();
@@ -129,6 +133,7 @@ public class PlayerStatusBoxView extends JLayeredPane implements model.Player.Li
     practiceInfo.setWrapStyleWord(true);
     practiceInfo.setLineWrap(true);
     practiceInfo.setBounds(120, 360, 30, 15);
+    practiceInfo.setEditable(false);
     add(practiceInfo, new Integer(2));
 
   }

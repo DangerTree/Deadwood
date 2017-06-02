@@ -10,6 +10,8 @@ public class SceneView
 {
 
   private JLabel sceneLabel;
+  private int w;
+  private int h;
 
   public SceneView (int x, int y, int h, int w, model.Scene s){
 
@@ -18,12 +20,22 @@ public class SceneView
     ResourcesDW r = ResourcesDW.getInstance();
     sceneLabel.setIcon (r.getBackOfCard()); // face down card
     sceneLabel.setBounds(0, 0, w, h); // establish bounds of scene card
+    this.w = w;
+    this.h = h;
     sceneLabel.setVisible(true);
     add (sceneLabel, new Integer (1)); // add sceneLabel to JLayeredPane
 
     s.subscribe(this); // tell the scene model that it is listening to it
 
     makeRoleViews(s);
+  }
+
+  public void newScene(model.Scene scene){
+    ResourcesDW r = ResourcesDW.getInstance();
+    sceneLabel.setIcon(r.getBackOfCard());
+    sceneLabel.setBounds(0, 0, this.w, this.h);
+    sceneLabel.setVisible(true);
+    scene.subscribe(this);
   }
 
 
@@ -57,6 +69,10 @@ public class SceneView
   // IF THE SCENE IS WRAPPING, MAKE THE SCENE VIEW INVISIBLE
   public void signalWrapping (){
     sceneLabel.setVisible(false);
+  }
+
+  public void changed(){
+
   }
 
   public void flipSceneCard (model.Scene s){

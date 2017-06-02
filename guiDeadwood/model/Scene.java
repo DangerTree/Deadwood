@@ -19,6 +19,7 @@ public class Scene{
   public interface Listener {
     public void signalWrapping();
     public void flipSceneCard(Scene s);
+    public void changed();
   }
 
   private Collection<Listener> listeners;
@@ -84,6 +85,12 @@ public class Scene{
   public void signalWrapping(){
     for(Listener l: listeners)
       l.signalWrapping();
+  }
+
+  public void changed(){
+    for(Listener l: listeners){
+      l.changed();
+    }
   }
 
 
