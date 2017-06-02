@@ -1,3 +1,5 @@
+
+
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import java.awt.Dimension;
@@ -38,6 +40,11 @@ public class DeadwoodWrapper{
   static JTextArea playerInfo;
 
   static JLabel activePlayerLabel;
+
+  static JTextArea rankInfo;
+  static JTextArea moneyInfo;
+  static JTextArea creditInfo;
+  static JTextArea practiceInfo;
 
 
   public static void main(String[] args) throws Exception{
@@ -123,6 +130,22 @@ public class DeadwoodWrapper{
     activePlayerLabel.setBounds(1250, 250, 140, 30);
     pane.add(activePlayerLabel, new Integer(2));
 
+    JLabel rankLabel = new JLabel ("Rank:");
+    rankLabel.setBounds(1270, 280, 80, 15);
+    pane.add(rankLabel, new Integer(2));
+
+    JLabel moneyLabel = new JLabel("Money: ");
+    moneyLabel.setBounds(1260, 300, 80, 15);
+    pane.add(moneyLabel, new Integer(2));
+
+    JLabel creditLabel = new JLabel("Credits: ");
+    creditLabel.setBounds(1255, 320, 80, 15);
+    pane.add(creditLabel, new Integer(2));
+
+    JLabel practiceLabel = new JLabel("Practice: ");
+    practiceLabel.setBounds(1250, 340, 150, 15);
+    pane.add(practiceLabel, new Integer(2));
+
     /*
     JLabel activeP_label;
     JLabel pRank_label;
@@ -136,16 +159,42 @@ public class DeadwoodWrapper{
                                   "Credits: " +
                                   "Pracice Chips");
                                   */
-    playerInfo = new JTextArea ();
-    playerInfo.append("Rank: ");
-    playerInfo.append("\nMoney: ");
-    playerInfo.append("\nCredits: ");
-    playerInfo.append("\nPracice Chips: ");
+    rankInfo = new JTextArea ();
+    rankInfo.append(model.Deadwood.getActivePlayer().getRank() + "");
 
-    playerInfo.setWrapStyleWord(true);
-    playerInfo.setLineWrap(true);
-    playerInfo.setBounds(1210, 280, 280, 150);
-    pane.add(playerInfo, new Integer (2));
+
+    rankInfo.setWrapStyleWord(true);
+    rankInfo.setLineWrap(true);
+    rankInfo.setBounds(1320, 280, 30, 15);
+    pane.add(rankInfo, new Integer (2));
+
+    moneyInfo = new JTextArea();
+    moneyInfo.append(model.Deadwood.getActivePlayer().getMoneyCnt() + "");
+
+    moneyInfo.setWrapStyleWord(true);
+    moneyInfo.setLineWrap(true);
+    moneyInfo.setBounds(1320, 300, 30, 15);
+    pane.add(moneyInfo, new Integer(2));
+
+    creditInfo = new JTextArea();
+    creditInfo.append(model.Deadwood.getActivePlayer().getCreditCnt() + "");
+
+    creditInfo.setWrapStyleWord(true);
+    creditInfo.setLineWrap(true);
+    creditInfo.setBounds(1320, 320, 30, 15);
+    pane.add(creditInfo, new Integer(2));
+
+    practiceInfo = new JTextArea();
+    practiceInfo.append(model.Deadwood.getActivePlayer().getPracticeCnt() + "");
+
+    practiceInfo.setWrapStyleWord(true);
+    practiceInfo.setLineWrap(true);
+    practiceInfo.setBounds(1320, 340, 30, 15);
+    pane.add(practiceInfo, new Integer(2));
+
+
+
+
     /*
     JLabel activeP_label = new JLabel ("Active Player");
     activeP_label.setBounds(1210, );
@@ -155,6 +204,16 @@ public class DeadwoodWrapper{
     JLabel pCrcnt_label = new JLabel ("Credit Number:");;
     */
     /************************************************************/
+
+  }
+
+  public static void updatePlayerStats(){
+
+    rankInfo.setText(model.Deadwood.getActivePlayer().getMoneyCnt() + "");
+    moneyInfo.setText(model.Deadwood.getActivePlayer().getMoneyCnt() + "");
+    creditInfo.setText(model.Deadwood.getActivePlayer().getCreditCnt() + "");
+    practiceInfo.setText(model.Deadwood.getActivePlayer().getPracticeCnt() + "");
+
 
   }
 
