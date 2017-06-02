@@ -153,6 +153,7 @@ public class Player {
       }
     }
     changed();
+    view.DeadwoodWrapper.updatePlayerStats();
   }
 
 
@@ -347,6 +348,10 @@ public class Player {
   // creditCnt getter
   public int getCreditCnt(){
     return creditCnt;
+  }
+
+  public int getPracticeCnt(){
+    return practiceCnt;
   }
 
   public void leaveRole(){
