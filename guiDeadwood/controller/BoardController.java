@@ -79,7 +79,7 @@ public class BoardController extends JLayeredPane{
   }
 
 
-  private void makeSceneControllers(model.Board bModel) throws Exception{
+  public void makeSceneControllers(model.Board bModel) throws Exception{
     SceneController sc;
     File SceneViewLocationsFile = null;
     Scanner scan = null;

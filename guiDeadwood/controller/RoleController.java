@@ -10,10 +10,10 @@ class RoleController extends JPanel implements model.Role.Listener{
   private model.Role rlModel;
 
   public RoleController (int x, int y, int h, int w, model.Role role){
-    //System.out.println ("creating new RoleController");
+    System.out.println ("creating new RoleController");
     rlModel = role;
     setBounds (x, y, w, h);
-    setOpaque (false);
+    setOpaque (true);
     addMouseListener(new MouseAdapter(){
       public void mouseClicked(MouseEvent e){
         clicked();

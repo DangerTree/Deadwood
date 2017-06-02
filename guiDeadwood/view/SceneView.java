@@ -30,7 +30,7 @@ public class SceneView
     makeRoleViews(s);
   }
 
-  public void newScene(model.Scene scene){
+  public void newScenePlaced(model.Scene scene){
     ResourcesDW r = ResourcesDW.getInstance();
     sceneLabel.setIcon(r.getBackOfCard());
     sceneLabel.setBounds(0, 0, this.w, this.h);

@@ -246,6 +246,7 @@ public class BoardView extends JLayeredPane implements model.Player.Listener{
     }
   }
 
+
   public static SceneView getSceneView(String name){
     return sceneHashMap.get(name);
   }

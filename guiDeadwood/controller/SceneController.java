@@ -45,6 +45,7 @@ class SceneController extends JLayeredPane implements model.Scene.Listener{
   // if scene is flipped, make role controllers
   public void flipSceneCard (model.Scene s){
 
+    System.out.println ("in flip Scene Card");
     model.Role[] roleList = s.getSRoleList();
     RoleController rl_c;
 
