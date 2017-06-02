@@ -59,14 +59,15 @@ public class DeadwoodWrapper{
     JLayeredPane pane = new JLayeredPane();
 
     model.Board bModel = model.Board.getBoard();
+    view.PlayerStatusBoxView pStatBox = new view.PlayerStatusBoxView ();
     view.BoardView bView = new view.BoardView (bModel, numPlayers); // connect board view to the model
     controller.BoardController bContr = new controller.BoardController (bModel); // connect board controller to model
     //view.PlayerStatusBoxView pStatBox = new view.PlayerStatusBoxView (model.Deadwood.getPlayerQ());
-    view.PlayerStatusBoxView pStatBox = new view.PlayerStatusBoxView ();
+
 
     pane.add (bView, new Integer (0));
     pane.add (bContr, new Integer (1));
-    pane.add (pStatBox, new Integer (2));
+    //pane.add (pStatBox, new Integer (2));
     addCtrlPanel(pane);
 
     pane.setVisible (true);
