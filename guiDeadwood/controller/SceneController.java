@@ -4,18 +4,25 @@ import javax.swing.JPanel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import javax.swing.JLayeredPane;
 
-class SceneController extends JPanel implements model.Scene.Listener{
+
+class SceneController extends JLayeredPane implements model.Scene.Listener{
 
   private model.Scene sModel;
-
 
   public SceneController (int x, int y, int h, int w, model.Scene scene){
     sModel = scene;
     setBounds (x, y, w, h);
     setOpaque (false);
-
     scene.subscribe(this);
+
+    addMouseListener(new MouseAdapter(){
+      public void mouseClicked(MouseEvent e){
+        System.out.println ("clicked scene controller");
+      }
+    });
+
   }
 
 

@@ -17,8 +17,8 @@ public class BoardController extends JLayeredPane{
     setBounds (0, 0, 1200, 900);
 
     // create new room controllers
-    RoomController rc;
-    SceneController sc;
+    //RoomController rc;
+    //SceneController sc;
 
     makeRoomControllers(bModel);
     makeSceneControllers(bModel);
