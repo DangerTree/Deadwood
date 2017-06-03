@@ -1,5 +1,13 @@
 //package guiDeadwood;
 
+/*
+*   CSCI 345 Assignemnt 3: GUI Deadwood
+*   Sarah Gunderson, Zachary Lazar
+*   June 2, 2017
+*   Dr. Moushumi Sharmin
+*
+*/
+
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import java.awt.Dimension;
