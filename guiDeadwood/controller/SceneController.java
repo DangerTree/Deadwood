@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import javax.swing.JLayeredPane;
 
 
-class SceneController extends JLayeredPane implements model.Scene.Listener{
+public class SceneController extends JLayeredPane implements model.Scene.Listener{
 
   private model.Scene sModel;
   private String roomName;
@@ -45,7 +45,7 @@ class SceneController extends JLayeredPane implements model.Scene.Listener{
   // if scene is flipped, make role controllers
   public void flipSceneCard (model.Scene s){
 
-    System.out.println ("in flip Scene Card");
+    //System.out.println ("in flip Scene Card");
     model.Role[] roleList = s.getSRoleList();
     RoleController rl_c;
 

@@ -216,10 +216,11 @@ public class Board{
         room.placeScene(toPlace);
         //controller.BoardController.getSceneFromMap(room.getRName()).newScene(toPlace);
         view.BoardView.getSceneView(room.getRName()).newScenePlaced(toPlace); // associates newly placed model.Scenes with view.Scenes counterparts
+        controller.BoardController.getSceneFromMap(room.getRName()).newScene(toPlace);
         toPlace.changed();
       }
     }
-    controller.BoardController.makeSceneControllers(boardObj); // create new scene controllers for all scenes
+    //controller.BoardController.makeSceneControllers(boardObj); // create new scene controllers for all scenes
     Queue <Player> thePQ = Deadwood.getPlayerQ();
     for (Player p: thePQ){
       p.moveToTrailer(roomHashMap.get("Trailers"));

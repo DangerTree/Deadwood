@@ -26,7 +26,7 @@ public class RoleView
 
   // If a player took or left the role, indicate that
   public void changed (model.Role rl){
-    //System.out.println ("changed in RoleView");
+    System.out.println ("changed in RoleView");
     if (rl.getActor() != null){
       ResourcesDW r = ResourcesDW.getInstance();
       // update the role's label to be a pic of the player's die
