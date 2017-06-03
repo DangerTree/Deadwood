@@ -44,13 +44,11 @@ public class PlayerStatusBoxView extends JLayeredPane implements model.Player.Li
 
 
   public void changed (model.Player p){
-
     playerNumInfo.setText(model.Deadwood.getActivePlayer().getPlayerID() + "");
     rankInfo.setText(model.Deadwood.getActivePlayer().getRank() + "");
     moneyInfo.setText(model.Deadwood.getActivePlayer().getMoneyCnt() + "");
     creditInfo.setText(model.Deadwood.getActivePlayer().getCreditCnt() + "");
     practiceInfo.setText(model.Deadwood.getActivePlayer().getPracticeCnt() + "");
-
   }
 
 

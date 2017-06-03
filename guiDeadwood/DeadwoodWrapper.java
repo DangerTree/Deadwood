@@ -127,77 +127,8 @@ public class DeadwoodWrapper{
 
     inputRank = new JTextField("RANK");
     inputRank.setBounds(1210, 160, 100, 20);
-
-    /****************** Display active player... *****************/
-
-    /*
-
-    JLabel activePlayerLabel = new JLabel ("Active Player Stats");
-    activePlayerLabel.setBounds(1250, 250, 140, 30);
-    pane.add(activePlayerLabel, new Integer(2));
-
-    JLabel rankLabel = new JLabel ("Rank:");
-    rankLabel.setBounds(1270, 280, 80, 15);
-    pane.add(rankLabel, new Integer(2));
-
-    JLabel moneyLabel = new JLabel("Money: ");
-    moneyLabel.setBounds(1260, 300, 80, 15);
-    pane.add(moneyLabel, new Integer(2));
-
-    JLabel creditLabel = new JLabel("Credits: ");
-    creditLabel.setBounds(1255, 320, 80, 15);
-    pane.add(creditLabel, new Integer(2));
-
-    JLabel practiceLabel = new JLabel("Practice: ");
-    practiceLabel.setBounds(1250, 340, 150, 15);
-    pane.add(practiceLabel, new Integer(2));
-
-
-
-
-
-    rankInfo = new JTextArea ();
-
-
-    rankInfo.setWrapStyleWord(true);
-    rankInfo.setLineWrap(true);
-    rankInfo.setBounds(1320, 280, 30, 15);
-
-    moneyInfo = new JTextArea();
-
-    moneyInfo.setWrapStyleWord(true);
-    moneyInfo.setLineWrap(true);
-    moneyInfo.setBounds(1320, 300, 30, 15);
-
-    creditInfo = new JTextArea();
-
-    creditInfo.setWrapStyleWord(true);
-    creditInfo.setLineWrap(true);
-    creditInfo.setBounds(1320, 320, 30, 15);
-
-    practiceInfo = new JTextArea();
-
-    practiceInfo.setWrapStyleWord(true);
-    practiceInfo.setLineWrap(true);
-    practiceInfo.setBounds(1320, 340, 30, 15);
-
-    updatePlayerStats();
-
-    pane.add(moneyInfo, new Integer(2));
-    pane.add(creditInfo, new Integer(2));
-    pane.add(rankInfo, new Integer (2));
-    pane.add(practiceInfo, new Integer(2));
-    */
   }
 
-  public static void updatePlayerStats(){
-
-    rankInfo.setText(model.Deadwood.getActivePlayer().getRank() + "");
-    moneyInfo.setText(model.Deadwood.getActivePlayer().getMoneyCnt() + "");
-    creditInfo.setText(model.Deadwood.getActivePlayer().getCreditCnt() + "");
-    practiceInfo.setText(model.Deadwood.getActivePlayer().getPracticeCnt() + "");
-
-  }
 
 
   class boardMouseListener implements MouseListener{
