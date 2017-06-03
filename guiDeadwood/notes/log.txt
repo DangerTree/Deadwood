@@ -1,3 +1,20 @@
+################## June 2nd, 2017: #################
+
+Sometimes upgrading is not allowed when it should be ie when player first enters Casting Office.
+
+On first day, player image will not show on the middle on card roles, and no player images show on any on card roles on subsequent days.
+
+End of game scenario was never tested.
+
+Maybe include popup to indicate end of a day.
+
+Include a readout of actions taken and display to user.
+
+Player stats for all players, not just active player could be shown.
+
+DECOUPLE THE WHOLE SHITTER
+
+
 ################## June 1st, 2017: #################
 
 ### 12:34
